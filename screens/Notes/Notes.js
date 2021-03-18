@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
+import NoteTile from "../../components/NoteTile";
 
 const Notes = () => {
   return (
