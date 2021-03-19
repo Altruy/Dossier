@@ -27,7 +27,7 @@ const NoteTile = ({ title, user }) => {
           <Icon
             style={styles.star}
             name="star"
-            size={18}
+            size={20}
             color={colors.noteback}
           />
           <Text style={styles.title}>{title}</Text>

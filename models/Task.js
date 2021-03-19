@@ -2,6 +2,7 @@ class Task {
   constructor(
     id,
     collab,
+    title,
     assignees,
     assigner,
     deadline,
@@ -10,6 +11,7 @@ class Task {
   ) {
     this.id = id;
     this.collab = collab;
+    this.title = title;
     this.assignees = assignees;
     this.assigner = assigner;
     this.deadline = deadline;

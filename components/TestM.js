@@ -15,20 +15,23 @@ import {
 import Colors from "../constants/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Accordian from "./Accordian";
+import TaskAcc from "./TaskAcc";
+
 const TestM = () => {
   const [showInfo, setShowInfo] = useState(false);
 
   return (
     <View style={styles.container}>
-      <Accordian
-        title={"Title"}
-        data={[
-          { text: "dummy1", id: "1" },
-          { text: "dummy2", id: "2" },
-          { text: "dummy3", id: "3" },
-          { text: "dummy4", id: "4" },
-          { text: "dummy5", id: "5" },
-        ]}
+      <TaskAcc
+        data={{
+          id: "1",
+          collab: "1",
+          title: "Title",
+          assignees: ["zehr", "omer"],
+          deadline: "04/04/2019 11:00",
+          description: "this is description deal with it",
+          complete: false,
+        }}
       />
     </View>
   );

@@ -19,7 +19,7 @@ const NoteModal = () => {
   return (
     <View style={styles.container}>
       <View style={styles.modal}>
-        <Icon style={styles.times} name="times" size={18} color="white" />
+        <Icon style={styles.times} name="times" size={20} color="white" />
 
         <Text style={styles.note}>New Note</Text>
         <View style={{ flexDirection: "row" }}>

@@ -14,11 +14,20 @@ import {
   FlatList,
 } from "react-native";
 import Colors from "../constants/colors";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
-export default Accordian = ({ title, data }) => {
+export default Accordian = ({ data }) => {
   const [showInfo, setShowInfo] = useState(false);
-
+  const {
+    id,
+    collab,
+    title,
+    assignees,
+    assigner,
+    deadline,
+    description,
+    completed,
+  } = data;
   const renderSeparator = () => {
     return (
       <View
@@ -32,7 +41,6 @@ export default Accordian = ({ title, data }) => {
       />
     );
   };
-
   return (
     <TouchableOpacity
       style={styles.accordian}
@@ -41,27 +49,29 @@ export default Accordian = ({ title, data }) => {
       <View style={styles.box}>
         <View style={styles.dropdown}>
           <Text style={styles.title}>{title}</Text>
-          {showInfo ? (
-            <Icon name="angle-up" size={20} style={styles.icon} color="white" />
-          ) : (
-            <Icon
-              name="angle-down"
-              size={18}
-              style={styles.icon}
-              color="white"
-            />
-          )}
+
+          <Icon
+            style={styles.clip}
+            name="clipboard-check"
+            size={20}
+            color="white"
+          />
+          <Icon style={styles.times} name="times" size={20} color="white" />
         </View>
 
         {showInfo && (
-          <FlatList
-            data={data}
-            renderItem={({ item }) => (
-              <Text style={styles.answer}>{item.text}</Text>
-            )}
-            keyExtractor={(item) => item.id}
-            ItemSeparatorComponent={renderSeparator}
-          />
+          <View style={styles.answers}>
+            <Text style={styles.answer}>
+              Co-Assignees: {assignees.join(" ")}
+            </Text>
+            <Text style={styles.answer}>Deadline: {deadline} </Text>
+            <Text style={styles.answer}>Description: {description} </Text>
+          </View>
+        )}
+        {showInfo ? (
+          <Icon name="angle-up" size={18} style={styles.icon} color="white" />
+        ) : (
+          <Icon name="angle-down" size={18} style={styles.icon} color="white" />
         )}
       </View>
     </TouchableOpacity>
@@ -82,36 +92,51 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     flexDirection: "row",
-    paddingTop: 15,
+    paddingTop: 10,
     paddingLeft: 10,
-    paddingBottom: 15,
+    paddingBottom: 10,
+    alignItems: "center",
   },
   box: {
     padding: 15,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
     width: "90%",
     borderRadius: 15,
+    alignItems: "flex-start",
   },
   title: {
-    alignItems: "flex-start",
+    // alignItems: "flex-start",
     color: "white",
     fontSize: 18,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 0,
+    paddingBottom: 0,
   },
   answer: {
     paddingLeft: 15,
-    paddingTop: 7,
+    paddingTop: 8,
     paddingBottom: 7,
     color: "white",
     fontSize: 14,
   },
+  answers: {
+    paddingTop: 10,
+  },
   icon: {
-    position: "absolute",
-    right: 10,
+    position: "relative",
+    alignSelf: "center",
   },
   accordian: {
     width: "100%",
     alignItems: "center",
+  },
+  clip: {
+    position: "absolute",
+    paddingTop: 3,
+    left: "85%",
+  },
+  times: {
+    position: "absolute",
+    paddingTop: 4,
+    left: "95%",
   },
 });
