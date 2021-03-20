@@ -6,8 +6,7 @@ import Collaborations from "./screens/Home/Collaborations";
 import NoteTile from "./components/NoteTile";
 import NoteModal from "./components/NoteModal";
 import TestM from "./components/TestM";
-import BackNav from "./backend/BackNav";
 
 export default function App() {
-  return <BackNav/>;
+  return <TestM />;
 }
