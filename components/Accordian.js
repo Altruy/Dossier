@@ -46,7 +46,7 @@ export default Accordian = ({ title, data }) => {
           ) : (
             <Icon
               name="angle-down"
-              size={18}
+              size={20}
               style={styles.icon}
               color="white"
             />
