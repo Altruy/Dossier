@@ -56,14 +56,13 @@ export default Accordian = ({ data }) => {
             size={20}
             color="white"
           />
+          <Icon style={styles.edit} name="edit" size={20} color="white" />
           <Icon style={styles.times} name="times" size={20} color="white" />
         </View>
 
         {showInfo && (
           <View style={styles.answers}>
-            <Text style={styles.answer}>
-              Co-Assignees: {assignees.join(" ")}
-            </Text>
+            <Text style={styles.answer}>Co-Assignees: {assignees.join()}</Text>
             <Text style={styles.answer}>Deadline: {deadline} </Text>
             <Text style={styles.answer}>Description: {description} </Text>
           </View>
@@ -130,6 +129,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   clip: {
+    position: "absolute",
+    paddingTop: 3,
+    left: "75%",
+  },
+  edit: {
     position: "absolute",
     paddingTop: 3,
     left: "85%",

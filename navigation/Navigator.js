@@ -1,5 +1,10 @@
 import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
+import {
+  createStackNavigator,
+  createDrawerNavigator,
+} from "react-navigation-stack";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import HeaderButton from "../components/HeaderButton";
 import { Platform } from "react-native";
 import Collaborations from "../screens/Home/Collaborations";
 import Hamburger from "../screens/Home/Hamburger";
@@ -18,9 +23,9 @@ import CreateTasks from "../screens/Tasks/CreateTasks";
 import EditTask from "../screens/Tasks/EditTask";
 import Tasks from "../screens/Tasks/Tasks";
 
-const AppNavigator = createStackNavigator(
+const TaskNavigator = createStackNavigator(
   {
-    Collaborations: Collaborations,
+    // Collaborations: Collaborations,
     // Hamburger: Hamburger,
     // Settings: Settings,
     // Signin: Signin,
@@ -33,9 +38,9 @@ const AppNavigator = createStackNavigator(
     // Notes: Notes,
     // EditNote: EditNote,
     // Notification: Notification,
-    // CreateTasks: CreateTasks,
-    // EditTask: EditTask,
-    // Tasks: Tasks,
+    Tasks: Tasks,
+    CreateTasks: CreateTasks,
+    EditTask: EditTask,
   },
   {
     defaultNavigationOptions: {
@@ -44,7 +49,18 @@ const AppNavigator = createStackNavigator(
       },
       headerTintColor: "white",
     },
+    headerRight: (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="options"
+          iconName="options-vertical"
+          onPress={() => {
+            console.log("option is clicked");
+          }}
+        />
+      </HeaderButtons>
+    ),
   }
 );
 
-export default createAppContainer(AppNavigator);
+export default createAppContainer(TaskNavigator);
