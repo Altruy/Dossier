@@ -13,7 +13,7 @@ const BackNav = createStackNavigator(
     {
         Welcome: WelcomeView,
         ProjectsView: ProjectsView,
-        TasksList: TasksView
+        TasksView: TasksView,
     },
     {
       defaultNavigationOptions: {

@@ -10,7 +10,9 @@ import { useTasks } from "../providers/TasksProvider";
 import { TaskItem } from "../components/TaskItem";
 import { AddTask } from "../components/AddTask";
 
-export function TasksView({ navigation, route }) {
+import TasksProvider from "../providers/TasksProvider"
+
+export function TasksView({ navigation}) {
   const { name } = route.params;
 
   const [overlayVisible, setOverlayVisible] = useState(false);
@@ -26,6 +28,7 @@ export function TasksView({ navigation, route }) {
   }, []);
 
   return (
+    <TasksProvider user={navigation.getParam('user')} projectPartition={navigation.getParam('projectPartition')}>
     <View>
       {tasks.map((task) =>
         task ? <TaskItem key={`${task._id}`} task={task} /> : null
@@ -48,5 +51,6 @@ export function TasksView({ navigation, route }) {
         </>
       ) : null}
     </View>
+    </TasksProvider>
   );
 }

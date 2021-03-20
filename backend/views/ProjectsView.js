@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { useAuth } from "../providers/AuthProvider";
 import { ListItem } from "react-native-elements";
+import Logout from '../components/Logout'
 
 export function ProjectsView({ navigation }) {
   const { projectData } = useAuth();
@@ -9,11 +10,18 @@ export function ProjectsView({ navigation }) {
   // the onClickProject navigates to the Task List with the project name
   // and project partition value
   const onClickProject = async (project) => {
-    navigation.navigate("TaskList", {
+    navigation.navigate("TaskView", {
       name: project.name,
       projectPartition: project.partition,
     });
   };
+
+  ProjectsView.navigationOptions = {
+    headerLeft: function Header() {
+      return <Logout />;
+    },
+  };
+  
 
   return (
     <View>

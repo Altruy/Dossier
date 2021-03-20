@@ -3,7 +3,7 @@ import Realm from "realm";
 import { getRealmApp } from "../getRealmApp";
 
 // Access the Realm App.
-const app = getRealmApp();
+const app = Realm.App.getApp("tasktracker-lcwfc"); // replace this with your App ID
 
 // Create a new Context object that will be provided to descendants of
 // the AuthProvider.
@@ -36,15 +36,24 @@ const AuthProvider = ({ children }) => {
   // The signIn function takes an email and password and uses the
   // emailPassword authentication provider to log in.
   const signIn = async (email, password) => {
+    console.log('signin');
     const creds = Realm.Credentials.emailPassword(email, password);
-    const newUser = await app.logIn(creds);
-    setUser(newUser);
+    try {
+      console.log('trying login')
+      const newUser = await app.logIn(creds);
+      console.log("Successfully logged in!", user.id);
+      console.log('new',newUser);
+      setUser(newUser);
+    } catch (err) {
+      console.error("Failed to log in", err.message);
+    }
+
   };
 
   // The signUp function takes an email and password and uses the
   // emailPassword authentication provider to register the user.
   const signUp = async (email, password) => {
-    await app.emailPasswordAuth.registerUser(email, password);
+    console.log(await app.emailPasswordAuth.registerUser(email, password));
   };
 
   // The signOut function calls the logOut function on the currently
