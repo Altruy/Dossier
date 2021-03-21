@@ -22,17 +22,7 @@ const TestM = () => {
 
   return (
     <View style={styles.container}>
-      <TaskAcc
-        data={{
-          id: "1",
-          collab: "1",
-          title: "Title",
-          assignees: ["zehr", "omer"],
-          deadline: "04/04/2019 11:00",
-          description: "this is description deal with it",
-          complete: false,
-        }}
-      />
+      <TaskAcc />
     </View>
   );
 };

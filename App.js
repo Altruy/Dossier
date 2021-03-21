@@ -6,8 +6,12 @@ import Collaborations from "./screens/Home/Collaborations";
 import NoteTile from "./components/NoteTile";
 import NoteModal from "./components/NoteModal";
 import TestM from "./components/TestM";
-import BackEnd from "./backend/BackEnd";
+import { Provider as PaperProvider } from "react-native-paper";
 
 export default function App() {
-  return <BackEnd/>;
+  return (
+    <PaperProvider>
+      <AppNavigator />
+    </PaperProvider>
+  );
 }

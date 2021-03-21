@@ -17,10 +17,6 @@ const Notes = () => {
   );
 };
 
-Notes.navigationOptions = {
-  headerTitle: "Notes",
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
