@@ -74,10 +74,6 @@ const Tasks = ({ navigation }) => {
   );
 };
 
-Tasks.navigationOptions = {
-  headerTitle: "Tasks",
-};
-
 const styles = StyleSheet.create({
   entire: {
     width: "100%",
@@ -104,7 +100,7 @@ const styles = StyleSheet.create({
   btn: {
     position: "absolute",
     fontSize: 18,
-    width: "18%",
+    width: "21%",
     height: 50,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     borderWidth: 1,

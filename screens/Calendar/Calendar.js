@@ -16,10 +16,6 @@ const Calendar = () => {
   );
 };
 
-Calendar.navigationOptions = {
-  headerTitle: "Calendar",
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -63,10 +63,6 @@ const CreateTasks = ({ navigation }) => {
   );
 };
 
-CreateTasks.navigationOptions = {
-  headerTitle: "Create Tasks",
-};
-
 const styles = StyleSheet.create({
   image: {
     height: "100%",

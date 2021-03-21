@@ -16,10 +16,6 @@ const CreateEvent = () => {
   );
 };
 
-CreateEvent.navigationOptions = {
-  headerTitle: "Create Event",
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
