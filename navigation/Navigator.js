@@ -271,6 +271,8 @@ EditNote.navigationOptions = (navData) => {
 };
 
 const MainNavigator = createDrawerNavigator({
+  Signin: Signin,
+  Signup:Signup,
   Notes: NotesNavigator,
   Tasks: TaskNavigator,
   Calendar: CalendarNavigator,

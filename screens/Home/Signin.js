@@ -12,6 +12,7 @@ import {
 
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { signin } from '../../backend/MongoConfig'
 
 const SignIn = ({navigation}) => {
     const [data, setData] = React.useState({
@@ -20,6 +21,7 @@ const SignIn = ({navigation}) => {
         check_textInputChange: false,
         secureTextEntry: true,
     })
+    const [user,setUser] = React.useState(null);
 
     const textInputChange = (val) => {
         if (val.length != 0) {
@@ -51,6 +53,13 @@ const SignIn = ({navigation}) => {
         })
     }
 
+    const handleSignin = async () => {
+        let user = await signin(data.email,data.password);
+        setUser (user);
+        console.log('user',user);
+        if (!!user) navigation.navigate('Notes');
+    }
+
     return (
         <View style={styles.container}>
             {/* <View style={styles.top}>
@@ -80,6 +89,7 @@ const SignIn = ({navigation}) => {
                         style={styles.textInput}
                         autoCapitalize="none"
                         secureTextEntry={data.secureTextEntry ? true : false}
+                        onChangeText={(val) => handlePassword(val)}
                     />
                     <TouchableOpacity onPress={showPassword}>
                         <Feather name="eye-off" color="white" size={20} />
@@ -91,7 +101,7 @@ const SignIn = ({navigation}) => {
                     <TouchableOpacity
                         style={styles.SignButton}
 
-                        // onPress={() => }
+                        onPress={handleSignin}
                     >
                         <Text style={styles.textSign}>Sign In</Text>
                     </TouchableOpacity>

@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import Realm from "realm";
 import { getRealmApp } from "../getRealmApp";
-
+import { signin } from "../MongoConfig";
 // Access the Realm App.
-const app = Realm.App.getApp("tasktracker-lcwfc"); // replace this with your App ID
+const app = Realm.App.getApp("dossier-svtta"); // replace this with your App ID
 
 // Create a new Context object that will be provided to descendants of
 // the AuthProvider.
@@ -24,8 +24,8 @@ const AuthProvider = ({ children }) => {
 
     // The current user always has their own project, so we don't need
     // to wait for the user object to load before displaying that project.
-    const myProject = { name: "My Project", partition: `project=${user.id}` };
-    setProjectData([myProject]);
+    // const myProject = { name: "My Project", partition: `project=${user.id}` };
+    // setProjectData([myProject]);
 
     // TODO: Open the user realm, which contains at most one user custom data object
     // for the logged-in user.
@@ -37,15 +37,15 @@ const AuthProvider = ({ children }) => {
   // emailPassword authentication provider to log in.
   const signIn = async (email, password) => {
     console.log('signin');
-    const creds = Realm.Credentials.emailPassword(email, password);
+    const creds = Realm.Credentials.function({"email":"turyal.neeshat5@gmail.com", "password": "tazor"});
     try {
-      console.log('trying login')
-      const newUser = await app.logIn(creds);
-      console.log("Successfully logged in!", user.id);
-      console.log('new',newUser);
-      setUser(newUser);
+      console.log('trying login',creds)
+      // const newUser = await app.logIn(creds);
+      const newUser = await signin("turyal.neeshat5@gmail.com","tazor")
+      setUser({"username":newUser.username , "id": newUser._id["$oid"]});
+      console.log("Successfully logged in!", 'new user:', user );
     } catch (err) {
-      console.error("Failed to log in", err.message);
+      console.log("Failed to log in", err.message);
     }
 
   };

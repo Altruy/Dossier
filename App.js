@@ -7,11 +7,15 @@ import NoteTile from "./components/NoteTile";
 import NoteModal from "./components/NoteModal";
 import TestM from "./components/TestM";
 import { Provider as PaperProvider } from "react-native-paper";
+import BackNav from "./backend/BackNav";
+import { AuthProvider } from "./backend/providers/AuthProvider";
 
 export default function App() {
   return (
+    <AuthProvider>
     <PaperProvider>
-      <AppNavigator />
+      <BackNav/>
     </PaperProvider>
+    </AuthProvider>
   );
 }

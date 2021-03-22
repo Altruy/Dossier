@@ -59,7 +59,7 @@ export function WelcomeView({ navigation }) {
         />
       </View>
       <Button onPress={onPressSignIn} title="Sign In" />
-      <Button onPress={onPressSignUp} title="Sign Up" />
+      {/* <Button onPress={onPressSignUp} title="Sign Up" /> */}
     </View>
   );
 }

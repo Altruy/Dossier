@@ -7,8 +7,8 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@material-ui/core": "^4.11.3",
     "@expo/vector-icons": "^12.0.4",
+    "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@react-native-community/masked-view": "^0.1.10",
     "expo": "~40.0.0",
@@ -24,8 +24,8 @@
     "react-native-paper": "^4.7.2",
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "^3.2.0",
-    "react-native-unimodules": "~0.12.0",
     "react-native-screens": "^2.15.2",
+    "react-native-unimodules": "~0.12.0",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.4",
