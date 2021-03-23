@@ -25,13 +25,15 @@ import CreateTasks from '../screens/Tasks/CreateTasks'
 import EditTask from '../screens/Tasks/EditTask'
 import Tasks from '../screens/Tasks/Tasks'
 
+import Members from '../screens/Members/Members'
+
 const TaskNavigator = createStackNavigator(
     {
         // Collaborations: Collaborations,
         // Hamburger: Hamburger,
         // Settings: Settings,
-        Signin: Signin,
-        Signup: Signup,
+        // Signin: Signin,
+        // Signup: Signup,
         // Chat: Chat,
         // Chatbox: Chatbox,
         // Calendar: Calendar,
@@ -40,9 +42,10 @@ const TaskNavigator = createStackNavigator(
         // Notes: Notes,
         // EditNote: EditNote,
         // Notification: Notification,
-        Tasks: Tasks,
-        CreateTasks: CreateTasks,
-        EditTask: EditTask,
+        Members: Members,
+        // Tasks: Tasks,
+        // CreateTasks: CreateTasks,
+        // EditTask: EditTask,
     },
     {
         defaultNavigationOptions: {
