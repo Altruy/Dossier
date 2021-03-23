@@ -16,10 +16,6 @@ const Chat = () => {
   );
 };
 
-Chat.navigationOptions = {
-  headerTitle: "Chat",
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

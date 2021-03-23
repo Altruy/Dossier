@@ -16,10 +16,6 @@ const EditEvent = () => {
   );
 };
 
-EditEvent.navigationOptions = {
-  headerTitle: "Edit Event",
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

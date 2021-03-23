@@ -16,10 +16,6 @@ const EditNote = () => {
   );
 };
 
-EditNote.navigationOptions = {
-  headerTitle: "Edit Note",
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
