@@ -40,11 +40,11 @@ const TestO = ({}) => {
     <View style={styles.rest}>
 
     <CollabText
-      data={[{name: "SDS"},
-    {name: "Software Engineering"},
-    {name: "Network Security"},
-    {name: "Advanced Programming"},
-    {name: "Theory of Automata"}]
+      data={[{name: "SDS",id:1},
+    {name: "Software Engineering",id:1},
+    {name: "Network Security",id:1},
+    {name: "Advanced Programming",id:1},
+    {name: "Theory of Automata",id:1}]
         
       }
     />
@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor:'#341024',
-    color:'#341024',
+    
+    
   },
   rest:{
     paddingTop:35,

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SettingsAccordian from "./SettingsAccordian";
 
-
+import data from "../data/settings-data";
 import {
   View,
   Text,
@@ -14,6 +14,7 @@ import {
   Platform,
   TextInput,
   Modal,
+  FlatList,
 } from "react-native";
 
 const TestA = ({}) => {
@@ -32,11 +33,20 @@ const TestA = ({}) => {
   };
   return (
     
-    <View style={styles.container}>
-    <SettingsAccordian 
-        title={"omer"}
-        data={[{text:"hi",id:1}]}
-    />
+    <View style={styles.container}>    
+      <View>
+        <FlatList
+          data={data}
+          renderItem={({ item }) => (
+            <SettingsAccordian data={item}  />
+          )}
+          keyExtractor={(item) => item.id}
+          ItemSeparatorComponent={RenderSeparator}
+          ListFooterComponent={<View style={{ height: 20 }} />}
+          style={styles.fl}
+        />
+      </View>   
+   
   </View>
     
     
@@ -44,10 +54,19 @@ const TestA = ({}) => {
 };
 
 const styles = StyleSheet.create({
+  fl: {
+    paddingTop: 30,
+    paddingBottom: 30,
+    marginBottom: 30,
+  },
   container: {
     flex: 1,
+   
+    
     backgroundColor:'#341024',
     color:'#341024',
+    
+    overflow: "hidden",
   },
   rest:{
     paddingTop:35,

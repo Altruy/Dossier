@@ -15,38 +15,46 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 import ChatBoxBar from "../../components/ChatBoxBar";
 import ChatBox from "../../components/ChatBox";
+import ChatGroup from "../../components/ChatGroup";
+
 import { TextInput } from 'react-native-paper';
+import { KeyboardAvoidingView } from 'react-native';
+
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
 
 
-
-const  Chatbox = ({ navigation }) => {
+const TestGroupChat = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
   const [text, setText] = React.useState('');
 
   return (
+    
     <ImageBackground
       source={require("../../assets/Chat-background.png")}
       style={styles.image}
     >
+   
       <View style={styles.container}>
-        <ChatBoxBar data={{name:'Jellybean',image:require('../../assets/members.png')}} />
+        <ChatBoxBar data={{name:'Group',image:require('../../assets/members.png')}} />
       </View>
+     
       <View >
-      <ChatBox
+      <ChatGroup
          
-            data={[{name: "SDS",id:1,message:'Hello Omer, How are you.....?',from:"omer"},
-            {name: "Software Engineering",id:2,message:'Hello r',from:"r"},
-            {name: "Network Security",id:3,message:'Woah woah',from:"omer"},
-            {name: "Advanced Programming",id:4,message:'Musti enters',from:"or"},
-            {name: "Theory of Automata",id:5,message:'Goodbye',from:"omer"}]
+            data={[{name: "SDS",id:1,message:'Hello Omer, How are you.....?',from:"omer",image:'re',image:require('../../assets/members.png')},
+            {name: "Software Engineering",id:2,message:'Hello r',from:"r",image:require('../../assets/members.png')},
+            {name: "Network Security",id:3,message:'Woah woah',from:"omer",image:require('../../assets/members.png')},
+            {name: "Advanced Programming",id:4,message:'Musti enters',from:"or",image:require('../../assets/members.png')},
+            {name: "Theory of Automata",id:5,message:'Goodbye',from:"omer",image:require('../../assets/members.png')}]
         
              }
              style={{position:'relative'}}
              />
              </View>
+            
              <View style={styles.send}>
     
         {/* <Icon name="link" size={20} color="white" style={{marginTop:10,marginLeft:15,marginBottom:5}}/> */}
@@ -64,9 +72,10 @@ const  Chatbox = ({ navigation }) => {
                         <Image source={require('../../assets/next.png')} style={styles.next}/>
                     </View>
                     
-  
-       
+                    
+                    
     </ImageBackground>
+   
   );
 };
 
@@ -154,4 +163,4 @@ const styles = StyleSheet.create({
   },
  
 });
-export default Chatbox;
+export default TestGroupChat;

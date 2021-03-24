@@ -5,6 +5,7 @@ import {
 } from "react-navigation-stack";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
+import React from 'react';
 import { Platform } from "react-native";
 import Collaborations from "../screens/Home/Collaborations";
 import Hamburger from "../screens/Home/Hamburger";

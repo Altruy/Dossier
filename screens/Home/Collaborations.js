@@ -1,32 +1,78 @@
-import React from "react";
+import React, { useState } from "react";
+import CollabText from "../../components/CollabText";
+import Homebar from "../../components/Homebar";
+import Invite from "../../components/Invite";
+
 import {
   View,
   Text,
   Image,
-  Button,
   StyleSheet,
-  ScrollView,
+  Button,
+  ImageBackground,
+  TouchableOpacity,
+  TouchableNativeFeedback,
+  Platform,
+  TextInput,
+  Modal,
 } from "react-native";
 
-const Collaborations = () => {
+const Collaboration = ({}) => {
+  const RenderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "86%",
+          backgroundColor: "#CED0CE",
+          marginLeft: "4.5%",
+          opacity: 0.2,
+        }}
+      />
+    );
+  };
   return (
+    
     <View style={styles.container}>
-      <Text>The Collaboration Screen!</Text>
-    </View>
-  );
-};
+    <Homebar />
+    
+    <RenderSeparator />
+    <View style={styles.rest}>
 
-Collaborations.navigationOptions = {
-  headerTitle: "Collaborations",
+    <CollabText
+      data={[{name: "SDS",id:1},
+    {name: "Software Engineering",id:1},
+    {name: "Network Security",id:1},
+    {name: "Advanced Programming",id:1},
+    {name: "Theory of Automata",id:1}]
+        
+      }
+    />
+    </View>
+     <RenderSeparator />
+  </View>
+    
+    
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor:'#341024',
+    
+    
   },
+  rest:{
+    paddingTop:35,
+    alignItems: "center",
+  },
+  search:{
+    paddingLeft:50,
+    paddingTop:50,
+    paddingBottom:25
+  }
+  
 });
 
-export default Collaborations;
+export default Collaboration;

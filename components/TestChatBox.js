@@ -12,27 +12,28 @@ import {
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
-
-import ChatBoxBar from "../../components/ChatBoxBar";
-import ChatBox from "../../components/ChatBox";
+import data from "../data/settings-data";
+import ChatHomeScreen from "./ChatHomeScreen";
+import ChatBoxBar from "./ChatBoxBar";
+import ChatBox from "./ChatBox";
 import { TextInput } from 'react-native-paper';
 
 
 
 
 
-const  Chatbox = ({ navigation }) => {
+const TestChatBox = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
   const [text, setText] = React.useState('');
 
   return (
     <ImageBackground
-      source={require("../../assets/Chat-background.png")}
+      source={require("../assets/Chat-background.png")}
       style={styles.image}
     >
       <View style={styles.container}>
-        <ChatBoxBar data={{name:'Jellybean',image:require('../../assets/members.png')}} />
+        <ChatBoxBar data={{name:'Jellybean',image:require('../assets/members.png')}} />
       </View>
       <View >
       <ChatBox
@@ -61,7 +62,7 @@ const  Chatbox = ({ navigation }) => {
                         placeholderTextColor="#FFF"
                         // Flat= "false"
                         />
-                        <Image source={require('../../assets/next.png')} style={styles.next}/>
+                        <Image source={require('../assets/next.png')} style={styles.next}/>
                     </View>
                     
   
@@ -154,4 +155,4 @@ const styles = StyleSheet.create({
   },
  
 });
-export default Chatbox;
+export default TestChatBox;
