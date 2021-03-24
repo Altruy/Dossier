@@ -74,10 +74,6 @@ const Tasks = ({ navigation }) => {
   );
 };
 
-Tasks.navigationOptions = {
-  headerTitle: "Tasks",
-};
-
 const styles = StyleSheet.create({
   entire: {
     width: "100%",

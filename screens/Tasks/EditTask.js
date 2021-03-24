@@ -16,10 +16,6 @@ const EditTask = () => {
   );
 };
 
-EditTask.navigationOptions = {
-  headerTitle: "Edit Task",
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
