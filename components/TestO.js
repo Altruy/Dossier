@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import CollabText from "../../components/CollabText";
-import Homebar from "../../components/Homebar";
-import Invite from "../../components/Invite";
+import CollabText from "./CollabText";
+import Homebar from "./Homebar";
+import Invite from "./Invite";
 
 import {
   View,
@@ -17,7 +17,7 @@ import {
   Modal,
 } from "react-native";
 
-const Collaboration = ({}) => {
+const TestO = ({}) => {
   const RenderSeparator = () => {
     return (
       <View
@@ -75,4 +75,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default Collaboration;
+export default TestO;

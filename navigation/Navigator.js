@@ -1,4 +1,14 @@
 import { createAppContainer } from "react-navigation";
+<<<<<<< HEAD
+import {
+  createStackNavigator,
+  createDrawerNavigator,
+} from "react-navigation-stack";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import HeaderButton from "../components/HeaderButton";
+import React from 'react';
+import { Platform } from "react-native";
+=======
 import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import React from "react";
@@ -8,6 +18,7 @@ import SideBar from "../components/SideBar";
 import CreateTasks from "../screens/Tasks/CreateTasks";
 import EditTask from "../screens/Tasks/EditTask";
 import Tasks from "../screens/Tasks/Tasks";
+>>>>>>> d3c5dbd59bbafb8d676fb7730d94156fa5396407
 import Collaborations from "../screens/Home/Collaborations";
 import Settings from "../screens/Home/Settings";
 import Signin from "../screens/Home/Signin";
@@ -21,11 +32,27 @@ import Notes from "../screens/Notes/Notes";
 import EditNote from "../screens/Notes/EditNote";
 import Notification from "../screens/Notification/Notification";
 
+import Members from '../screens/Members/Members'
+
 const TaskNavigator = createStackNavigator(
-  {
-    Tasks: Tasks,
-    CreateTasks: CreateTasks,
-    EditTask: EditTask,
+    {
+        // Collaborations: Collaborations,
+        // Hamburger: Hamburger,
+        // Settings: Settings,
+        // Signin: Signin,
+        // Signup: Signup,
+        // Chat: Chat,
+        // Chatbox: Chatbox,
+        // Calendar: Calendar,
+        // CreateEvent: CreateEvent,
+        // EditEvent: EditEvent,
+        // Notes: Notes,
+        // EditNote: EditNote,
+        // Notification: Notification,
+        //Members: Members,
+        // Tasks: Tasks,
+        // CreateTasks: CreateTasks,
+        // EditTask: EditTask,
   },
   {
     defaultNavigationOptions: {
