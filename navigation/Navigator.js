@@ -4,6 +4,7 @@ import { createDrawerNavigator } from "react-navigation-drawer";
 import React from "react";
 import { Platform, StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import SideBar from "../components/SideBar";
 import CreateTasks from "../screens/Tasks/CreateTasks";
 import EditTask from "../screens/Tasks/EditTask";
 import Tasks from "../screens/Tasks/Tasks";
@@ -41,6 +42,19 @@ const CollaborationNavigator = createStackNavigator(
     Signup: Signup,
     Collaborations: Collaborations,
     Signin: Signin,
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "black",
+      },
+      headerTintColor: "white",
+    },
+  }
+);
+
+const SettingsNavigator = createStackNavigator(
+  {
     Settings: Settings,
   },
   {
@@ -270,12 +284,39 @@ EditNote.navigationOptions = (navData) => {
   };
 };
 
-const MainNavigator = createDrawerNavigator({
-  Notes: NotesNavigator,
-  Tasks: TaskNavigator,
-  Calendar: CalendarNavigator,
-  Chat: ChatNavigator,
-  Settings: Settings,
-});
+Settings.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Settings",
+    headerLeft: () => (
+      <Icon
+        type="ionicon"
+        name="md-menu"
+        color="white"
+        size={35}
+        onPress={() => {
+          navData.navigation.toggleDrawer();
+        }}
+      />
+    ),
+  };
+};
 
-export default createAppContainer(MainNavigator);
+const DrawerNavigator = createDrawerNavigator(
+  {
+    Notes: NotesNavigator,
+    Tasks: TaskNavigator,
+    Calendar: CalendarNavigator,
+    Chat: ChatNavigator,
+  },
+  {
+    contentOptions: {
+      labelStyle: {
+        color: "white",
+        fontSize: 18,
+      },
+    },
+    contentComponent: (props) => <SideBar {...props} />,
+  }
+);
+
+export default createAppContainer(DrawerNavigator);

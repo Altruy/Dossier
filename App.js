@@ -7,6 +7,7 @@ import NoteTile from "./components/NoteTile";
 import NoteModal from "./components/NoteModal";
 import TestM from "./components/TestM";
 import { Provider as PaperProvider } from "react-native-paper";
+import EditNote from "./screens/Notes/EditNote";
 
 export default function App() {
   return (
