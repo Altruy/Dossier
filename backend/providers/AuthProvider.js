@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import Realm from "realm";
-import { getRealmApp } from "../getRealmApp";
+import {getRealmApp} from "../getRealmApp";
 import { signin } from "../MongoConfig";
 // Access the Realm App.
-const app = Realm.App.getApp("dossier-svtta"); // replace this with your App ID
+const app = getRealmApp(); // replace this with your App ID
 
 // Create a new Context object that will be provided to descendants of
 // the AuthProvider.
@@ -13,7 +13,7 @@ const AuthContext = React.createContext(null);
 // AuthContext value to its descendants. Components under an AuthProvider can
 // use the useAuth() hook to access the auth value.
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(app.currentUser);
+  const [user, setUser] = useState({});
   const realmRef = useRef(null);
   const [projectData, setProjectData] = useState([]);
 
@@ -39,11 +39,13 @@ const AuthProvider = ({ children }) => {
     console.log('signin');
     const creds = Realm.Credentials.function({"email":"turyal.neeshat5@gmail.com", "password": "tazor"});
     try {
-      console.log('trying login',creds)
-      // const newUser = await app.logIn(creds);
-      const newUser = await signin("turyal.neeshat5@gmail.com","tazor")
-      setUser({"username":newUser.username , "id": newUser._id["$oid"]});
-      console.log("Successfully logged in!", 'new user:', user );
+      // console.log('trying login',creds)
+      const newUser = await app.logIn({"email":"turyal.neeshat5@gmail.com", "password": "tazor"});
+      // const newUser = await signin("turyal.neeshat5@gmail.com","tazor")
+      // setUser({"username":newUser.username , "id": newUser._id["$oid"]});
+      // const useri = await app.objects("user")
+      setUser(newUser);
+      console.log(`Logged in as ${newUser.identity}`);
     } catch (err) {
       console.log("Failed to log in", err.message);
     }
