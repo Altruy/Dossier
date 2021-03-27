@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "50%",
     borderRadius: 30,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
     left: "20%",
   },
   btn: {
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     width: "21%",
     height: 50,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
     borderWidth: 1,
     borderRadius: 30,
     paddingLeft: 10,

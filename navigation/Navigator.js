@@ -21,27 +21,28 @@ import Notes from "../screens/Notes/Notes";
 import EditNote from "../screens/Notes/EditNote";
 import Notification from "../screens/Notification/Notification";
 
-import Members from '../screens/Members/Members'
+import Members from "../screens/Members/Members";
 
 const TaskNavigator = createStackNavigator(
-    {
-        // Collaborations: Collaborations,
-        // Hamburger: Hamburger,
-        // Settings: Settings,
-        // Signin: Signin,
-        // Signup: Signup,
-        // Chat: Chat,
-        // Chatbox: Chatbox,
-        // Calendar: Calendar,
-        // CreateEvent: CreateEvent,
-        // EditEvent: EditEvent,
-        // Notes: Notes,
-        // EditNote: EditNote,
-        // Notification: Notification,
-        //Members: Members,
-        // Tasks: Tasks,
-        // CreateTasks: CreateTasks,
-        // EditTask: EditTask,
+  {
+    //Members: Members,
+    Tasks: Tasks,
+    CreateTasks: CreateTasks,
+    EditTask: EditTask,
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "black",
+      },
+      headerTintColor: "white",
+    },
+  }
+);
+
+const MembersNavigator = createStackNavigator(
+  {
+    Members: Members,
   },
   {
     defaultNavigationOptions: {
@@ -131,6 +132,23 @@ const ChatNavigator = createStackNavigator(
 );
 
 CreateEvent.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Create Event",
+    headerLeft: () => (
+      <Icon
+        type="ionicon"
+        name="md-menu"
+        color="white"
+        size={35}
+        onPress={() => {
+          navData.navigation.toggleDrawer();
+        }}
+      />
+    ),
+  };
+};
+
+Members.navigationOptions = (navData) => {
   return {
     headerTitle: "Create Event",
     headerLeft: () => (
@@ -323,6 +341,8 @@ const DrawerNavigator = createDrawerNavigator(
     Tasks: TaskNavigator,
     Calendar: CalendarNavigator,
     Chat: ChatNavigator,
+    Settings: SettingsNavigator,
+    Members: MembersNavigator,
   },
   {
     contentOptions: {
@@ -331,7 +351,13 @@ const DrawerNavigator = createDrawerNavigator(
         fontSize: 18,
       },
     },
-    contentComponent: (props) => <SideBar {...props} />,
+    contentComponent: (props) => {
+      var copyprops = Object.assign({}, props);
+      copyprops.items = copyprops.items.filter(
+        (item) => item.key !== "Settings" && item.key !== "Members"
+      );
+      return <SideBar {...copyprops} />;
+    },
   }
 );
 
