@@ -15,17 +15,15 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native-calendars": "^1.1254.0",
     "react-native-elements": "^3.3.2",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",
     "react-native-modal": "^11.7.0",
     "react-native-paper": "^4.7.2",
     "react-native-reanimated": "~1.13.0",
-<<<<<<< HEAD
-    "react-native-toggle-element": "^1.0.1",
-=======
     "react-native-screens": "^2.18.1",
->>>>>>> d3c5dbd59bbafb8d676fb7730d94156fa5396407
+    "react-native-toggle-element": "^1.0.1",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.4",
