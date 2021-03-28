@@ -8,13 +8,18 @@ import NoteModal from "./components/NoteModal";
 import TestM from "./components/TestM";
 import { Provider as PaperProvider } from "react-native-paper";
 import BackNav from "./backend/BackNav";
-import { AuthProvider } from "./backend/providers/AuthProvider";
+import { AuthProvider } from './auth_providers/Auth';
+
+import { Button } from "react-native";
+import { tryy } from "./actions";
+import { WelcomeView } from "./backend/views/WelcomeView";
 
 export default function App() {
+
   return (
     <AuthProvider>
     <PaperProvider>
-      <BackNav/>
+       <WelcomeView/>
     </PaperProvider>
     </AuthProvider>
   );

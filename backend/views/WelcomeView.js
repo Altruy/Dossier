@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Button, Alert } from "react-native";
-import { useAuth } from "../providers/AuthProvider";
+import { useAuth } from "../../auth_providers/Auth";
 import styles from "../stylesheet";
 
 export function WelcomeView({ navigation }) {
