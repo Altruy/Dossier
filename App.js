@@ -7,14 +7,14 @@ import { Provider as PaperProvider } from "react-native-paper";
 
 import { AuthProvider } from './auth_providers/Auth';
 
-import { WelcomeView } from "./backend/views/WelcomeView";
+import BackNav from './navigation/BackNav'
 
 export default function App() {
 
   return (
     <AuthProvider>
     <PaperProvider>
-       <WelcomeView/>
+       <BackNav/>
     </PaperProvider>
     </AuthProvider>
   );

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Button, Alert } from "react-native";
-import { useAuth } from "../../auth_providers/Auth";
-import styles from "../stylesheet";
+import { useAuth } from "./auth_providers/Auth";
+import styles from "./backend/stylesheet";
 
 export function WelcomeView({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, signUp, signIn } = useAuth();
+  const { user, signUp, signIn ,signOut } = useAuth();
 
   useEffect(() => {
     // If there is a user logged in, go to the Projects page.
     if (user != null) {
-      navigation.navigate("Projects");
+      navigation.navigate("Home");
+      console.log('user tryna navigate',user)
+      // signOut()
     }
   }, [user]);
 
