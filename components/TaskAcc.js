@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   box: {
     padding: 15,
-    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     width: "90%",
     borderRadius: 15,
     alignItems: "flex-start",

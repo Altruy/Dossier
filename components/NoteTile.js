@@ -10,28 +10,53 @@ import {
   TouchableNativeFeedback,
   Platform,
 } from "react-native";
+import { Searchbar } from "react-native-paper";
+import { color } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/FontAwesome";
 import colors from "../constants/colors";
 
-const NoteTile = ({ title, user }) => {
+const NoteTile = ({ data, navigation }) => {
+  const { id, name, user, fave } = data;
+  const [Star, setStar] = useState(false);
+
   return (
     <TouchableNativeFeedback
-      onPress={() => {}}
+      onPress={() => {
+        navigation.navigate("EditNote");
+      }}
       background={TouchableNativeFeedback.Ripple("purple", false)}
     >
-      <View style={styles.tile}>
+      <View style={styles.container}>
         <ImageBackground
           source={require("../assets/Notes-tile.png")}
           style={styles.image}
         >
-          <Icon
-            style={styles.star}
-            name="star"
-            size={20}
-            color={colors.noteback}
-          />
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.user}>{user}</Text>
+          <View style={styles.tile}>
+            <TouchableOpacity
+              style={styles.star}
+              onPress={() => {
+                setStar(!Star);
+              }}
+            >
+              {Star ? (
+                <Icon
+                  name="star"
+                  size={18}
+                  style={styles.icon}
+                  color={colors.noteback}
+                />
+              ) : (
+                <Icon
+                  name="star-o"
+                  size={18}
+                  style={styles.icon}
+                  color="white"
+                />
+              )}
+            </TouchableOpacity>
+            <Text style={styles.title}>{name}</Text>
+            <Text style={styles.user}>-{user}</Text>
+          </View>
         </ImageBackground>
       </View>
     </TouchableNativeFeedback>
@@ -39,12 +64,38 @@ const NoteTile = ({ title, user }) => {
 };
 
 const styles = StyleSheet.create({
-  tile: {
-    height: "20%",
-    width: "30%",
+  container: {
+    // flex: 1,
+    width: "40%",
     alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 8,
+    // justifyContent: "center",
+  },
+  upperbar: {
+    flex: 1,
+    paddingTop: 60,
+    alignItems: "center",
+    flexDirection: "row",
+    paddingBottom: 10,
+  },
+  tile: {
+    padding: 55,
+  },
+  title: {
+    position: "relative",
+    textAlign: "center",
+    color: "white",
+    fontSize: 15,
+    // alignSelf: "stretch",
+  },
+  user: {
+    position: "absolute",
+    textAlign: "right",
+    paddingRight: 8,
+    bottom: "20%",
+    right: "20%",
+    paddingRight: "10%",
+    fontSize: 10,
+    color: "white",
   },
   image: {
     flex: 1,
@@ -52,31 +103,13 @@ const styles = StyleSheet.create({
     width: "100%",
     resizeMode: "cover",
     justifyContent: "center",
-    borderRadius: 8,
     overflow: "hidden",
+    borderRadius: 8,
   },
   star: {
     position: "absolute",
     top: 8,
     left: 8,
-  },
-  title: {
-    position: "relative",
-    textAlign: "center",
-    color: "white",
-    fontSize: 15,
-
-    // alignSelf: "stretch",
-  },
-  user: {
-    position: "relative",
-    textAlign: "right",
-    paddingRight: 8,
-    bottom: -55,
-    paddingRight: "6%",
-    paddingBottom: "12%",
-    fontSize: 10,
-    color: "white",
   },
 });
 

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import CollabText from "../../components/CollabText";
-import Homebar from "../../components/Homebar";
-import Invite from "../../components/Invite";
+import SettingsAccordian from "./SettingsAccordian";
 
+import data from "../data/settings-data";
 import {
   View,
   Text,
@@ -15,9 +14,10 @@ import {
   Platform,
   TextInput,
   Modal,
+  FlatList,
 } from "react-native";
 
-const Collaboration = ({}) => {
+const TestA = ({}) => {
   const RenderSeparator = () => {
     return (
       <View
@@ -33,23 +33,20 @@ const Collaboration = ({}) => {
   };
   return (
     
-    <View style={styles.container}>
-    <Homebar />
-    
-    <RenderSeparator />
-    <View style={styles.rest}>
-
-    <CollabText
-      data={[{name: "SDS",id:1},
-    {name: "Software Engineering",id:1},
-    {name: "Network Security",id:1},
-    {name: "Advanced Programming",id:1},
-    {name: "Theory of Automata",id:1}]
-        
-      }
-    />
-    </View>
-     <RenderSeparator />
+    <View style={styles.container}>    
+      <View>
+        <FlatList
+          data={data}
+          renderItem={({ item }) => (
+            <SettingsAccordian data={item}  />
+          )}
+          keyExtractor={(item) => item.id}
+          ItemSeparatorComponent={RenderSeparator}
+          ListFooterComponent={<View style={{ height: 20 }} />}
+          style={styles.fl}
+        />
+      </View>   
+   
   </View>
     
     
@@ -57,11 +54,19 @@ const Collaboration = ({}) => {
 };
 
 const styles = StyleSheet.create({
+  fl: {
+    paddingTop: 30,
+    paddingBottom: 30,
+    marginBottom: 30,
+  },
   container: {
     flex: 1,
+   
+    
     backgroundColor:'#341024',
+    color:'#341024',
     
-    
+    overflow: "hidden",
   },
   rest:{
     paddingTop:35,
@@ -75,4 +80,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default Collaboration;
+export default TestA;
