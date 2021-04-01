@@ -1,61 +1,93 @@
-import {createAppContainer} from 'react-navigation'
-import {createStackNavigator} from 'react-navigation-stack'
-import {createDrawerNavigator} from 'react-navigation-drawer'
-import React from 'react'
-import {Platform, StyleSheet, Text, View} from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
-import CreateTasks from '../screens/Tasks/CreateTasks'
-import EditTask from '../screens/Tasks/EditTask'
-import Tasks from '../screens/Tasks/Tasks'
-import Collaborations from '../screens/Home/Collaborations'
-import Settings from '../screens/Home/Settings'
-import Signin from '../screens/Home/Signin'
-import Signup from '../screens/Home/Signup'
-import Chat from '../screens/Chat/Chat'
-import Chatbox from '../screens/Chat/Chatbox'
-import Calendar from '../screens/Calendar/Calendar'
-import CreateEvent from '../screens/Calendar/CreateEvent'
-import EditEvent from '../screens/Calendar/EditEvent'
-import Notes from '../screens/Notes/Notes'
-import EditNote from '../screens/Notes/EditNote'
-import Notification from '../screens/Notification/Notification'
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import { createDrawerNavigator } from "react-navigation-drawer";
+import React from "react";
+import { Platform, StyleSheet, Text, View } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
+import SideBar from "../components/SideBar";
+import CreateTasks from "../screens/Tasks/CreateTasks";
+import EditTask from "../screens/Tasks/EditTask";
+import Tasks from "../screens/Tasks/Tasks";
+import Collaborations from "../screens/Home/Collaborations";
+import Settings from "../screens/Home/Settings";
+import Signin from "../screens/Home/Signin";
+import Signup from "../screens/Home/Signup";
+import Chat from "../screens/Chat/Chat";
+import Chatbox from "../screens/Chat/Chatbox";
+import Calendar from "../screens/Calendar/Calendar";
+import CreateEvent from "../screens/Calendar/CreateEvent";
+import EditEvent from "../screens/Calendar/EditEvent";
+import Notes from "../screens/Notes/Notes";
+import EditNote from "../screens/Notes/EditNote";
+import Notification from "../screens/Notification/Notification";
 
-import Members from '../screens/Members/Members'
+import Members from "../screens/Members/Members";
 
-const TaskNavigator = createStackNavigator({
-    // Collaborations: Collaborations,
-    // Hamburger: Hamburger,
-    // Settings: Settings,
-    // Signin: Signin,
-    // Signup: Signup,
-    // Chat: Chat,
-    // Chatbox: Chatbox,
-    // Calendar: Calendar,
-    // CreateEvent: CreateEvent,
-    // EditEvent: EditEvent,
-    // Notes: Notes,
-    // EditNote: EditNote,
-    Notification: Notification,
-    // Members: Members,
-    // Tasks: Tasks,
-    // CreateTasks: CreateTasks,
-    // EditTask: EditTask,
-})
+const TaskNavigator = createStackNavigator(
+  {
+    //Members: Members,
+    Tasks: Tasks,
+    CreateTasks: CreateTasks,
+    EditTask: EditTask,
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "black",
+      },
+      headerTintColor: "white",
+    },
+  }
+);
+
+const MembersNavigator = createStackNavigator(
+  {
+    Members: Members,
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "black",
+      },
+      headerTintColor: "white",
+    },
+  }
+);
 
 const CollaborationNavigator = createStackNavigator(
+  {
+    Signup: Signup,
+    Collaborations: Collaborations,
+    Signin: Signin,
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "black",
+      },
+      headerTintColor: "white",
+    },
+  }
+);
+
+const SettingsNavigator = createStackNavigator(
     {
-        Signup: Signup,
-        Collaborations: Collaborations,
-        Signin: Signin,
         Settings: Settings,
     },
     {
         defaultNavigationOptions: {
-            headerStyle: {
-                backgroundColor: 'black',
-            },
-            headerTintColor: 'white',
-        },
+        headerStyle: {
+        backgroundColor: "black",
+    },
+        headerTintColor: "white",
+    },
+        // {
+        //     defaultNavigationOptions: {
+        //         headerStyle: {
+        //             backgroundColor: 'black',
+        //         },
+        //         headerTintColor: 'white',
+        // },
     }
 )
 
@@ -150,6 +182,23 @@ CreateEvent.navigationOptions = (navData) => {
         ),
     }
 }
+
+Members.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Create Event",
+    headerLeft: () => (
+      <Icon
+        type="ionicon"
+        name="md-menu"
+        color="white"
+        size={35}
+        onPress={() => {
+          navData.navigation.toggleDrawer();
+        }}
+      />
+    ),
+  };
+};
 
 EditEvent.navigationOptions = (navData) => {
     return {
@@ -304,15 +353,47 @@ EditNote.navigationOptions = (navData) => {
     }
 }
 
-const MainNavigator = createDrawerNavigator({
+Settings.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Settings",
+    headerLeft: () => (
+      <Icon
+        type="ionicon"
+        name="md-menu"
+        color="white"
+        size={35}
+        onPress={() => {
+          navData.navigation.toggleDrawer();
+        }}
+      />
+    ),
+  };
+};
+
+const DrawerNavigator = createDrawerNavigator(
+  {
     Notes: NotesNavigator,
     Tasks: TaskNavigator,
     Calendar: CalendarNavigator,
     Chat: ChatNavigator,
-    Notification: NotificationsNavigator,
-
-    Settings: Settings,
+    Settings: SettingsNavigator,
     Members: MembersNavigator,
-})
+  },
+  {
+    contentOptions: {
+      labelStyle: {
+        color: "white",
+        fontSize: 18,
+      },
+    },
+    contentComponent: (props) => {
+      var copyprops = Object.assign({}, props);
+      copyprops.items = copyprops.items.filter(
+        (item) => item.key !== "Settings" && item.key !== "Members"
+      );
+      return <SideBar {...copyprops} />;
+    },
+  }
+);
 
-export default createAppContainer(MainNavigator)
+export default createAppContainer(DrawerNavigator);
