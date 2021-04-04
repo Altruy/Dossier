@@ -28,19 +28,12 @@ export default Accordian = ({data}) => {
         description,
         completed,
     } = data
-    const renderSeparator = () => {
-        return (
-            <View
-                style={{
-                    height: 1,
-                    width: '86%',
-                    backgroundColor: '#CED0CE',
-                    marginLeft: '4.5%',
-                    opacity: 0.2,
-                }}
-            />
-        )
-    }
+
+    console.log('sttile = ', title)
+    console.log()
+    console.log()
+    console.log()
+
     return (
         <TouchableOpacity
             style={styles.accordian}
@@ -73,8 +66,9 @@ export default Accordian = ({data}) => {
                 {showInfo && (
                     <View style={styles.answers}>
                         <Text style={styles.answer}>
-                            Co-Assignees: {assignees.join()}
+                            Co-Assignees: {assignees}
                         </Text>
+                        {/* <Text style={styles.answer}>Co-Assignees: {assignees.join()}</Text> */}
                         <Text style={styles.answer}>Deadline: {deadline} </Text>
                         <Text style={styles.answer}>
                             Description: {description}{' '}
@@ -122,9 +116,9 @@ const styles = StyleSheet.create({
     },
     box: {
         padding: 15,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        width: '90%',
-        borderRadius: 15,
+        // backgroundColor: 'rgba(100, 100, 100, 0.5)',
+        width: '100%',
+        // borderRadius: 15,
         alignItems: 'flex-start',
     },
     title: {

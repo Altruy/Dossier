@@ -1,157 +1,170 @@
+import React, {useState} from 'react'
+import TaskAcc from './CalTaskAcc'
+import CreateEventModal from './CreateEventModal'
 
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-import React, { useState } from "react";
-import Colors from "../constants/colors";
-//import Icon from "react-native-vector-icons/FontAwesome5";
-import Toggle from 'react-native-toggle-element';
-import {
-  View,
-  Text,
-  Image,
-  Button,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  FlatList,
-  ImageBackground,
-} from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import { Modal } from 'react-native-paper';
+import {View, Text, FlatList, ImageBackground, StyleSheet} from 'react-native'
 
-const Task_expanded =({data}) =>{
-    const [show,setShowState] = useState(false)
-    const [toggleValue, setToggleValue] = useState(false);
-    const [showInfo, setShowInfo] = useState(false);
-    
+const Task_expanded = (props) => {
+    const show = props.show
+    // const [show, setShowState] = useState(props.show)
+
+    const DATA = [
+        {
+            id: '1',
+            title: 'First Item',
+            assignees: 'Turu',
+            assigner: 'Adnan',
+            deadline: 'kal',
+            description: 'KAAM KAROOOO',
+            completed: '',
+        },
+        {
+            id: '2',
+            title: 'Second Item',
+            assignees: 'Turu',
+            assigner: 'Adnan',
+            deadline: 'kal',
+            description: 'KAAM KAROOOO',
+            completed: '',
+        },
+        {
+            id: '3',
+            title: 'Third Item',
+            assignees: 'Turu',
+            assigner: 'Adnan',
+            deadline: 'kal',
+            description: 'KAAM KAROOOO',
+            completed: '',
+        },
+        {
+            id: '4',
+            title: 'fourth Item',
+            assignees: 'Turu',
+            assigner: 'Adnan',
+            deadline: 'kal',
+            description: 'KAAM KAROOOO',
+            completed: '',
+        },
+        {
+            id: '5',
+            title: 'fifth Item',
+            assignees: 'Turu',
+            assigner: 'Adnan',
+            deadline: 'kal',
+            description: 'KAAM KAROOOO',
+            completed: '',
+        },
+        {
+            id: '6',
+            title: 'sixt Item',
+            assignees: 'Turu',
+            assigner: 'Adnan',
+            deadline: 'kal',
+            description: 'KAAM KAROOOO',
+            completed: '',
+        },
+    ]
     const renderSeparator = () => {
-      return (
-        <View
-          style={{
-            height: 1,
-            width: "86%",
-            backgroundColor: "#CED0CE",
-            marginLeft: "4.5%",
-            opacity: 0.2,
-          }}
-        />
-      );
-    };
-    return(
-       
-        <TouchableOpacity
-      style={styles.accordian}
-      onPress={() => setShowInfo(!showInfo)}
-    >
-      <View style={styles.box}>
-        <View style={styles.dropdown}>
-          <Text style={styles.title}>dsdsdsd</Text>
-          
-        
-        </View>
+        return (
+            <View
+                style={{
+                    height: 2,
+                    width: '86%',
+                    backgroundColor: 'white',
+                    // alignItems: 'center',
+                    alignSelf: 'center',
+                    // marginLeft: '4.5%',
+                    opacity: 0.5,
+                    borderRadius: 100,
+                }}
+            />
+        )
+    }
 
-        {showInfo && (
-          <View style={styles.answers}>
-          <View style={styles.toggle}> 
-            <Text style={styles.answer}>All Notifications: </Text>
-           
+    const renderItem = ({item}) => <TaskAcc data={item} />
+
+    if (show) {
+        return (
+            <View style={styles.container}>
+                <ImageBackground
+                    source={require('../assets/Calendar-tile.png')}
+                    style={styles.image}
+                >
+                    <View style={styles.header}>
+                        <View>
+                            <Text style={{color: 'white'}}>DATE</Text>
+                        </View>
+                        <View>
+                            <CreateEventModal />
+                        </View>
+                    </View>
+
+                    <View style={styles.separator}></View>
+
+                    <View style={styles.listbody}>
+                        <FlatList
+                            data={DATA}
+                            renderItem={renderItem}
+                            ItemSeparatorComponent={renderSeparator}
+                            // keyExtractor={(item) => item.id}
+                        />
+                    </View>
+                </ImageBackground>
             </View>
-            <View style={styles.toggle}> 
-            <Text style={styles.answer}>Chat Notifications: </Text>
-            </View>
-          </View>
-        )}
-        {showInfo ? (
-          <Icon name="angle-up" size={25} style={styles.icon} color="white" />
-        ) : (
-          <Icon name="angle-down" size={25} style={styles.icon} color="white" />
-        )}
-      </View>
-    </TouchableOpacity>
-    );
+        )
+    } else {
+        return null
+    }
 }
-const styles=StyleSheet.create({
-    icon: {
-        position: "relative",
-        alignSelf: "center",
-      },
-    toggleb:{
-        position: "absolute",
-        paddingTop: 10,
-        left: "150%",
-        paddingBottom:10
-      },
-      toggle:{
-        flexDirection:"row",
-        justifyContent: "space-between",
-        paddingBottom:10
-      },
-      container: {
-        flex: 1,
-        backgroundColor: Colors.homeback,
-        alignItems: "center",
-        justifyContent: "center",
-        shadowColor: "black",
-        shadowOpacity: 0.5,
-        width: "100%",
-      },
-      dropdown: {
-        flex: 1,
-        alignItems: "center",
-        flexDirection: "row",
-        paddingTop: 10,
-        paddingLeft: 10,
-        paddingBottom: 10,
-        alignItems: "center",
-      },
-      box: {
-        padding: 10,
-        backgroundColor: "rgba(0, 0, 0, 0.2)",
-        width: "90%",
-        borderRadius: 15,
-        alignItems: "flex-start",
-        marginBottom:10
-      },
-      title: {
-        // alignItems: "flex-start",
-        color: "white",
-        fontSize: 21,
-        paddingTop: 0,
-        paddingBottom: 0,
-      },
-      answer: {
-        paddingLeft: 15,
-        paddingTop: 8,
-        paddingBottom: 7,
-        color: "white",
-        fontSize: 14,
-      },
-      answers: {
-        paddingTop: 10,
-        paddingRight:10
-      },
-      icon: {
-        position: "relative",
-        alignSelf: "center",
-      },
-      accordian: {
-        width: "100%",
-        alignItems: "center",
-        paddingTop:20
-      },
-      clip: {
-        position: "absolute",
-        paddingTop: 3,
-        left: "75%",
-      },
-      edit: {
-        position: "absolute",
-        paddingTop: 3,
-        left: "85%",
-      },
-      times: {
-        position: "absolute",
-        paddingTop: 4,
-        left: "95%",
-      },
+const styles = StyleSheet.create({
+    container: {
+        // backgroundColor: '#1F0915',
+        // padding: 10,
+        // margin: 10,
+        // borderRadius: 40,
+        // height: '45%',
+        // alignContent: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center',
+        // flex: 1,
+        marginTop: 15,
+        alignSelf: 'center',
+        // alignItems: 'center',
+        width: '95%',
+        height: '45%',
+        // flex: 0.95,
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'cover',
+        overflow: 'hidden',
+        borderRadius: 8,
+        // opacity: 0.5,
+    },
+
+    header: {
+        height: 50,
+        padding: 20,
+        justifyContent: 'space-between',
+        paddingVertical: 10,
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+
+    separator: {
+        width: '90%',
+        alignSelf: 'center',
+        borderWidth: 1,
+        borderColor: 'white',
+        opacity: 0.8,
+        borderRadius: 100,
+    },
+
+    listbody: {
+        paddingVertical: 2,
+        // marginBottom: 20,
+    },
 })
-export default Task_expanded;
+
+export default Task_expanded
