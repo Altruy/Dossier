@@ -1,7 +1,8 @@
-import React from 'react'
+import React , {useState , useEffect} from 'react'
 import {View, StyleSheet, FlatList} from 'react-native'
 import {Searchbar} from 'react-native-paper'
-import data from '../../data/taskacc-data'
+import { getCollabs } from '../../API'
+import { useAuth } from '../../auth_providers/Auth'
 import Accordion from './Accord'
 
 const renderSeparator = () => {
@@ -19,8 +20,17 @@ const renderSeparator = () => {
 }
 
 const Members = ({navigation}) => {
-    const [searchQuery, setSearchQuery] = React.useState('')
+    const [searchQuery, setSearchQuery] = useState('')
+    const [data, setData] = useState([])
     const onChangeSearch = (query) => setSearchQuery(query)
+    const { username , setCollabId } = useAuth();
+  
+    useEffect(() => {
+      collabs();
+    }, [])
+  
+    const collabs = async () => getCollabs(username).then((vals)=>setData(vals));
+  
     return (
         <View style={styles.container}>
             <View style={styles.upperbar}>
@@ -38,7 +48,7 @@ const Members = ({navigation}) => {
                 renderItem={({item}) => (
                     <Accordion data={item} navigation={navigation} />
                 )}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item,i) => i.toString()}
                 ItemSeparatorComponent={renderSeparator}
                 ListFooterComponent={<View style={{height: 20}} />}
                 style={styles.fl}

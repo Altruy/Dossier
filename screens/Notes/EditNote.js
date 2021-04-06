@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { Alert } from "react-native";
 import {
   View,
   Text,
@@ -11,11 +12,52 @@ import {
   ImageBackground,
   TextInput,
 } from "react-native";
+import Icon2 from "react-native-vector-icons/Feather";
 import Icon from "react-native-vector-icons/Ionicons";
-import data from "../../data/tile-data";
+import {useAuth} from '../../auth_providers/Auth'
+
 
 const EditNote = ({ navigation }) => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
+  const [title, setTitle] = useState('');
+  const [id,setId] = useState(navigation.getParam('id'))
+  const [edit, setEdit] = useState(false)
+  const [note,setNote] = useState({})
+  const { realm ,username} = useAuth();
+
+  useEffect(() => {
+    if(realm!==null && !!id)
+    {
+      let not = realm.objects('note').filtered(`id = "${id}"`)
+      setNote(not[0]);
+      setText(not[0].content);
+      setTitle(not[0].title)
+    }
+  }, [realm,id])
+
+
+  const handleEdit = () => {
+    let not = realm.objects('note').filtered(`id = "${id}"`)[0]
+    setNote(not)
+    if(!!not.editing){
+      Alert.alert(`Cannot Edit Note, '${not.editing}' is currently editing the Note`)
+    }
+    else {
+      realm.write(() => {
+        not.editing = username;
+      });
+      setEdit(true);
+    }
+  }
+  const handleSave = () => {
+    let not = realm.objects('note').filtered(`id = "${id}"`)[0]
+    realm.write(() => {
+      not.content = text;
+      not.editing = '';
+    });
+    setEdit(false);
+  }
+
   return (
     <ImageBackground
       source={require("../../assets/Notes-background.png")}
@@ -27,23 +69,32 @@ const EditNote = ({ navigation }) => {
             name="arrow-back-sharp"
             size={35}
             color="white"
-            onPress={() => {}}
+            onPress={() => navigation.goBack()}
           />
-          <Text style={styles.title}>Title</Text>
-          <Icon
+          <Text style={styles.title}>{title}</Text>
+          {edit && <Icon
             style={styles.check}
             name="checkmark-circle-outline"
             size={35}
             color="white"
-            onPress={() => {}}
-          />
+            onPress={()=>handleSave()}
+          />}
+           {!edit && <Icon2
+            style={styles.check}
+            name="edit"
+            size={35}
+            color="white"
+            onPress={()=>handleEdit()}
+          />}
         </View>
         <TextInput
           multiline={true}
           spellCheck={true}
           style={styles.input}
+          inlineImagePadding={20}
           onChangeText={(text) => setText(text)}
           defaultValue={text}
+          editable={edit}
         />
       </View>
     </ImageBackground>
@@ -65,7 +116,10 @@ const styles = StyleSheet.create({
     position: "relative",
     paddingTop: "5%",
     borderBottomWidth: 2,
+    color:'white',
     borderBottomColor: "black",
+    fontSize:20,
+    margin: '3%'
   },
 
   image: {
@@ -76,7 +130,8 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   check: {
-    paddingLeft: "70%",
+    position:'absolute',
+    right:'5%'
   },
 });
 

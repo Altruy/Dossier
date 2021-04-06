@@ -1,58 +1,90 @@
 import React, {useState} from 'react'
-import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native'
+import {Text, View, StyleSheet, TouchableOpacity, Image, Alert} from 'react-native'
 import Roleicon from './Roleicon'
+import { useAuth } from '../../auth_providers/Auth'
+import {removeUser} from '../../API'
 
-const Member = ({data}) => {
-    const {Name, Role} = data
-    const [showRole, setShowRole] = useState(false)
+const Member = ({data,creator,navigation}) => {
+    const { role, user } = data
+    const {username , collabId} = useAuth()
+
+    const handleRemove = async () => {
+        removeUser(collabId,user).then((resp)=>{
+            navigation.replace('Members')
+        })
+    }
+
 
     return (
         <View style={styles.item}>
-            <Text style={styles.names}> {data.key} </Text>
+            <Text style={styles.names}> {user} {user === username && <Text>(Me)</Text>} </Text>
+            
             <Roleicon
-                data={[
-                    {key: 'owner'},
-                    {key: 'admin'},
-                    {key: 'a'},
-                    {key: 's'},
-                    {key: 'admin'},
-                    {key: 'admin'},
-                    {key: 'John'},
-                    {key: 'Jillian'},
-                    {key: 'admin'},
-                    {key: 'Julie'},
-                    {key: 'asdsad'},
-                    {key: 'Dasn'},
-                    {key: 'admin'},
-                    {key: 'admin'},
-                    {key: 'admin'},
-                    {key: 'admin'},
-                    {key: 'admin'},
-                    {key: 'Jisllian'},
-                    {key: 'Jismmy'},
-                    {key: 'Juslie'},
-                ]}
+                role={role}
+                creator={creator}
+                user ={user}
+                navigation={navigation}
             />
-            <TouchableOpacity
-                style={styles.removebtn}
-                // onPress={() => Alert.alert('AYY')}
-            >
-                <Text style={styles.btntext}>Remove</Text>
-                <Image
-                    source={require('../../assets/remove.png')}
-                    style={styles.removeicon}
-                />
-            </TouchableOpacity>
+            <View style={styles.remove}>
+            {  user === username &&
+                    <TouchableOpacity
+                        style={styles.leavebtn}
+                        onPress={() => Alert.alert(
+                            `Leave this Collaboration?`,
+                            `Are you sure you want to leave the collaboration, you will not be able to interact any more?\nThis cannot be undone.`,
+                            [
+                              {
+                                text: 'Cancel',
+                                style: 'cancel'
+                              },
+                              { text: 'Leave', onPress: () => handleRemove() }
+                            ],
+                            { cancelable: true }
+                          )}
+                    >
+                        <Text style={styles.btntext}>Leave</Text>
+                        <Image
+                            source={require('../../assets/remove.png')}
+                            style={styles.removeicon}
+                        />
+                    </TouchableOpacity>
+                }  
+                {  username === creator && user !== username &&
+                    <TouchableOpacity
+                        style={styles.removebtn}
+                        onPress={() => Alert.alert(
+                            `Remove '${user}' from this Collaboration?`,
+                            `Are you sure you want to remove this user, they will not be able to interact any more?\nThis cannot be undone.`,
+                            [
+                              {
+                                text: 'Cancel',
+                                style: 'cancel'
+                              },
+                              { text: 'Remove', onPress: () => handleRemove() }
+                            ],
+                            { cancelable: true }
+                          )}
+                    >
+                        <Text style={styles.btntext}>Remove</Text>
+                        <Image
+                            source={require('../../assets/remove.png')}
+                            style={styles.removeicon}
+                        />
+                    </TouchableOpacity>
+                }  
+            </View>
         </View>
     )
 }
 
+
 export default Member
+
 
 const styles = StyleSheet.create({
     item: {
         justifyContent: 'space-between',
-
+        width:'100%',
         color: 'white',
         flexDirection: 'row',
 
@@ -65,33 +97,48 @@ const styles = StyleSheet.create({
         // paddingRight: 10,
         alignSelf: 'flex-start',
         fontSize: 18,
+        width:'60%'
     },
 
-    roleOwner: {
-        color: 'white',
-        alignSelf: 'flex-end',
-    },
     btntext: {
         color: 'white',
         paddingRight: 10,
         alignContent: 'center',
-        paddingTop: 3,
+        paddingTop: 5,
+        paddingBottom: 5,
         // marginVertical: 10,
     },
     removebtn: {
         flexDirection: 'row',
         fontSize: 18,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: '#AA3939',
         borderRadius: 30,
 
         alignSelf: 'flex-end',
-        height: 25,
+        height: 30,
 
         // alignContent: 'center',
         paddingHorizontal: 10,
         // paddingVertical: 6,
     },
+    leavebtn: {
+        flexDirection: 'row',
+        fontSize: 18,
+        backgroundColor: '#AA3939',
+        borderRadius: 30,
 
+        alignSelf: 'flex-end',
+        height: 30,
+
+        // alignContent: 'center',
+        paddingHorizontal: 10,
+        // paddingVertical: 6,
+    },
+    remove:{
+        width:'30%',
+        height:'100%'
+    }
+,
     removeicon: {
         marginTop: 3,
         height: 19,

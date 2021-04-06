@@ -13,17 +13,15 @@ import Modalinvite from './modal'
 
 import Member from './Member'
 
-export default Accordion = ({data}) => {
+export default Accordion = ({data,navigation}) => {
     const [showInfo, setShowInfo] = useState(false)
     const {
-        id,
+        _id,
+        admins,
         collab,
-        title,
-        assignees,
-        assigner,
-        deadline,
-        description,
-        completed,
+        creator,
+        name,
+        users,
     } = data
 
     return (
@@ -33,8 +31,8 @@ export default Accordion = ({data}) => {
                     style={styles.accordionbutton}
                     onPress={() => setShowInfo(!showInfo)}
                 >
-                    <Text style={styles.titletext}>Collaboration</Text>
-                    <Modalinvite />
+                    <Text style={styles.titletext}>{name}</Text>
+                    <Modalinvite collab={collab} name={name}/>
                     {showInfo ? (
                         <Icon
                             name="angle-up"
@@ -61,31 +59,25 @@ export default Accordion = ({data}) => {
                             <View>
                                 <FlatList
                                     nestedScrollEnabled={true}
-                                    data={[
-                                        {key: 'Devin'},
-                                        {key: 'Dan'},
-                                        {key: 'Dominic'},
-                                        {key: 'Jackson'},
-                                        {key: 'James'},
-                                        {key: 'Joel'},
-                                        {key: 'John'},
-                                        {key: 'Jillian'},
-                                        {key: 'Jimmy'},
-                                        {key: 'Julie'},
-                                        {key: 'asdsad'},
-                                        {key: 'Dasn'},
-                                        {key: 'Dosminic'},
-                                        {key: 'Jassckson'},
-                                        {key: 'Jasmes'},
-                                        {key: 'Josel'},
-                                        {key: 'Joshn'},
-                                        {key: 'Jisllian'},
-                                        {key: 'Jismmy'},
-                                        {key: 'Juslie'},
-                                    ]}
+                                    data={users.map((v,i)=>{
+                                        let role = 'user'
+                                        if ( v === creator ){
+                                            role = 'creator'
+                                        }
+                                        else if (admins.includes(v)){
+                                            role = 'admin'
+                                        }
+
+                                        return {
+                                            'key':i.toString() , 
+                                            'user':v,
+                                            'role' : role
+                                        }
+                                    })}
                                     renderItem={({item}) => (
-                                        <Member data={item} />
+                                        <Member data={item} creator={creator} navigation={navigation}  />
                                     )}
+                                    keyExtractor={(v,i)=>i.toString()}
                                 />
                             </View>
                         </ScrollView>
@@ -115,12 +107,9 @@ const styles = StyleSheet.create({
         // paddingRight: 40,
         // alignItems: 'center',
         flexDirection: 'column',
-        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         width: '100%',
         borderRadius: 25,
-
-        borderWidth: 1,
-        borderColor: 'gray',
         paddingTop: 15,
         paddingBottom: 10,
         paddingHorizontal: 10,

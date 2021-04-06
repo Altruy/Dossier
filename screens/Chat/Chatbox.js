@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState , useEffect} from "react";
 import {
   View,
   Text,
@@ -26,12 +26,36 @@ import {
   Entypo,
   Fontisto,
 } from '@expo/vector-icons';
+import {useAuth} from '../../auth_providers/Auth'
+import {getChat, addChat} from '../../API'
 
 
 const  Chatbox = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
   const [text, setText] = React.useState('');
+  const [data , setdata] = useState([])
+  const user = 'Jellybean'
+  const { collabId, username , realm} = useAuth()
+
+  useEffect(() => {
+    refresh()
+  }, [])
+
+  const refresh = ()=>{
+    getChat(collabId,username,user).then((res)=>setdata(res))
+  }
+
+  const handleSend=()=>{
+    if(!!text){
+      addChat(collabId,text,user,username).then(()=>{
+        setText('')
+        refresh()
+      })
+    }
+  }
+
+
 
   return (
     <KeyboardAvoidingView keyboardVerticalOffset={-500} behavior="padding" >
@@ -41,18 +65,14 @@ const  Chatbox = ({ navigation }) => {
     >
     
       <View >
-        <ChatBoxBar data={{name:'Jellybean',image:require('../../assets/members.png')}} />
+        <ChatBoxBar navigation={navigation} data={{name:user,image:{
+                    uri: 'https://robohash.org/'+user,
+                  }}} />
       </View>
       <ScrollView >
       <ChatBox
          
-            data={[{name: "SDS",id:1,message:'Hello Omer, How are you.....?',from:"omer"},
-            {name: "Software Engineering",id:2,message:'Hello r',from:"r"},
-            {name: "Network Security",id:3,message:'Woah woah',from:"omer"},
-            {name: "Advanced Programming",id:4,message:'Musti enters',from:"or"},
-            {name: "Theory of Automata",id:5,message:'Goodbye',from:"omer"}]
-        
-             }
+            data={data}
              style={{position:'relative'}}
              />
              </ScrollView>
@@ -68,8 +88,10 @@ const  Chatbox = ({ navigation }) => {
           onChangeText={text => setText(text)}
         />
       </View>
-      <FontAwesome5 name="arrow-right" size={28} color="blue" style={styles.next}/>
-                </View>     
+      <TouchableOpacity style={styles.next} onPress={()=>handleSend()}> 
+        <FontAwesome5 name="arrow-right" size={30} color="blue" style={styles.next} />
+      </TouchableOpacity>
+      </View>     
   
                     
     </ImageBackground>

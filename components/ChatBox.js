@@ -15,10 +15,11 @@ import {
 } from "react-native";
 import Colors from "../constants/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
+import {useAuth} from '../auth_providers/Auth'
 
-export default ChatBox = ({ title, data }) => {
+export default ChatBox = ({ data }) => {
   const [showInfo, setShowInfo] = useState(true);
-
+  const {username} = useAuth()
 
 
   return (
@@ -28,7 +29,7 @@ export default ChatBox = ({ title, data }) => {
           <FlatList
             data={data}
             renderItem={({ item }) => {
-                if (item.from === "omer"){
+                if (item.from === username){
                     return (<View style={styles.btn2}> 
                     <Text style={styles.text}>
                         {item.message}

@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState , useEffect} from "react";
 import {
   View,
   Text,
@@ -17,6 +17,8 @@ import Icon from "react-native-vector-icons/Ionicons";
 import ChatBoxBar from "../../components/ChatBoxBar";
 import ChatBox from "../../components/ChatBox";
 import ChatGroup from "../../components/ChatGroup";
+import {useAuth} from '../../auth_providers/Auth'
+import {getGroup, addGroup} from '../../API'
 
 import {KeyboardAvoidingView, Platform,} from "react-native";
 import {
@@ -30,9 +32,29 @@ import {
 
 
 const TestGroupChat = ({ navigation }) => {
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [data , setdata] = useState([])
+  const [text, setText] = useState('');
   const onChangeSearch = (query) => setSearchQuery(query);
-  const [text, setText] = React.useState('');
+  const { collabId, username , realm} = useAuth()
+
+  useEffect(() => {
+    refresh()
+  }, [])
+
+  const refresh = ()=>{
+    getGroup(collabId).then((res)=>setdata(res))
+  }
+
+  const handleSend=()=>{
+    if(!!text){
+      addGroup(collabId,text,username).then(()=>{
+        setText('')
+        refresh()
+      })
+    }
+  }
+
 
   return (
     <KeyboardAvoidingView keyboardVerticalOffset={-500} behavior="padding" >
@@ -41,26 +63,14 @@ const TestGroupChat = ({ navigation }) => {
       style={styles.image}
     >
    
-      <View >
-        <ChatBoxBar data={{name:'Group',image:require('../../assets/members.png')}} />
-      </View>
+       <View >
+        <ChatBoxBar navigation={navigation} data={{name:'Group Chat'}} />
+      </View> 
      
       <ScrollView >
       <ChatGroup
-         
-            data={[{name: "SDS",id:1,message:'Hello Omer, How are you.....?',from:"omer",image:'re',image:require('../../assets/members.png')},
-            {name: "Software Engineering",id:2,message:'Hello r',from:"r",image:require('../../assets/members.png')},
-            {name: "Network Security",id:3,message:'Woah woah',from:"omer",image:require('../../assets/members.png')},
-            {name: "Advanced Programming",id:4,message:'Musti enters',from:"or",image:require('../../assets/members.png')},
-            {name: "Theory of Automata",id:5,message:'Goodbye',from:"omer",image:require('../../assets/members.png')},
-            {name: "Theory of Automata",id:6,message:'Goodbye',from:"haha",image:require('../../assets/members.png')},
-            {name: "Theory of Automata",id:7,message:'Goodbye',from:"nope",image:require('../../assets/members.png')},
-            {name: "Theory of Automata",id:8,message:'Goodbye',from:"adnan",image:require('../../assets/members.png')},
-            {name: "Theory of Automata",id:9,message:'Goodbye',from:"zersh",image:require('../../assets/members.png')},
-            {name: "Theory of Automata",id:99,message:'Goodbye',from:"turu",image:require('../../assets/members.png')},
-            {name: "Theory of Automata",id:989,message:'Goodbye',from:"jellybean",image:require('../../assets/members.png')}]
-        
-             }
+         navigation={navigation}
+            data={data}
              style={{position:'relative'}}
              />
              </ScrollView>
@@ -77,8 +87,11 @@ const TestGroupChat = ({ navigation }) => {
                 onChangeText={text => setText(text)}
               />
             </View>
-            <FontAwesome5 name="arrow-right" size={28} color="blue" style={styles.next}/>
-                      </View>     
+            <TouchableOpacity style={styles.next} onPress={()=>handleSend()}> 
+              <FontAwesome5 name="arrow-right" size={30} color="blue" style={styles.next} />
+            </TouchableOpacity>
+           
+          </View>     
                     
                     
                     

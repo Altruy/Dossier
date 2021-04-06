@@ -15,8 +15,10 @@ import {
 } from "react-native";
 import Colors from "../constants/colors";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { Alert } from "react-native";
+import {useAuth} from '../auth_providers/Auth'
 
-export default Accordian = ({ data }) => {
+export default Accordian = ({ data , navigation}) => {
   const [showInfo, setShowInfo] = useState(false);
   const {
     id,
@@ -28,19 +30,46 @@ export default Accordian = ({ data }) => {
     description,
     completed,
   } = data;
-  const renderSeparator = () => {
-    return (
-      <View
-        style={{
-          height: 1,
-          width: "86%",
-          backgroundColor: "#CED0CE",
-          marginLeft: "4.5%",
-          opacity: 0.2,
-        }}
-      />
+  const { realm , username , collabId} = useAuth();
+
+  const handleEdit = ()=>{
+    navigation.navigate('EditTask',{
+      id : id
+    })
+  }
+
+  const alertDelete = () => {
+    Alert.alert(
+      `Delete '${title}'`,
+      `Are you sure you want to delete this task?\nThis cannot be undone.`,
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel'
+        },
+        { text: 'Delete', onPress: () => handleDelete() }
+      ],
+      { cancelable: false }
     );
-  };
+  }
+
+  const handleDelete = () => {
+    let tas = realm.objects('tas').filtered(`id = "${id}"`)[0]
+    realm.write(() => {
+      realm.delete(tas);
+    });
+    navigation.replace('Tasks') // check
+  }
+
+  const handleDone = () =>{
+    let tas = realm.objects('task').filtered(`id = "${id}"`)[0]
+    realm.write(() => {
+      tas.completed = !completed;
+    });
+    (!completed)?Alert.alert(`${title} marked as complete`):Alert.alert(`${title} marked as incomplete`)
+    navigation.replace('Tasks')
+  }
+ 
   return (
     <TouchableOpacity
       style={styles.accordian}
@@ -48,23 +77,30 @@ export default Accordian = ({ data }) => {
     >
       <View style={styles.box}>
         <View style={styles.dropdown}>
-          <Text style={styles.title}>{title}</Text>
-
-          <Icon
-            style={styles.clip}
-            name="clipboard-check"
-            size={20}
-            color="white"
-          />
-          <Icon style={styles.edit} name="edit" size={20} color="white" />
-          <Icon style={styles.times} name="times" size={20} color="white" />
+          <Text style={(!completed)?styles.title:styles.titleDon}>{title}</Text>
+          <View style={styles.btn}>
+            <Icon
+              style={styles.clip}
+              name="clipboard-check"
+              size={30}
+              color="white"
+              onPress={()=>handleDone()}
+            />
+            { (username===assigner) &&
+              <Icon style={styles.edit} name="edit" size={30} color="white" onPress={()=>handleEdit()}/>
+            }
+            { (username===assigner) &&
+            <Icon style={styles.times} name="times" size={30} color="white" onPress={()=>alertDelete()}/>
+            }
+          </View>
         </View>
 
         {showInfo && (
           <View style={styles.answers}>
-            <Text style={styles.answer}>Co-Assignees: {assignees.join()}</Text>
-            <Text style={styles.answer}>Deadline: {deadline} </Text>
+            <Text style={styles.answer}>Co-Assignees: {assignees.join(' , ')}</Text>
+            <Text style={styles.answer}>Deadline: {Date(deadline).slice(0,Date(deadline).indexOf('GMT'))} </Text>
             <Text style={styles.answer}>Description: {description} </Text>
+            <Text style={styles.answer}>Assigner: {assigner} </Text>
           </View>
         )}
         {showInfo ? (
@@ -106,16 +142,25 @@ const styles = StyleSheet.create({
   title: {
     // alignItems: "flex-start",
     color: "white",
-    fontSize: 18,
+    fontSize: 22,
     paddingTop: 0,
     paddingBottom: 0,
+  },
+  titleDon: {
+    // alignItems: "flex-start",
+    color: "white",
+    fontSize: 22,
+    paddingTop: 0,
+    paddingBottom: 0,
+    textDecorationLine:'line-through',
+    textDecorationStyle:'solid',
   },
   answer: {
     paddingLeft: 15,
     paddingTop: 8,
     paddingBottom: 7,
     color: "white",
-    fontSize: 14,
+    fontSize: 17,
   },
   answers: {
     paddingTop: 10,
@@ -129,18 +174,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   clip: {
-    position: "absolute",
-    paddingTop: 3,
-    left: "75%",
+    // position: "absolute",
+    padding: 3,
+    // left: "69%",
   },
   edit: {
-    position: "absolute",
-    paddingTop: 3,
-    left: "85%",
+    // position: "absolute",
+    padding: 3,
+    marginLeft:'5%'
+    // right:'31%'
+    // left: "81%",
   },
   times: {
-    position: "absolute",
-    paddingTop: 4,
-    left: "95%",
+    // position: "absolute",
+    padding: 4,
+    // right: "5%",
   },
+  btn : {
+    position: "absolute",
+    right:'-80%',
+    flexDirection : 'row',
+    width:'33%',
+    justifyContent:'flex-end'
+  }
 });

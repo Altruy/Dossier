@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {
     TextInput,
     View,
@@ -7,12 +7,11 @@ import {
     Button,
     Pressable,
     Alert,
-    StyleSheet,
+    StyleSheet
 } from 'react-native'
-
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { signin } from '../../backend/MongoConfig'
+import {useAuth} from '../../auth_providers/Auth'
 
 const SignIn = ({navigation}) => {
     const [data, setData] = React.useState({
@@ -20,21 +19,41 @@ const SignIn = ({navigation}) => {
         password: '',
         check_textInputChange: false,
         secureTextEntry: true,
+        validEmail : 'white'
     })
-    const [user,setUser] = React.useState(null);
+    const { user,username, signIn ,signOut } = useAuth();
+
+    useEffect(() => {
+        if (!!username) {
+            // signOut()
+          navigation.replace("Collabs");
+        }
+      }, [username]);
 
     const textInputChange = (val) => {
         if (val.length != 0) {
-            setData({
+            if(!val.includes('@') || !val.includes('.com') || val.includes(' '))
+            {
+                setData({
                 ...data, //destructrung data
                 email: val,
                 check_textInputChange: true,
+                validEmail:'white'
             })
+            }else{
+                setData({
+                    ...data, //destructrung data
+                    email: val,
+                    check_textInputChange: true,
+                    validEmail:'green'
+                })
+            }
         } else {
             setData({
                 ...data,
                 email: val,
                 check_textInputChange: false,
+                validEmail:'white'
             })
         }
     }
@@ -54,17 +73,25 @@ const SignIn = ({navigation}) => {
     }
 
     const handleSignin = async () => {
-        let user = await signin(data.email,data.password);
-        setUser (user);
-        console.log('user',user);
-        if (!!user) navigation.navigate('Notes');
+        if(data.validEmail!=='green' )
+        {
+            Alert.alert("Please Enter a valid Email");
+        }else if (!data.password) {
+            Alert.alert("Please Enter your Password");
+        }else{ 
+            try {
+                await signIn(data.email, data.password);
+            } catch (error) {
+                Alert.alert(error);
+            }
+        }
     }
 
     return (
         <View style={styles.container}>
-            {/* <View style={styles.top}>
+            <View style={styles.top}>
                 <Text style={styles.SignIntitle}>Sign In</Text>
-            </View> */}
+            </View>
             <View style={styles.body}>
                 <Text style={styles.text}>Email</Text>
                 <View style={styles.act}>
@@ -77,7 +104,7 @@ const SignIn = ({navigation}) => {
                         onChangeText={(val) => textInputChange(val)}
                     />
                     {data.check_textInputChange ? (
-                        <Feather name="check-circle" color="green" size={20} />
+                        <Feather name="check-circle" color={data.validEmail} size={20} />
                     ) : null}
                 </View>
                 <Text style={styles.text}>Password</Text>
@@ -115,8 +142,7 @@ const SignIn = ({navigation}) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('Signup')}
-                        // onPress={() => }
+                        onPress={() => navigation.navigate('SignUp')}
                     >
                         <Text style={styles.textSign}>Create Account</Text>
                     </TouchableOpacity>
@@ -138,15 +164,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#341024',
     },
     top: {
-        paddingTop: 20,
+        paddingTop: '12%',
         // marginTop: 20,
 
         // paddingBottom: 10,
-        marginBottom: 10,
 
-        height: '15%',
+        height: '17%',
         alignItems: 'center',
-        backgroundColor: '#1F0A16',
         flexDirection: 'row',
     },
     backbutton: {
@@ -174,7 +198,6 @@ const styles = StyleSheet.create({
     body: {
         // paddingTop: 30,
         paddingHorizontal: 20,
-        marginTop: 60,
         flex: 0.8,
         justifyContent: 'center',
 

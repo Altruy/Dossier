@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   View,
   Text,
@@ -9,20 +9,51 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback,
   Platform,
+  Alert
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { color } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/FontAwesome";
+import Icon2 from "react-native-vector-icons/MaterialIcons"
 import colors from "../constants/colors";
+import {useAuth} from '.././auth_providers/Auth'
 
 const NoteTile = ({ data, navigation }) => {
-  const { id, name, user, fave } = data;
+  const [note, setNote] = useState({})
   const [Star, setStar] = useState(false);
+  const { id, title, creator, editing, fave } = data;
+  const { realm , username} = useAuth();
+
+
+  useEffect(() => {
+    if(realm!==null && !!id)
+    {
+      let not = realm.objects('note').filtered(`id = "${id}"`)
+      setNote(not[0]);
+    }
+  }, [realm,id])
+
+  const handleDelete = () => {
+    let not = realm.objects('note').filtered(`id = "${id}"`)[0]
+    if(!!not.editing){
+      Alert.alert(`Cannot Delete Note, '${not.editing}' is currently editing the Note`)
+    }
+    else {
+      let titl = not.title;
+      realm.write(() => {
+        realm.delete(not);
+      });
+      Alert.alert(`Successfully Deleted Note '${titl}'`)
+      navigation.replace('Notes') // check
+    }
+  }
 
   return (
     <TouchableNativeFeedback
       onPress={() => {
-        navigation.navigate("EditNote");
+        navigation.navigate("EditNote",{
+          id : id
+        });
       }}
       background={TouchableNativeFeedback.Ripple("purple", false)}
     >
@@ -41,21 +72,36 @@ const NoteTile = ({ data, navigation }) => {
               {Star ? (
                 <Icon
                   name="star"
-                  size={18}
+                  size={25}
                   style={styles.icon}
                   color={colors.noteback}
                 />
               ) : (
                 <Icon
                   name="star-o"
-                  size={18}
+                  size={25}
                   style={styles.icon}
                   color="white"
                 />
               )}
             </TouchableOpacity>
-            <Text style={styles.title}>{name}</Text>
-            <Text style={styles.user}>-{user}</Text>
+            {note.creator === username && <TouchableOpacity
+              style={styles.delete}
+              onPress={() => {
+                handleDelete()
+              }}
+            >
+              
+                <Icon2
+                  name="delete"
+                  size={25}
+                  style={styles.icon}
+                  color={'white'}
+                />
+              
+            </TouchableOpacity>}
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.user}>-{creator}</Text>
           </View>
         </ImageBackground>
       </View>
@@ -110,6 +156,11 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 8,
     left: 8,
+  },
+  delete: {
+    position: "absolute",
+    top: 8,
+    right: 8,
   },
 });
 

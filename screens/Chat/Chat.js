@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   View,
   Text,
@@ -13,6 +13,8 @@ import {
 import { Searchbar } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import ChatHomeScreen from "../../components/ChatHomeScreen";
+import {useAuth} from '../../auth_providers/Auth'
+import {getUsers} from '../../API'
 
 const RenderSeparator = () => {
   return (
@@ -31,7 +33,27 @@ const RenderSeparator = () => {
 
 const Chat = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
-  const onChangeSearch = (query) => setSearchQuery(query);
+  const [all, setall] = useState([])
+  const [fil, setfil] = useState([])
+  const {realm , collabId , username} = useAuth()
+  const onChangeSearch = (query) => {
+    setSearchQuery(query);
+    setfil(all.filter((v)=>v.username.includes(query)))
+  }
+  
+  useEffect(() => {
+    if(all.length===0){
+      getUsers(collabId).then((resp)=>{
+        if(resp!==null){
+          setall(resp)
+          setfil(resp)
+        }
+      })
+    }
+    
+  }, [])
+
+
   return (
     <ImageBackground
       source={require("../../assets/Chat-background.png")}
@@ -47,17 +69,7 @@ const Chat = ({ navigation }) => {
             onChangeText={onChangeSearch}
             value={searchQuery}
           />
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("CreateTasks");
-            }}
-            style={styles.btn}
-          >
-            <Text style={styles.text}>
-              New
-              <Icon name="add" size={20} color="white" />
-            </Text>
-          </TouchableOpacity>
+          
         </View>
         <View style={{ justifyContent: "center", left: "2%" }}>
           <RenderSeparator />
@@ -66,83 +78,8 @@ const Chat = ({ navigation }) => {
       <ScrollView style={{ marginHorizontal: 20 }}>
         <View style={styles.fl}>
           <ChatHomeScreen
-            data={[
-              {
-                name: "SDS",
-                id: 1,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "Software Engineering",
-                id: 2,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "Network Security",
-                id: 3,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "Advanced Programming",
-                id: 4,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "Theory of Automata",
-                id: 5,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "SDS",
-                id: 1,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "Software Engineering",
-                id: 2,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "Network Security",
-                id: 3,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "Advanced Programming",
-                id: 4,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "Theory of Automata",
-                id: 5,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "SDS",
-                id: 1,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "Software Engineering",
-                id: 2,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "Network Security",
-                id: 3,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "Advanced Programming",
-                id: 4,
-                image: require("../../assets/members.png"),
-              },
-              {
-                name: "Theory of Automata",
-                id: 5,
-                image: require("../../assets/members.png"),
-              },
-            ]}
+            data={fil}
+            navigation={navigation}
           />
         </View>
       </ScrollView>
@@ -164,13 +101,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     paddingBottom: 20,
+    justifyContent:'center'
   },
   search: {
-    position: "absolute",
+    position:'absolute',
     width: "50%",
     borderRadius: 30,
     backgroundColor: "#26272C",
-    left: "10%",
   },
   btn: {
     position: "absolute",
@@ -201,6 +138,7 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     marginBottom: 30,
     alignSelf: "center",
+    width:'90%'
   },
 });
 export default Chat;

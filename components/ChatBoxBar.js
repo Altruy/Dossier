@@ -17,7 +17,7 @@ import ChatHomeScreen from "./ChatHomeScreen";
 
 
 
-const ChatBoxBar = ({ data }) => {
+const ChatBoxBar = ({ data , navigation}) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
   return (
@@ -26,9 +26,7 @@ const ChatBoxBar = ({ data }) => {
         <View style={styles.upperbar}>
           
           <TouchableOpacity
-            onPress={() => {
-              console.log("going back");
-            }}
+            onPress={() => navigation.goBack()}
             style={styles.bar}
           >
            <Image source={require('../assets/back-arrow.png')} style={styles.image} />
@@ -36,7 +34,7 @@ const ChatBoxBar = ({ data }) => {
                {data.name}
            </Text>
           </TouchableOpacity>
-          <Image source={data.image} style={styles.user} />
+          {!!data.image && <Image source={data.image} style={styles.user} />}
         </View>
         
       </View>
@@ -50,6 +48,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
     justifyContent: "center",
+    marginBottom:20
   },
 
     bar:{
@@ -72,13 +71,11 @@ const styles = StyleSheet.create({
     alignSelf:'center'
   },
   user:{
-    height: 25,
-    width:25,
+    height: 50,
+    width:50,
     alignSelf:'center',
     right:20,
     position:'absolute',
-    height: 35,
-    width:35,
     alignSelf:'center',
     borderRadius: 400/ 2,
     borderColor:'#26272C',

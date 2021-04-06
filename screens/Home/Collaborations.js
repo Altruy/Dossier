@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import CollabText from "../../components/CollabText";
 import Homebar from "../../components/Homebar";
 import Invite from "../../components/Invite";
-
+import {useAuth} from '../../auth_providers/Auth'
 import {
   View,
   Text,
@@ -16,8 +16,18 @@ import {
   TextInput,
   Modal,
 } from "react-native";
+import { getCollabs } from "../../API";
 
-const Collaboration = ({}) => {
+const Collaboration = ({navigation}) => {
+  const [data, setData] = useState([])
+  const { username , setCollabId , signOut } = useAuth();
+
+  useEffect(() => {
+    collabs();
+  }, [])
+
+  const collabs = async () => getCollabs(username).then((vals)=>setData(vals));
+
   const RenderSeparator = () => {
     return (
       <View
@@ -34,19 +44,15 @@ const Collaboration = ({}) => {
   return (
     
     <View style={styles.container}>
-    <Homebar />
+    <Homebar navigation={navigation}/>
     
     <RenderSeparator />
     <View style={styles.rest}>
 
     <CollabText
-      data={[{name: "SDS",id:1},
-    {name: "Software Engineering",id:1},
-    {name: "Network Security",id:1},
-    {name: "Advanced Programming",id:1},
-    {name: "Theory of Automata",id:1}]
-        
-      }
+      data={data}
+      setCollabId={setCollabId}
+      navigation = {navigation}
     />
     </View>
      <RenderSeparator />
@@ -70,7 +76,7 @@ const styles = StyleSheet.create({
   search:{
     paddingLeft:50,
     paddingTop:50,
-    paddingBottom:25
+    paddingBottom:25,
   }
   
 });

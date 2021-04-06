@@ -12,7 +12,7 @@ export function WelcomeView({ navigation }) {
     // If there is a user logged in, go to the Projects page.
     if (user != null) {
       navigation.navigate("Home");
-      console.log('user tryna navigate',user)
+      // console.log('user tryna navigate',user)
       // signOut()
     }
   }, [user]);
@@ -24,7 +24,7 @@ export function WelcomeView({ navigation }) {
     try {
       await signIn(email, password);
     } catch (error) {
-      Alert.alert(`Failed to sign in: ${error.message}`);
+      Alert.alert(`Invalid Email or Password`);
     }
   };
 

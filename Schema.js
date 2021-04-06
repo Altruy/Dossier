@@ -8,6 +8,7 @@ export const taskSchema = {
     completed: 'bool?',
     deadline: 'date?',
     description: 'string?',
+    id: 'string?',
     title: 'string?',
   },
   primaryKey: '_id',
@@ -34,7 +35,8 @@ export const noteSchema = {
     content: 'string?',
     creator: 'string?',
     editing: 'string?',
-    tite: 'string?',
+    id: 'string?',
+    title: 'string?',
   },
   primaryKey: '_id',
 };
@@ -47,6 +49,7 @@ export const eventSchema = {
     date: 'date?',
     description: 'string?',
     duration: 'string?',
+    id: 'string?',
     title: 'string?',
     user: 'string?',
   },
@@ -61,7 +64,7 @@ export const collaborationSchema = {
     collab: 'string?',
     creator: 'string?',
     name: 'string?',
-    notes: 'collaboration_notes[]',
+    notes: {type: 'list',objectType:'collaboration_notes'},
     users: 'string[]',
   },
   primaryKey: '_id',
@@ -85,6 +88,18 @@ export const chatSchema = {
     from: 'string?',
     message: 'string?',
     to: 'string?',
+  },
+  primaryKey: '_id',
+};
+
+export const userSchema = {
+  name: 'user',
+  properties: {
+    _id: 'objectId?',
+    collab: 'string?',
+    email: 'string?',
+    password: 'string?',
+    username: 'string?',
   },
   primaryKey: '_id',
 };

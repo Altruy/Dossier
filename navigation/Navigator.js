@@ -1,9 +1,23 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Button,
+  ImageBackground,
+  TouchableOpacity,
+  TouchableNativeFeedback,
+  Platform,
+  TextInput,
+  Modal,
+} from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator } from "react-navigation-drawer";
-import React from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import Icon2 from "react-native-vector-icons/SimpleLineIcons";
+import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 import SideBar from "../components/SideBar";
 import CreateTasks from "../screens/Tasks/CreateTasks";
 import EditTask from "../screens/Tasks/EditTask";
@@ -14,6 +28,7 @@ import Signin from "../screens/Home/Signin";
 import Signup from "../screens/Home/Signup";
 import Chat from "../screens/Chat/Chat";
 import Chatbox from "../screens/Chat/Chatbox";
+import ChatGroup from "../screens/Chat/ChatGroup";
 import Calendar from "../screens/Calendar/Calendar";
 import CreateEvent from "../screens/Calendar/CreateEvent";
 import EditEvent from "../screens/Calendar/EditEvent";
@@ -22,6 +37,7 @@ import EditNote from "../screens/Notes/EditNote";
 import Notification from "../screens/Notification/Notification";
 
 import Members from "../screens/Members/Members";
+import Topbar from "../components/topBar";
 
 const TaskNavigator = createStackNavigator(
   {
@@ -120,6 +136,7 @@ const ChatNavigator = createStackNavigator(
   {
     Chat: Chat,
     Chatbox: Chatbox,
+    ChatGroup: ChatGroup
   },
   {
     defaultNavigationOptions: {
@@ -150,7 +167,7 @@ CreateEvent.navigationOptions = (navData) => {
 
 Members.navigationOptions = (navData) => {
   return {
-    headerTitle: "Create Event",
+    headerTitle: "Members",
     headerLeft: () => (
       <Icon
         type="ionicon"
@@ -264,10 +281,47 @@ Chat.navigationOptions = (navData) => {
         }}
       />
     ),
+    headerRight:(props)=>{
+      return <View style={styles.container}>
+         <Icon3
+        name="bell"
+        color="white"
+        size={30}
+        
+        style={{padding: 10}}
+        onPress={() => console.log(all)}
+      />
+      <Icon2
+        name="options-vertical"
+        color="white"
+        size={30}
+        style={{padding: 10}}
+        onPress={() => console.log('option')}
+      />
+      
+    </View> 
+    }
   };
 };
 
 Chatbox.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Chat",
+    headerLeft: () => (
+      <Icon
+        type="ionicon"
+        name="md-menu"
+        color="white"
+        size={35}
+        onPress={() => {
+          navData.navigation.toggleDrawer();
+        }}
+      />
+    ),
+  };
+};
+
+ChatGroup.navigationOptions = (navData) => {
   return {
     headerTitle: "Chat",
     headerLeft: () => (
@@ -337,12 +391,13 @@ Settings.navigationOptions = (navData) => {
 
 const DrawerNavigator = createDrawerNavigator(
   {
-    Notes: NotesNavigator,
-    Tasks: TaskNavigator,
-    Calendar: CalendarNavigator,
     Chat: ChatNavigator,
-    Settings: SettingsNavigator,
+    Tasks: TaskNavigator,
+    Notes: NotesNavigator,
+    Calendar: CalendarNavigator,
     Members: MembersNavigator,
+    Settings: SettingsNavigator,
+    Notification: Notification
   },
   {
     contentOptions: {
@@ -354,7 +409,7 @@ const DrawerNavigator = createDrawerNavigator(
     contentComponent: (props) => {
       var copyprops = Object.assign({}, props);
       copyprops.items = copyprops.items.filter(
-        (item) => item.key !== "Settings" && item.key !== "Members"
+        (item) => item.key !== "Settings" && item.key !== "Members" && item.key !== "Notification"
       );
       return <SideBar {...copyprops} />;
     },
@@ -362,3 +417,74 @@ const DrawerNavigator = createDrawerNavigator(
 );
 
 export default createAppContainer(DrawerNavigator);
+
+
+const styles = StyleSheet.create({
+  container: {
+    position:'absolute',
+    height:'100%',
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection:'row'
+  },
+  modal: {
+    marginTop:'75%',
+    marginLeft:'16%',
+    height: 220,
+    width: "65%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 15,
+    backgroundColor: "black",
+    opacity:0.91
+  },
+  note: {
+    position: "relative",
+    top: -30,
+    fontSize: 22,
+    fontWeight:'bold',
+    color: "white",
+  },
+  title: {
+    position: "relative",
+    left: 0,
+    paddingTop: '3%',
+    fontSize: 15,
+    color: "white",
+    fontSize:18
+  },
+  input: {
+    top: -10,
+    margin: 10,
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    width: "60%",
+    height: "60%",
+    color:'white',
+    paddingLeft:15,
+    fontSize:18
+  },
+  btn: {
+    position: "relative",
+    top: 0,
+    left: "1%",
+    color: "white",
+    backgroundColor: "black",
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 14,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 4,
+    paddingTop: 4,
+    fontSize:18
+  },
+  times: {
+    position: "relative",
+    top: -10,
+    left: "37%",
+  },
+});
+

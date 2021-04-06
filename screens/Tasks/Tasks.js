@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useEffect} from "react";
 import {
   View,
   Text,
@@ -12,8 +12,9 @@ import {
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
-import data from "../../data/taskacc-data";
+// import data from "../../data/taskacc-data";
 import TaskAcc from "../../components/TaskAcc";
+import {useAuth} from '../../auth_providers/Auth'
 
 const renderSeparator = () => {
   return (
@@ -31,7 +32,25 @@ const renderSeparator = () => {
 
 const Tasks = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
-  const onChangeSearch = (query) => setSearchQuery(query);
+  const [data, setData] = React.useState([]);
+  const [fildata, setFildata] = React.useState([]);
+  const { realm , username , collabId} = useAuth();
+
+  const onChangeSearch = (query) => {
+    setFildata(data.filter((item)=>item.title.includes(query)))
+    setSearchQuery(query);
+  }
+  
+  useEffect(() => {
+    if(realm!==null)
+    {
+      let dat = realm.objects('task')
+      setData(dat)
+      setFildata(dat)
+    }
+    
+  }, [realm])
+
   return (
     <ImageBackground
       source={require("../../assets/Notification-background.png")}
@@ -60,9 +79,9 @@ const Tasks = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <FlatList
-          data={data}
+          data={fildata}
           renderItem={({ item }) => (
-            <TaskAcc data={item} navigation={navigation} />
+            <TaskAcc data={item} navigation={navigation} username = {username} />
           )}
           keyExtractor={(item) => item.id}
           ItemSeparatorComponent={renderSeparator}

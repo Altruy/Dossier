@@ -13,10 +13,19 @@ import {
   Modal,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import Icon2 from "react-native-vector-icons/SimpleLineIcons";
 
-const NoteModal = ({modal,setModal,text,setText,handleNew}) => {
+const Topbar = ({}) => {
+  const [modal, setModal] = useState(false)
   return (
     <View style={styles.container}>
+      <Icon2
+        type="simplelineicons"
+        name="options-vertical"
+        color="white"
+        size={30}
+        onPress={() => console.log('top')}
+      />
       <Modal
         animationType="fade"
         transparent={true}
@@ -119,4 +128,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NoteModal;
+export default Topbar;

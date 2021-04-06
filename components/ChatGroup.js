@@ -15,53 +15,55 @@ import {
 } from "react-native";
 import Colors from "../constants/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
+import {useAuth} from '../auth_providers/Auth'
 
-export default ChatGroup = ({ title, data }) => {
+export default ChatGroup = ({ navigation, data }) => {
   const [showInfo, setShowInfo] = useState(true);
-
-
-
+  const {username} = useAuth()
   return (
-    
   <View>
-         {(
-          <FlatList
-            data={data}
-            renderItem={({ item }) => {
-                if (item.from === "omer"){
-                    return (<View style={styles.btn2}> 
-                    <Text style={styles.text}>
-                        {item.message}
-                    </Text>
-                    </View>)
-                    
-                }
-                else{
-                    return (<View style={{flexDirection:'row'}}>
-                    <Image source={item.image} style={styles.image}/>
-                    <View style={styles.btn1}> 
-                    <Text style={styles.name}>{item.from}</Text>
-                    <Text style={styles.text}>
-                        {item.message}
-                    </Text>
-                    </View>
-                    </View>)
-                }
-             
-            }}
-            
-            keyExtractor={(item) => item.id}
-          />
-        )}
-        </View>
+    {(
+    <FlatList
+      data={data}
+      renderItem={({ item }) => {
+          if (item.from === username){
+              return (<View style={styles.btn2}> 
+              <Text style={styles.text}>
+                  {item.message}
+              </Text>
+              </View>)
+          }
+          else{
+              return (<View style={{flexDirection:'row'}}>
+              <Image 
+                source={{
+                  uri: 'https://robohash.org/'+item.from,
+                }} 
+                style={styles.image}
+            />
+              <View style={styles.btn1}> 
+              <Text style={styles.name}>{item.from}</Text>
+              <Text style={styles.text}>
+                  {item.message}
+              </Text>
+              </View>
+              </View>)
+          }
+        
+      }}
+      
+      keyExtractor={(item,i) => i.toString()}
+    />
+    )}
+  </View>
   );
 };
 
 const styles = StyleSheet.create({
     name:{
-            color:"white",
-            position:'absolute',
-            left:"45%",
+      color:"white",
+      position:'absolute',
+      left:"45%",
     },
     btn1: {
      

@@ -16,7 +16,7 @@ import {
 import Colors from "../constants/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default ChatHomeScreen = ({ title, data }) => {
+export default ChatHomeScreen = ({ navigation, data }) => {
   const [showInfo, setShowInfo] = useState(true);
 
   const RenderSeparator = () => {
@@ -24,9 +24,9 @@ export default ChatHomeScreen = ({ title, data }) => {
       <View
         style={{
           height: 1,
-          width: "86%",
+          width: "80%",
           backgroundColor: "#CED0CE",
-          marginLeft: "4.5%",
+          marginLeft: "10%",
           opacity: 0.2,
           marginTop:5,
           marginBottom:5
@@ -38,31 +38,47 @@ export default ChatHomeScreen = ({ title, data }) => {
   return (
     
   <View>
+    <TouchableOpacity
+        style={styles.container2}
+        onPress={() => navigation.navigate('ChatGroup')}
+      >
+   
+        
+        <Text style={styles.text}>Group Chat</Text>
+        <Image 
+        source={require('../assets/next.png')} 
+        style={styles.ImageIconStyle} 
+        />
+ 
+      </TouchableOpacity>
+      {RenderSeparator()}
          {(
           <FlatList
             data={data}
-            renderItem={({ item }) => (
-              <TouchableOpacity
+            renderItem={({ item }) => <TouchableOpacity
                 style={styles.container}
-                onPress={() => console.log(item.id)}
+                onPress={() => {
+                  navigation.navigate('ChatBox')
+                  console.log('chatbox')}}
               >
-            <Image 
-                  source={item.image} 
+                <Image 
+                  source={{
+                    uri: 'https://robohash.org/'+item.username,
+                  }} 
                   style={styles.image}
                   />
-            <Text style={styles.text}>{item.name}</Text>
-                  <Image 
-                  source={require('../assets/next.png')} 
-                  style={styles.ImageIconStyle} 
-                  />
-                   <Image 
-                  source={require('../assets/chat.png')} 
-                  style={styles.chaticon} 
-                  />
+                <Text style={styles.text}>{item.username}</Text>
+                <Image 
+                source={require('../assets/next.png')} 
+                style={styles.ImageIconStyle} 
+                />
+                {/* <Image 
+                source={require('../assets/chat.png')} 
+                style={styles.chaticon} 
+                /> */}
               </TouchableOpacity>
-            )}
+            }
             ItemSeparatorComponent={RenderSeparator}
-            keyExtractor={(item) => item.id}
           />
         )}
         </View>
@@ -75,6 +91,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginVertical:7,
   },
+  container2: {
+    flexDirection: 'row',
+    paddingVertical: 10,
+    marginVertical:7,
+    height:70
+  },
   text:
   {
     
@@ -85,10 +107,9 @@ const styles = StyleSheet.create({
     left:"35%"
   },
   image:{
-    height: 35,
-    width:35,
+    height: 60,
+    width:60,
     alignSelf:'center',
-    left:"15%",
     borderRadius: 400/ 2,
     borderColor:'#26272C',
     backgroundColor:'#26272C'
@@ -98,7 +119,7 @@ const styles = StyleSheet.create({
     height: 20,
     width:20,
     alignSelf:'center',
-    right:5,
+    right:'5%',
     position:'absolute'
   
   },

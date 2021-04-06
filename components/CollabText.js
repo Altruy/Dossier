@@ -17,7 +17,7 @@ import Colors from "../constants/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default CollabText = ({ title, data }) => {
+export default CollabText = ({ navigation , setCollabId, data }) => {
   const [showInfo, setShowInfo] = useState(true);
 
   const RenderSeparator = () => {
@@ -43,7 +43,10 @@ export default CollabText = ({ title, data }) => {
             renderItem={({ item }) => (
               <TouchableOpacity
                 style={styles.container}
-                onPress={() => console.log(item)}
+                onPress={() => {
+                  setCollabId(item.collab);
+                  navigation.navigate('Home');
+                }}
               >
           
             <Text style={styles.text}>{item.name}</Text>
@@ -54,7 +57,7 @@ export default CollabText = ({ title, data }) => {
               </TouchableOpacity>
             )}
             ItemSeparatorComponent={RenderSeparator}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.collab}
           />
         )}
         </View>

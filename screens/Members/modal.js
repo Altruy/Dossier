@@ -9,11 +9,14 @@ import {
     View,
     Image,
     TextInput,
+    Clipboard
 } from 'react-native'
+// import {Clipboard} from '@react-native-community/clipboard'
+import Icon2 from "react-native-vector-icons/FontAwesome";
 
 import Feather from 'react-native-vector-icons/Feather'
 
-const Modalinvite = () => {
+const Modalinvite = ({collab,name}) => {
     // const genlink = () => {
     //     var text = ''
     //     var possible =
@@ -25,6 +28,10 @@ const Modalinvite = () => {
     //     return text
     // }
     const [modalVisible, setModalVisible] = useState(false)
+    const handleCopy =()=>{
+        Clipboard.setString(collab)
+        Alert.alert('Collab Id copied to clipboard')
+    }
     return (
         <View style={styles.centeredView}>
             <Modal
@@ -40,14 +47,11 @@ const Modalinvite = () => {
                     <View style={styles.modalView}>
                         <View style={styles.head}>
                             <Text style={styles.headtext}>
-                                Invite Member to [Collaboration]
+                                Invite Member to '{name}'
                             </Text>
-                            <Feather
-                                name="x"
-                                color="white"
-                                onPress={() => setModalVisible(!modalVisible)}
-                                size={18}
-                            ></Feather>
+                            <Icon2 style={styles.cross} name="times" size={30} color="white" 
+                                onPress={() => setModalVisible(!modalVisible)} />
+                            
                         </View>
                         <View style={styles.email}>
                             <Text style={styles.textStyle}>Email: </Text>
@@ -58,15 +62,21 @@ const Modalinvite = () => {
                             />
                         </View>
 
-                        <View style={styles.email}>
+                        <TouchableOpacity style={styles.email} onPress={()=>handleCopy()}>
                             <Text style={styles.textStyle}>Link: </Text>
-                            <TextInput
-                                // placeholder="Username"
-                                placeholderTextColor="white"
+                            <Text
                                 style={styles.textInput}
                                 autoCapitalize="none"
-                            />
-                        </View>
+                            >{collab}
+                                
+                            </Text>
+                            <Feather
+                                    name="copy"
+                                    color="white"
+                                    size={18}
+                                    style={styles.copy}
+                                />
+                        </TouchableOpacity>
 
                         <TouchableOpacity style={styles.invitebtn}>
                             <Text style={styles.invitetext}>Invite</Text>
@@ -107,6 +117,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         opacity: 10,
     },
+    copy:{
+        position:'absolute',
+        top:'25%',
+        right:'5%'
+    },
     button: {
         flexDirection: 'row',
         // fontSize: 20,
@@ -143,8 +158,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
     },
     headtext: {
-        fontSize: 15,
+        fontSize: 18,
         color: 'white',
+        paddingLeft:20
         // fontWeight: '400',
     },
 
@@ -171,7 +187,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         color: 'white',
-        width: '70%',
+        width: '75%',
     },
 
     invitetext: {
@@ -191,6 +207,11 @@ const styles = StyleSheet.create({
         height: 25,
         // left: '20%',
     },
+    cross: {
+        position: "absolute",
+        top: '-20%',
+        right: "3%",
+      },
 })
 
 export default Modalinvite

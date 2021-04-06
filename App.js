@@ -1,21 +1,20 @@
-
+import 'react-native-gesture-handler'
+import 'react-native-reanimated'
 import React from "react";
-
-import AppNavigator from "./navigation/Navigator";
 
 import { Provider as PaperProvider } from "react-native-paper";
 
 import { AuthProvider } from './auth_providers/Auth';
 
-import BackNav from './navigation/BackNav'
+import MainNavigator from './navigation/BackNav'
 
 export default function App() {
 
   return (
     <AuthProvider>
-    <PaperProvider>
-       <BackNav/>
-    </PaperProvider>
+      <PaperProvider>
+        <MainNavigator/>
+      </PaperProvider>
     </AuthProvider>
   );
 }
