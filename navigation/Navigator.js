@@ -281,7 +281,7 @@ Chat.navigationOptions = (navData) => {
         }}
       />
     ),
-    headerRight:(props)=>{
+    headerRight:()=>{
       return <View style={styles.container}>
          <Icon3
         name="bell"
@@ -289,8 +289,17 @@ Chat.navigationOptions = (navData) => {
         size={30}
         
         style={{padding: 10}}
-        onPress={() => console.log(all)}
+        onPress={() => console.log('bell')}
       />
+      <Icon3
+        name="home"
+        color="white"
+        size={30}
+        
+        style={{padding: 10}}
+        onPress={() => console.log('home')}
+      />
+      
       <Icon2
         name="options-vertical"
         color="white"
