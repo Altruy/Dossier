@@ -3,7 +3,7 @@ import TaskAcc from './CalTaskAcc'
 import CreateEventModal from './CreateEventModal'
 
 import {View, Text, FlatList, ImageBackground, StyleSheet} from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import {ScrollView} from 'react-native-gesture-handler'
 
 const Task_expanded = (props) => {
     const show = props.show
@@ -87,9 +87,7 @@ const Task_expanded = (props) => {
 
     if (show) {
         return (
-            
             <View style={styles.container}>
-                
                 <ImageBackground
                     source={require('../assets/Calendar-tile.png')}
                     style={styles.image}
@@ -99,20 +97,20 @@ const Task_expanded = (props) => {
                             <Text style={{color: 'white'}}>DATE</Text>
                         </View>
                         <View>
-                            <CreateEventModal />
+                            <CreateEvent />
                         </View>
                     </View>
 
                     <View style={styles.separator}></View>
                     <ScrollView>
-                    <View style={styles.listbody}>
-                        <FlatList
-                            data={DATA}
-                            renderItem={renderItem}
-                            ItemSeparatorComponent={renderSeparator}
-                            // keyExtractor={(item) => item.id}
-                        />
-                    </View>
+                        <View style={styles.listbody}>
+                            <FlatList
+                                data={DATA}
+                                renderItem={renderItem}
+                                ItemSeparatorComponent={renderSeparator}
+                                // keyExtractor={(item) => item.id}
+                            />
+                        </View>
                     </ScrollView>
                 </ImageBackground>
             </View>
