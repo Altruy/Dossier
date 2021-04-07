@@ -18,6 +18,8 @@ import {
 const Calen = ({data}) => {
     const [show, setShowState] = useState(false)
     const nextDays = []
+    const [tasks,settasks] = useState([])
+    const [show_date,setdate] = useState('') 
     data.forEach((day) => {
         for (const [key, value] of Object.entries(day)) {
             //console.log(`${key}`);
@@ -40,24 +42,24 @@ const Calen = ({data}) => {
             <View style={styles.container}>
                 <Calendar
                     onDayPress={(day) => {
-                        data.forEach((item) => {
-                            for (const [key, value] of Object.entries(item)) {
-                                if (key === day.dateString) {
-                                    console.log(`woah woah ${value}`)
-                                    console.log('sdsds', show)
-                                    setShowState(!show)
-                                    // newDaysObject[day.dateString] = {
-                                    //     marked: true,
-                                    //     selected: true,
-                                    //     selectedColor: 'blue'
-                                    // };
-                                    // console.log(newDaysObject)
+                        let arr=[]
+                            
+                            setdate(day.dateString)
+                            data.map((item) => {
+                                for (const [key, value] of Object.entries(item)) {
+                                    if (key === day.dateString) {
+                                        arr.push(value)
+                                        console.log("SSSSSSSSSSSSSSSSSSS",arr)
+                                    }
                                 }
+                            })
+                            if(show === true && day.dateString === show_date){
+                                setShowState(false)
                             }
-                        })
-                    }}
-                    onDayLongPress={(day) => {
-                        console.log('selected day', day)
+                            else if(show === false){
+                                setShowState(true)
+                            }
+                            settasks(arr)
                     }}
                     onMonthChange={(month) => {
                         console.log('month changed', month)
@@ -95,7 +97,7 @@ const Calen = ({data}) => {
                         textDayHeaderFontSize: 16,
                     }}
                 />
-                <Task_expanded show={show} />
+                <Task_expanded show={show} DATA = {tasks}/>
             </View>
         </ImageBackground>
     )

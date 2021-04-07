@@ -1,77 +1,71 @@
 import React, {useState} from 'react'
 import TaskAcc from './CalTaskAcc'
-import CreateEvent from './CreateEventModal'
+import CreateEventModal from './CreateEventModal'
 
-import {
-    View,
-    Text,
-    FlatList,
-    ImageBackground,
-    StyleSheet,
-    TouchableOpacity,
-    Image,
-} from 'react-native'
+import {View, Text, FlatList, ImageBackground, StyleSheet} from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const Task_expanded = (props) => {
     const show = props.show
-    // const [show, setShowState] = useState(true)
+    const DATA = props.DATA
+    // const [show, setShowState] = useState(props.show)
 
-    const DATA = [
-        {
-            id: '1',
-            title: 'First Item',
-            assignees: 'Turu',
-            assigner: 'Adnan',
-            deadline: 'kal',
-            description: 'KAAM KAROOOO',
-            completed: '',
-        },
-        {
-            id: '2',
-            title: 'Second Item',
-            assignees: 'Turu',
-            assigner: 'Adnan',
-            deadline: 'kal',
-            description: 'KAAM KAROOOO',
-            completed: '',
-        },
-        {
-            id: '3',
-            title: 'Third Item',
-            assignees: 'Turu',
-            assigner: 'Adnan',
-            deadline: 'kal',
-            description: 'KAAM KAROOOO',
-            completed: '',
-        },
-        {
-            id: '4',
-            title: 'fourth Item',
-            assignees: 'Turu',
-            assigner: 'Adnan',
-            deadline: 'kal',
-            description: 'KAAM KAROOOO',
-            completed: '',
-        },
-        {
-            id: '5',
-            title: 'fifth Item',
-            assignees: 'Turu',
-            assigner: 'Adnan',
-            deadline: 'kal',
-            description: 'KAAM KAROOOO',
-            completed: '',
-        },
-        {
-            id: '6',
-            title: 'sixt Item',
-            assignees: 'Turu',
-            assigner: 'Adnan',
-            deadline: 'kal',
-            description: 'KAAM KAROOOO',
-            completed: '',
-        },
-    ]
+    // const DATA = [
+    //     {
+    //         id: '1',
+    //         title: 'First Item',
+    //         assignees: 'Turu',
+    //         assigner: 'Adnan',
+    //         deadline: 'kal',
+    //         description: 'KAAM KAROOOO',
+    //         completed: '',
+    //     },
+    //     {
+    //         id: '2',
+    //         title: 'Second Item',
+    //         assignees: 'Turu',
+    //         assigner: 'Adnan',
+    //         deadline: 'kal',
+    //         description: 'KAAM KAROOOO',
+    //         completed: '',
+    //     },
+    //     {
+    //         id: '3',
+    //         title: 'Third Item',
+    //         assignees: 'Turu',
+    //         assigner: 'Adnan',
+    //         deadline: 'kal',
+    //         description: 'KAAM KAROOOO',
+    //         completed: '',
+    //     },
+    //     {
+    //         id: '4',
+    //         title: 'fourth Item',
+    //         assignees: 'Turu',
+    //         assigner: 'Adnan',
+    //         deadline: 'kal',
+    //         description: 'KAAM KAROOOO',
+    //         completed: '',
+    //     },
+    //     {
+    //         id: '5',
+    //         title: 'fifth Item',
+    //         assignees: 'Turu',
+    //         assigner: 'Adnan',
+    //         deadline: 'kal',
+    //         description: 'KAAM KAROOOO',
+    //         completed: '',
+    //     },
+    //     {
+    //         id: '6',
+    //         title: 'sixt Item',
+    //         assignees: 'Turu',
+    //         assigner: 'Adnan',
+    //         deadline: 'kal',
+    //         description: 'KAAM KAROOOO',
+    //         completed: '',
+    //     },
+    // ]
     const renderSeparator = () => {
         return (
             <View
@@ -93,9 +87,11 @@ const Task_expanded = (props) => {
 
     if (show) {
         return (
+            
             <View style={styles.container}>
+                
                 <ImageBackground
-                    source={require('../../assets/Calendar-tile.png')}
+                    source={require('../assets/Calendar-tile.png')}
                     style={styles.image}
                 >
                     <View style={styles.header}>
@@ -103,27 +99,12 @@ const Task_expanded = (props) => {
                             <Text style={{color: 'white'}}>DATE</Text>
                         </View>
                         <View>
-                            {/* <CreateEvent /> */}
-                            <TouchableOpacity
-                                style={[styles.button, styles.buttonOpen]}
-                                // onPress={() => setModalVisible(true)}
-                                onPress={
-                                    () => alert('CREATE EVENT')
-                                    // navigation.navigate('CreateEvent')
-                                }
-                                // onPress={() => Alert.alert('AYY')}
-                            >
-                                <Text style={styles.textStyle}>New Event</Text>
-                                <Image
-                                    source={require('../../assets/invite.png')}
-                                    style={styles.removeicon}
-                                />
-                            </TouchableOpacity>
+                            <CreateEventModal />
                         </View>
                     </View>
 
                     <View style={styles.separator}></View>
-
+                    <ScrollView>
                     <View style={styles.listbody}>
                         <FlatList
                             data={DATA}
@@ -132,6 +113,7 @@ const Task_expanded = (props) => {
                             // keyExtractor={(item) => item.id}
                         />
                     </View>
+                    </ScrollView>
                 </ImageBackground>
             </View>
         )
@@ -156,27 +138,6 @@ const styles = StyleSheet.create({
         width: '95%',
         height: '45%',
         // flex: 0.95,
-    },
-    button: {
-        flexDirection: 'row',
-        // fontSize: 20,
-        borderRadius: 20,
-        // marginRight: 15,
-        textDecorationColor: 'white',
-        // paddingHorizontal: 10,
-        // paddingVertical: 5,
-        // alignItems: 'center',
-        // height: 25,
-    },
-    buttonOpen: {
-        backgroundColor: 'rgba(0, 0, 0, 0.9)',
-    },
-    textStyle: {
-        color: 'white',
-        fontSize: 15,
-        justifyContent: 'flex-start',
-        textAlignVertical: 'center',
-        // paddingRight: 10,
     },
     image: {
         width: '100%',
