@@ -17,12 +17,29 @@ import Repeat from './CheckBox'
 
 import Feather from 'react-native-vector-icons/Feather'
 import {BackgroundImage} from 'react-native-elements/dist/config'
+
 const CreateEvent = () => {
+    // const genlink = () => {
+    //     var text = ''
+    //     var possible =
+    //         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+    //     for (var i = 0; i < 5; i++)
+    //         text += possible.charAt(Math.floor(Math.random() * possible.length))
+
+    //     return text
+    // }
+    const [modalVisible, setModalVisible] = useState(false)
     return (
-        <View>
-            <ImageBackground
-                source={require('../../assets/Calendar-background.png')}
-                style={styles.image}
+        <View style={styles.container}>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    Alert.alert('Modal has been closed.')
+                    setModalVisible(!modalVisible)
+                }}
             >
                 <KeyboardAvoidingView style={styles.container}>
                     <View style={styles.modalView}>
@@ -30,12 +47,12 @@ const CreateEvent = () => {
                             <Text style={styles.headtext}>
                                 Create New Event
                             </Text>
-                            {/* <Feather
+                            <Feather
                                 name="x"
                                 color="white"
-                                // onPress={() => setModalVisible(!modalVisible)}
+                                onPress={() => setModalVisible(!modalVisible)}
                                 size={18}
-                            ></Feather> */}
+                            ></Feather>
                         </View>
                         <View style={styles.body}>
                             <View style={styles.object}>
@@ -99,12 +116,22 @@ const CreateEvent = () => {
                         </TouchableOpacity>
                     </View>
                 </KeyboardAvoidingView>
-            </ImageBackground>
+            </Modal>
+
+            <TouchableOpacity
+                style={[styles.button, styles.buttonOpen]}
+                // onPress={() => setModalVisible(true)}
+                onPress={() => navigation.navigate('CreateEvent')}
+                // onPress={() => Alert.alert('AYY')}
+            >
+                <Text style={styles.textStyle}>New Event</Text>
+                <Image
+                    source={require('../../assets/invite.png')}
+                    style={styles.removeicon}
+                />
+            </TouchableOpacity>
         </View>
     )
-
-    {
-    }
 }
 
 const styles = StyleSheet.create({
@@ -112,13 +139,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         // alignItems: 'center',
-    },
-    image: {
-        //flex: 1,
-        height: '100%',
-        width: '100%',
-        resizeMode: 'cover',
-        overflow: 'hidden',
     },
     modalView: {
         // flex: 0.6,

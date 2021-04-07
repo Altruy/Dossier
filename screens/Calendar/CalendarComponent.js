@@ -1,6 +1,7 @@
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars'
 import React, {useState} from 'react'
 import Task_expanded from './Task_expanded'
+import CreateEvent from './CreateEvent'
 
 import {
     View,
@@ -33,7 +34,7 @@ const Calen = ({data}) => {
 
     return (
         <ImageBackground
-            source={require('../assets/Calendar-background.png')}
+            source={require('../../assets/Calendar-background.png')}
             style={styles.image}
         >
             <View style={styles.container}>

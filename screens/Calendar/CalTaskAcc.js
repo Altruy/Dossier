@@ -13,7 +13,7 @@ import {
     Modal,
     FlatList,
 } from 'react-native'
-import Colors from '../constants/colors'
+import Colors from '../../constants/colors'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
 export default Accordian = ({data}) => {
@@ -41,20 +41,12 @@ export default Accordian = ({data}) => {
         >
             <View style={styles.box}>
                 <View style={styles.dropdown}>
-                    <Text style={styles.title}>{title}</Text>
+                    <View>
+                        <Text style={styles.title}>{title}</Text>
+                        <Text style={styles.answer}>Deadline: {deadline} </Text>
+                    </View>
 
-                    <Icon
-                        style={styles.clip}
-                        name="clipboard-check"
-                        size={20}
-                        color="white"
-                    />
-                    <Icon
-                        style={styles.edit}
-                        name="edit"
-                        size={20}
-                        color="white"
-                    />
+                    <Text style={styles.answer}>[ClockIcon] </Text>
                     <Icon
                         style={styles.times}
                         name="times"
@@ -65,11 +57,6 @@ export default Accordian = ({data}) => {
 
                 {showInfo && (
                     <View style={styles.answers}>
-                        <Text style={styles.answer}>
-                            Co-Assignees: {assignees}
-                        </Text>
-                        {/* <Text style={styles.answer}>Co-Assignees: {assignees.join()}</Text> */}
-                        <Text style={styles.answer}>Deadline: {deadline} </Text>
                         <Text style={styles.answer}>
                             Description: {description}{' '}
                         </Text>
