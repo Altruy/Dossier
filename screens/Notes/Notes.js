@@ -161,4 +161,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Notes;
+export default Notes

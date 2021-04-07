@@ -40,97 +40,90 @@ import Members from "../screens/Members/Members";
 import Topbar from "../components/topBar";
 
 const TaskNavigator = createStackNavigator(
-  {
-    //Members: Members,
-    Tasks: Tasks,
-    CreateTasks: CreateTasks,
-    EditTask: EditTask,
-  },
-  {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: "black",
-      },
-      headerTintColor: "white",
+    {
+        //Members: Members,
+        Tasks: Tasks,
+        CreateTasks: CreateTasks,
+        EditTask: EditTask,
     },
-  }
-);
-
-const MembersNavigator = createStackNavigator(
-  {
-    Members: Members,
-  },
-  {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: "black",
-      },
-      headerTintColor: "white",
-    },
-  }
-);
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: 'black',
+            },
+            headerTintColor: 'white',
+        },
+    }
+)
 
 const CollaborationNavigator = createStackNavigator(
-  {
-    Signup: Signup,
-    Collaborations: Collaborations,
-    Signin: Signin,
-  },
-  {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: "black",
-      },
-      headerTintColor: "white",
+    {
+        Signup: Signup,
+        Collaborations: Collaborations,
+        Signin: Signin,
     },
-  }
-);
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: 'black',
+            },
+            headerTintColor: 'white',
+        },
+    }
+)
 
 const SettingsNavigator = createStackNavigator(
-  {
-    Settings: Settings,
-  },
-  {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: "black",
-      },
-      headerTintColor: "white",
+    {
+        Settings: Settings,
     },
-  }
-);
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: 'black',
+            },
+            headerTintColor: 'white',
+        },
+        // {
+        //     defaultNavigationOptions: {
+        //         headerStyle: {
+        //             backgroundColor: 'black',
+        //         },
+        //         headerTintColor: 'white',
+        // },
+    }
+)
 
 const NotesNavigator = createStackNavigator(
-  {
-    Notes: Notes,
-    EditNote: EditNote,
-  },
-  {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: "black",
-      },
-      headerTintColor: "white",
+    {
+        Notes: Notes,
+        EditNote: EditNote,
     },
-  }
-);
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: 'black',
+            },
+            headerTintColor: 'white',
+        },
+    }
+)
 
 const CalendarNavigator = createStackNavigator(
-  {
-    Calendar: Calendar,
-    CreateEvent: CreateEvent,
-    EditEvent: EditEvent,
-    // Notification: Notification,
-  },
-  {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: "black",
-      },
-      headerTintColor: "white",
+    {
+        Calendar: Calendar,
+        CreateEvent: CreateEvent,
+        EditEvent: EditEvent,
+        // Notification: Notification,
     },
-  }
-);
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: 'black',
+            },
+            headerTintColor: 'white',
+        },
+    }
+)
 
 const ChatNavigator = createStackNavigator(
   {
@@ -144,26 +137,39 @@ const ChatNavigator = createStackNavigator(
         backgroundColor: "black",
       },
       headerTintColor: "white",
-    },
+    }
   }
-);
+)
+const MembersNavigator = createStackNavigator(
+    {
+        Members: Members,
+    },
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: 'black',
+            },
+            headerTintColor: 'white',
+        },
+    }
+)
 
 CreateEvent.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Create Event",
-    headerLeft: () => (
-      <Icon
-        type="ionicon"
-        name="md-menu"
-        color="white"
-        size={35}
-        onPress={() => {
-          navData.navigation.toggleDrawer();
-        }}
-      />
-    ),
-  };
-};
+    return {
+        headerTitle: 'Create Event',
+        headerLeft: () => (
+            <Icon
+                type="ionicon"
+                name="md-menu"
+                color="white"
+                size={35}
+                onPress={() => {
+                    navData.navigation.toggleDrawer()
+                }}
+            />
+        ),
+    }
+}
 
 Members.navigationOptions = (navData) => {
   return {
@@ -183,89 +189,89 @@ Members.navigationOptions = (navData) => {
 };
 
 EditEvent.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Edit Event",
-    headerLeft: () => (
-      <Icon
-        type="ionicon"
-        name="md-menu"
-        color="white"
-        size={35}
-        onPress={() => {
-          navData.navigation.toggleDrawer();
-        }}
-      />
-    ),
-  };
-};
+    return {
+        headerTitle: 'Edit Event',
+        headerLeft: () => (
+            <Icon
+                type="ionicon"
+                name="md-menu"
+                color="white"
+                size={35}
+                onPress={() => {
+                    navData.navigation.toggleDrawer()
+                }}
+            />
+        ),
+    }
+}
 
 Calendar.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Calendar",
-    headerLeft: () => (
-      <Icon
-        type="ionicon"
-        name="md-menu"
-        color="white"
-        size={35}
-        onPress={() => {
-          navData.navigation.toggleDrawer();
-        }}
-      />
-    ),
-  };
-};
+    return {
+        headerTitle: 'Calendar',
+        headerLeft: () => (
+            <Icon
+                type="ionicon"
+                name="md-menu"
+                color="white"
+                size={35}
+                onPress={() => {
+                    navData.navigation.toggleDrawer()
+                }}
+            />
+        ),
+    }
+}
 
 Tasks.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Tasks",
-    headerLeft: () => (
-      <Icon
-        type="ionicon"
-        name="md-menu"
-        color="white"
-        size={35}
-        onPress={() => {
-          navData.navigation.toggleDrawer();
-        }}
-      />
-    ),
-  };
-};
+    return {
+        headerTitle: 'Tasks',
+        headerLeft: () => (
+            <Icon
+                type="ionicon"
+                name="md-menu"
+                color="white"
+                size={35}
+                onPress={() => {
+                    navData.navigation.toggleDrawer()
+                }}
+            />
+        ),
+    }
+}
 
 CreateTasks.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Create Tasks",
-    headerLeft: () => (
-      <Icon
-        type="ionicon"
-        name="md-menu"
-        color="white"
-        size={35}
-        onPress={() => {
-          navData.navigation.toggleDrawer();
-        }}
-      />
-    ),
-  };
-};
+    return {
+        headerTitle: 'Create Tasks',
+        headerLeft: () => (
+            <Icon
+                type="ionicon"
+                name="md-menu"
+                color="white"
+                size={35}
+                onPress={() => {
+                    navData.navigation.toggleDrawer()
+                }}
+            />
+        ),
+    }
+}
 
 EditTask.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Edit Task",
-    headerLeft: () => (
-      <Icon
-        type="ionicon"
-        name="md-menu"
-        color="white"
-        size={35}
-        onPress={() => {
-          navData.navigation.toggleDrawer();
-        }}
-      />
-    ),
-  };
-};
+    return {
+        headerTitle: 'Edit Task',
+        headerLeft: () => (
+            <Icon
+                type="ionicon"
+                name="md-menu"
+                color="white"
+                size={35}
+                onPress={() => {
+                    navData.navigation.toggleDrawer()
+                }}
+            />
+        ),
+    }
+}
 
 Chat.navigationOptions = (navData) => {
   return {
@@ -314,21 +320,21 @@ Chat.navigationOptions = (navData) => {
 };
 
 Chatbox.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Chat",
-    headerLeft: () => (
-      <Icon
-        type="ionicon"
-        name="md-menu"
-        color="white"
-        size={35}
-        onPress={() => {
-          navData.navigation.toggleDrawer();
-        }}
-      />
-    ),
-  };
-};
+    return {
+        headerTitle: 'Chat',
+        headerLeft: () => (
+            <Icon
+                type="ionicon"
+                name="md-menu"
+                color="white"
+                size={35}
+                onPress={() => {
+                    navData.navigation.toggleDrawer()
+                }}
+            />
+        ),
+    }
+}
 
 ChatGroup.navigationOptions = (navData) => {
   return {
@@ -348,55 +354,55 @@ ChatGroup.navigationOptions = (navData) => {
 };
 
 Notes.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Notes",
-    headerLeft: () => (
-      <Icon
-        type="ionicon"
-        name="md-menu"
-        color="white"
-        size={35}
-        onPress={() => {
-          navData.navigation.toggleDrawer();
-        }}
-      />
-    ),
-  };
-};
+    return {
+        headerTitle: 'Notes',
+        headerLeft: () => (
+            <Icon
+                type="ionicon"
+                name="md-menu"
+                color="white"
+                size={35}
+                onPress={() => {
+                    navData.navigation.toggleDrawer()
+                }}
+            />
+        ),
+    }
+}
 
 EditNote.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Edit Note",
-    headerLeft: () => (
-      <Icon
-        type="ionicon"
-        name="md-menu"
-        color="white"
-        size={35}
-        onPress={() => {
-          navData.navigation.toggleDrawer();
-        }}
-      />
-    ),
-  };
-};
+    return {
+        headerTitle: 'Edit Note',
+        headerLeft: () => (
+            <Icon
+                type="ionicon"
+                name="md-menu"
+                color="white"
+                size={35}
+                onPress={() => {
+                    navData.navigation.toggleDrawer()
+                }}
+            />
+        ),
+    }
+}
 
 Settings.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Settings",
-    headerLeft: () => (
-      <Icon
-        type="ionicon"
-        name="md-menu"
-        color="white"
-        size={35}
-        onPress={() => {
-          navData.navigation.toggleDrawer();
-        }}
-      />
-    ),
-  };
-};
+    return {
+        headerTitle: 'Settings',
+        headerLeft: () => (
+            <Icon
+                type="ionicon"
+                name="md-menu"
+                color="white"
+                size={35}
+                onPress={() => {
+                    navData.navigation.toggleDrawer()
+                }}
+            />
+        ),
+    }
+}
 
 const DrawerNavigator = createDrawerNavigator(
   {
@@ -423,7 +429,7 @@ const DrawerNavigator = createDrawerNavigator(
       return <SideBar {...copyprops} />;
     },
   }
-);
+)
 
 export default createAppContainer(DrawerNavigator);
 
