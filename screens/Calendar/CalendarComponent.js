@@ -20,6 +20,7 @@ const Calen = ({data}) => {
     const nextDays = []
     const [tasks,settasks] = useState([])
     const [show_date,setdate] = useState('') 
+    const [Date,setDate] = useState('') 
     data.forEach((day) => {
         for (const [key, value] of Object.entries(day)) {
             //console.log(`${key}`);
@@ -45,11 +46,13 @@ const Calen = ({data}) => {
                         let arr=[]
                             
                             setdate(day.dateString)
+                            setDate(day.dateString)
                             data.map((item) => {
                                 for (const [key, value] of Object.entries(item)) {
                                     if (key === day.dateString) {
                                         arr.push(value)
                                         console.log("SSSSSSSSSSSSSSSSSSS",arr)
+                                        
                                     }
                                 }
                             })
@@ -97,7 +100,7 @@ const Calen = ({data}) => {
                         textDayHeaderFontSize: 16,
                     }}
                 />
-                <Task_expanded show={show} DATA = {tasks}/>
+                <Task_expanded show={show} DATA = {tasks} date = {Date}/>
             </View>
         </ImageBackground>
     )

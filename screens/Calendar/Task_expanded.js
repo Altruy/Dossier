@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import TaskAcc from './CalTaskAcc'
-import CreateEventModal from './CreateEventModal'
+import CreateEvent from './CreateEvent'
 
 import {View, Text, FlatList, ImageBackground, StyleSheet} from 'react-native'
 import {ScrollView} from 'react-native-gesture-handler'
@@ -8,6 +8,7 @@ import {ScrollView} from 'react-native-gesture-handler'
 const Task_expanded = (props) => {
     const show = props.show
     const DATA = props.DATA
+    const Date = props.date
     // const [show, setShowState] = useState(props.show)
 
     // const DATA = [
@@ -89,16 +90,16 @@ const Task_expanded = (props) => {
         return (
             <View style={styles.container}>
                 <ImageBackground
-                    source={require('../assets/Calendar-tile.png')}
+                    source={require('../../assets/Calendar-tile.png')}
                     style={styles.image}
                 >
                     <View style={styles.header}>
                         <View>
-                            <Text style={{color: 'white'}}>DATE</Text>
+                            <Text style={{color: 'white'}}>{Date}</Text>
                         </View>
-                        <View>
+                        {/* <View>
                             <CreateEvent />
-                        </View>
+                        </View> */}
                     </View>
 
                     <View style={styles.separator}></View>

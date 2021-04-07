@@ -245,4 +245,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default CreateEvent
+export default CreateEvent;
