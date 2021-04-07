@@ -29,7 +29,6 @@ const RenderSeparator = () => {
   );
 };
 
-<<<<<<< HEAD
 const Chat = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
@@ -94,8 +93,6 @@ const Chat = ({ navigation }) => {
   );
 };
 
-=======
->>>>>>> d3c5dbd59bbafb8d676fb7730d94156fa5396407
 const styles = StyleSheet.create({
  
   container: {

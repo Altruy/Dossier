@@ -3,67 +3,69 @@ import TaskAcc from './CalTaskAcc'
 import CreateEventModal from './CreateEventModal'
 
 import {View, Text, FlatList, ImageBackground, StyleSheet} from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const Task_expanded = (props) => {
     const show = props.show
+    const DATA = props.DATA
     // const [show, setShowState] = useState(props.show)
 
-    const DATA = [
-        {
-            id: '1',
-            title: 'First Item',
-            assignees: 'Turu',
-            assigner: 'Adnan',
-            deadline: 'kal',
-            description: 'KAAM KAROOOO',
-            completed: '',
-        },
-        {
-            id: '2',
-            title: 'Second Item',
-            assignees: 'Turu',
-            assigner: 'Adnan',
-            deadline: 'kal',
-            description: 'KAAM KAROOOO',
-            completed: '',
-        },
-        {
-            id: '3',
-            title: 'Third Item',
-            assignees: 'Turu',
-            assigner: 'Adnan',
-            deadline: 'kal',
-            description: 'KAAM KAROOOO',
-            completed: '',
-        },
-        {
-            id: '4',
-            title: 'fourth Item',
-            assignees: 'Turu',
-            assigner: 'Adnan',
-            deadline: 'kal',
-            description: 'KAAM KAROOOO',
-            completed: '',
-        },
-        {
-            id: '5',
-            title: 'fifth Item',
-            assignees: 'Turu',
-            assigner: 'Adnan',
-            deadline: 'kal',
-            description: 'KAAM KAROOOO',
-            completed: '',
-        },
-        {
-            id: '6',
-            title: 'sixt Item',
-            assignees: 'Turu',
-            assigner: 'Adnan',
-            deadline: 'kal',
-            description: 'KAAM KAROOOO',
-            completed: '',
-        },
-    ]
+    // const DATA = [
+    //     {
+    //         id: '1',
+    //         title: 'First Item',
+    //         assignees: 'Turu',
+    //         assigner: 'Adnan',
+    //         deadline: 'kal',
+    //         description: 'KAAM KAROOOO',
+    //         completed: '',
+    //     },
+    //     {
+    //         id: '2',
+    //         title: 'Second Item',
+    //         assignees: 'Turu',
+    //         assigner: 'Adnan',
+    //         deadline: 'kal',
+    //         description: 'KAAM KAROOOO',
+    //         completed: '',
+    //     },
+    //     {
+    //         id: '3',
+    //         title: 'Third Item',
+    //         assignees: 'Turu',
+    //         assigner: 'Adnan',
+    //         deadline: 'kal',
+    //         description: 'KAAM KAROOOO',
+    //         completed: '',
+    //     },
+    //     {
+    //         id: '4',
+    //         title: 'fourth Item',
+    //         assignees: 'Turu',
+    //         assigner: 'Adnan',
+    //         deadline: 'kal',
+    //         description: 'KAAM KAROOOO',
+    //         completed: '',
+    //     },
+    //     {
+    //         id: '5',
+    //         title: 'fifth Item',
+    //         assignees: 'Turu',
+    //         assigner: 'Adnan',
+    //         deadline: 'kal',
+    //         description: 'KAAM KAROOOO',
+    //         completed: '',
+    //     },
+    //     {
+    //         id: '6',
+    //         title: 'sixt Item',
+    //         assignees: 'Turu',
+    //         assigner: 'Adnan',
+    //         deadline: 'kal',
+    //         description: 'KAAM KAROOOO',
+    //         completed: '',
+    //     },
+    // ]
     const renderSeparator = () => {
         return (
             <View
@@ -85,7 +87,9 @@ const Task_expanded = (props) => {
 
     if (show) {
         return (
+            
             <View style={styles.container}>
+                
                 <ImageBackground
                     source={require('../assets/Calendar-tile.png')}
                     style={styles.image}
@@ -100,7 +104,7 @@ const Task_expanded = (props) => {
                     </View>
 
                     <View style={styles.separator}></View>
-
+                    <ScrollView>
                     <View style={styles.listbody}>
                         <FlatList
                             data={DATA}
@@ -109,6 +113,7 @@ const Task_expanded = (props) => {
                             // keyExtractor={(item) => item.id}
                         />
                     </View>
+                    </ScrollView>
                 </ImageBackground>
             </View>
         )
