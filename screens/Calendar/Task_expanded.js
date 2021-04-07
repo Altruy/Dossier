@@ -1,13 +1,18 @@
 import React, {useState} from 'react'
 import TaskAcc from './CalTaskAcc'
-import CreateEventModal from './CreateEventModal'
 
-import {View, Text, FlatList, ImageBackground, StyleSheet} from 'react-native'
+import {
+    View,
+    Text,
+    FlatList,
+    ImageBackground,
+    StyleSheet,
+    TouchableOpacity,
+    Image,
+} from 'react-native'
 import {ScrollView} from 'react-native-gesture-handler'
 
-const Task_expanded = (props) => {
-    const show = props.show
-    const DATA = props.DATA
+const Task_expanded = ({show, DATA, navigation}) => {
     // const [show, setShowState] = useState(props.show)
 
     // const DATA = [
@@ -89,7 +94,7 @@ const Task_expanded = (props) => {
         return (
             <View style={styles.container}>
                 <ImageBackground
-                    source={require('../assets/Calendar-tile.png')}
+                    source={require('../../assets/Calendar-tile.png')}
                     style={styles.image}
                 >
                     <View style={styles.header}>
@@ -97,7 +102,21 @@ const Task_expanded = (props) => {
                             <Text style={{color: 'white'}}>DATE</Text>
                         </View>
                         <View>
-                            <CreateEvent />
+                            <TouchableOpacity
+                                style={[styles.button, styles.buttonOpen]}
+                                onPress={
+                                    () => navigation.navigate('CreateEvent')
+                                    // alert('AYY')
+                                }
+
+                                //
+                            >
+                                <Text style={styles.textStyle}>New Event</Text>
+                                <Image
+                                    source={require('../../assets/invite.png')}
+                                    style={styles.removeicon}
+                                />
+                            </TouchableOpacity>
                         </View>
                     </View>
 
@@ -144,6 +163,32 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         borderRadius: 8,
         // opacity: 0.5,
+    },
+    button: {
+        flexDirection: 'row',
+        // fontSize: 20,
+        borderRadius: 20,
+        // marginRight: 15,
+        textDecorationColor: 'white',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        // alignItems: 'center',
+        // height: 25,
+    },
+    buttonOpen: {
+        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+        // backgroundColor: 'grey',
+    },
+    textStyle: {
+        color: 'white',
+        fontSize: 15,
+        justifyContent: 'flex-start',
+        textAlignVertical: 'center',
+        paddingRight: 10,
+    },
+    removeicon: {
+        height: 20,
+        width: 20,
     },
 
     header: {

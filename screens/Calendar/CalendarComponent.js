@@ -15,11 +15,11 @@ import {
     ImageBackground,
 } from 'react-native'
 
-const Calen = ({data}) => {
+const Calen = ({data, navigation}) => {
     const [show, setShowState] = useState(false)
     const nextDays = []
-    const [tasks,settasks] = useState([])
-    const [show_date,setdate] = useState('') 
+    const [tasks, settasks] = useState([])
+    const [show_date, setdate] = useState('')
     data.forEach((day) => {
         for (const [key, value] of Object.entries(day)) {
             //console.log(`${key}`);
@@ -42,24 +42,23 @@ const Calen = ({data}) => {
             <View style={styles.container}>
                 <Calendar
                     onDayPress={(day) => {
-                        let arr=[]
-                            
-                            setdate(day.dateString)
-                            data.map((item) => {
-                                for (const [key, value] of Object.entries(item)) {
-                                    if (key === day.dateString) {
-                                        arr.push(value)
-                                        console.log("SSSSSSSSSSSSSSSSSSS",arr)
-                                    }
+                        let arr = []
+
+                        setdate(day.dateString)
+                        data.map((item) => {
+                            for (const [key, value] of Object.entries(item)) {
+                                if (key === day.dateString) {
+                                    arr.push(value)
+                                    console.log('SSSSSSSSSSSSSSSSSSS', arr)
                                 }
-                            })
-                            if(show === true && day.dateString === show_date){
-                                setShowState(false)
                             }
-                            else if(show === false){
-                                setShowState(true)
-                            }
-                            settasks(arr)
+                        })
+                        if (show === true && day.dateString === show_date) {
+                            setShowState(false)
+                        } else if (show === false) {
+                            setShowState(true)
+                        }
+                        settasks(arr)
                     }}
                     onMonthChange={(month) => {
                         console.log('month changed', month)
@@ -97,7 +96,11 @@ const Calen = ({data}) => {
                         textDayHeaderFontSize: 16,
                     }}
                 />
-                <Task_expanded show={show} DATA = {tasks}/>
+                <Task_expanded
+                    show={show}
+                    DATA={tasks}
+                    navigation={navigation}
+                />
             </View>
         </ImageBackground>
     )

@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 import CalendarComponent from './CalendarComponent'
 
-const Calendar = () => {
+const Calendar = ({navigation}) => {
     return (
         <CalendarComponent
             data={[
@@ -23,6 +23,7 @@ const Calendar = () => {
                 {'2021-04-25': 'today we eat'},
                 {'2021-04-14': 'today we eat'},
             ]}
+            navigation={navigation}
         />
     )
 }
