@@ -100,7 +100,7 @@ export default Accordian = ({data}) => {
                 // />
                 null}
 
-                <View style={styles.separator}></View>
+                {/* <View style={styles.separator}></View> */}
             </View>
         </TouchableOpacity>
     )
