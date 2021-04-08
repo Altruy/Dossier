@@ -12,12 +12,15 @@ import {
     TextInput,
     Modal,
     FlatList,
+    LayoutAnimation,
+    UIManager,
 } from 'react-native'
 import Colors from '../constants/colors'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
 export default Accordian = ({data}) => {
     const [showInfo, setShowInfo] = useState(false)
+    UIManager.setLayoutAnimationEnabledExperimental(true)
     const {
         id,
         collab,
@@ -41,33 +44,39 @@ export default Accordian = ({data}) => {
             />
         )
     }
+    const toggleDropbox = (show) => {
+        setShowInfo(show)
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+    }
     return (
         <TouchableOpacity
             style={styles.accordian}
-            onPress={() => setShowInfo(!showInfo)}
+            onPress={() => toggleDropbox(!showInfo)}
         >
             <View style={styles.box}>
+                <View style={styles.separator}></View>
                 <View style={styles.dropdown}>
                     <Text style={styles.title}>{title}</Text>
-
-                    <Icon
-                        style={styles.clip}
-                        name="clipboard-check"
-                        size={20}
-                        color="white"
-                    />
-                    <Icon
-                        style={styles.edit}
-                        name="edit"
-                        size={20}
-                        color="white"
-                    />
-                    <Icon
-                        style={styles.times}
-                        name="times"
-                        size={20}
-                        color="white"
-                    />
+                    <View style={styles.iconcontainer}>
+                        <Icon
+                            style={styles.clip}
+                            name="clipboard-check"
+                            size={20}
+                            color="white"
+                        />
+                        <Icon
+                            style={styles.edit}
+                            name="edit"
+                            size={20}
+                            color="white"
+                        />
+                        <Icon
+                            style={styles.times}
+                            name="times"
+                            size={20}
+                            color="white"
+                        />
+                    </View>
                 </View>
 
                 {showInfo && (
@@ -105,44 +114,46 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.homeback,
-        alignItems: 'center',
-        justifyContent: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center',
         shadowColor: 'black',
         shadowOpacity: 0.5,
-        width: '100%',
+        // width: '100%',
     },
     dropdown: {
         flex: 1,
-        alignItems: 'center',
+        // alignItems: 'center',
         flexDirection: 'row',
-        paddingTop: 10,
-        paddingLeft: 10,
-        paddingBottom: 10,
-        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingTop: 15,
+        paddingHorizontal: 15,
+        // paddingBottom: 10,
+        // alignItems: 'center',
     },
     box: {
-        padding: 15,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        width: '90%',
-        borderRadius: 15,
-        alignItems: 'flex-start',
+        // padding: 15,
+        paddingVertical: 5,
+        // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        width: '95%',
+        // borderRadius: 15,
+        // alignItems: 'flex-start',
     },
     title: {
-        // alignItems: "flex-start",
+        // alignItems: 'flex-start',
         color: 'white',
         fontSize: 18,
-        paddingTop: 0,
+        // paddingTop: 10,
         paddingBottom: 0,
     },
     answer: {
-        paddingLeft: 15,
+        paddingHorizontal: 20,
         paddingTop: 8,
-        paddingBottom: 7,
+        // paddingBottom: 7,
         color: 'white',
         fontSize: 14,
     },
     answers: {
-        paddingTop: 10,
+        paddingVertical: 10,
     },
     icon: {
         position: 'relative',
@@ -152,19 +163,34 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
     },
+    iconcontainer: {
+        flexDirection: 'row',
+        // paddingHorizontal: 15,
+    },
     clip: {
-        position: 'absolute',
-        paddingTop: 3,
-        left: '75%',
+        // position: 'absolute',
+        // paddingTop: 30,
+        // left: '75%',
+        padding: 5,
     },
     edit: {
-        position: 'absolute',
-        paddingTop: 3,
-        left: '85%',
+        // position: 'absolute',
+        // paddingTop: 30,
+        // left: '85%',
+        padding: 5,
     },
     times: {
-        position: 'absolute',
-        paddingTop: 4,
-        left: '95%',
+        // position: 'absolute',
+        // pasddingTop: 30,
+        // left: '95%',
+        padding: 5,
+    },
+    separator: {
+        width: '95%',
+        alignSelf: 'center',
+        borderWidth: 1,
+        borderColor: 'white',
+        opacity: 0.8,
+        borderRadius: 100,
     },
 })
