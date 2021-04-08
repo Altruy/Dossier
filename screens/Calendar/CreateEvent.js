@@ -56,8 +56,8 @@ const CreateTasks = ({navigation}) => {
                         <Text style={styles.text}> Add Description</Text>
                         <TextInput
                             style={styles.dinput}
-                            multiline="true"
                             textAlignVertical="top"
+                            multiline={true}
                         />
                         <TouchableOpacity
                             onPress={() => {
