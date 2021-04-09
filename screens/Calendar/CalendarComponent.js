@@ -15,18 +15,18 @@ import {
     ImageBackground,
 } from 'react-native'
 
-const Calen = ({data}) => {
+const Calen = ({data, navigation}) => {
     const [show, setShowState] = useState(false)
     const nextDays = []
-    const [tasks,settasks] = useState([])
-    const [show_date,setdate] = useState('') 
-    const [Date,setDate] = useState('') 
+    const [tasks, settasks] = useState([])
+    const [show_date, setdate] = useState('')
+    const [Date, setDate] = useState('')
+    
     data.forEach((day) => {
-        for (const [key, value] of Object.entries(day)) {
-            //console.log(`${key}`);
-            nextDays.push(key)
-            //console.log("well",nextDays)
-        }
+       
+            nextDays.push(day.date)
+            
+        
     })
     let newDaysObject = {}
     nextDays.forEach((day) => {
@@ -43,26 +43,27 @@ const Calen = ({data}) => {
             <View style={styles.container}>
                 <Calendar
                     onDayPress={(day) => {
-                        let arr=[]
-                            
-                            setdate(day.dateString)
-                            setDate(day.dateString)
-                            data.map((item) => {
-                                for (const [key, value] of Object.entries(item)) {
-                                    if (key === day.dateString) {
-                                        arr.push(value)
-                                        console.log("SSSSSSSSSSSSSSSSSSS",arr)
-                                        
-                                    }
-                                }
-                            })
-                            if(show === true && day.dateString === show_date){
-                                setShowState(false)
+                        let arr = []
+                        setdate(day.dateString)
+                        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                        var d = new window.Date(day.dateString);
+                        var dayName = days[d.getDay()];
+                        dayName = dayName + " " + day.day+"th"
+                        console.log("sdsdsdsds",dayName); // the Day
+                        setDate(dayName)
+                        console.log(day)
+                        data.map((item) => {
+                            if (day.dateString === item.date){
+                                arr.push(item)
+                                
                             }
-                            else if(show === false){
-                                setShowState(true)
-                            }
-                            settasks(arr)
+                        })
+                        if (show === true && day.dateString === show_date) {
+                            setShowState(false)
+                        } else if (show === false) {
+                            setShowState(true)
+                        }
+                        settasks(arr)
                     }}
                     onMonthChange={(month) => {
                         console.log('month changed', month)
@@ -100,7 +101,12 @@ const Calen = ({data}) => {
                         textDayHeaderFontSize: 16,
                     }}
                 />
-                <Task_expanded show={show} DATA = {tasks} date = {Date}/>
+                <Task_expanded
+                    show={show}
+                    DATA={tasks}
+                    navigation={navigation}
+                    date = {Date}
+                />
             </View>
         </ImageBackground>
     )

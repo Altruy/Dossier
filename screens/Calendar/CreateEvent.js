@@ -17,7 +17,7 @@ import Repeat from './CheckBox'
 
 import Feather from 'react-native-vector-icons/Feather'
 import {BackgroundImage} from 'react-native-elements/dist/config'
-const CreateEvent = () => {
+const CreateEvent = ({navigation}) => {
     return (
         <View>
             <ImageBackground
@@ -26,20 +26,21 @@ const CreateEvent = () => {
             >
                 <KeyboardAvoidingView style={styles.container}>
                     <View style={styles.modalView}>
-                        <View style={styles.head}>
+                        {/* <View style={styles.head}>
                             <Text style={styles.headtext}>
                                 Create New Event
                             </Text>
-                            {/* <Feather
-                                name="x"
+
+                            <Feather
+                                name="left-arrow"
                                 color="white"
-                                // onPress={() => setModalVisible(!modalVisible)}
+                                // onPress={() => }
                                 size={18}
-                            ></Feather> */}
-                        </View>
+                            ></Feather>
+                        </View> */}
                         <View style={styles.body}>
                             <View style={styles.object}>
-                                <Text style={styles.textStyle}>Title </Text>
+                                <Text style={styles.textStyle}>Add Title </Text>
                                 <TextInput
                                     placeholderTextColor="white"
                                     style={styles.textInput}
@@ -47,7 +48,7 @@ const CreateEvent = () => {
                                 />
                             </View>
                             <View style={styles.object}>
-                                <Text style={styles.textStyle}>Date </Text>
+                                <Text style={styles.textStyle}>Add Date </Text>
                                 <TextInput
                                     placeholderTextColor="white"
                                     style={styles.textInput}
@@ -55,7 +56,7 @@ const CreateEvent = () => {
                                 />
                             </View>
                             <View style={styles.object}>
-                                <Text style={styles.textStyle}>Time </Text>
+                                <Text style={styles.textStyle}>Add Time </Text>
                                 <TextInput
                                     placeholderTextColor="white"
                                     style={styles.textInput}
@@ -63,14 +64,26 @@ const CreateEvent = () => {
                                 />
                             </View>
                             <View style={styles.object}>
-                                <Text style={styles.textStyle}>Duration </Text>
+                                <Text style={styles.textStyle}>
+                                    Add Duration{' '}
+                                </Text>
                                 <TextInput
                                     placeholderTextColor="white"
                                     style={styles.textInput}
                                     autoCapitalize="none"
                                 />
                             </View>
-                            <Text
+                            <View style={styles.object}>
+                                <Text style={styles.textStyle}>
+                                    Add Description
+                                </Text>
+                                <TextInput
+                                    placeholderTextColor="white"
+                                    style={styles.textInput}
+                                    autoCapitalize="none"
+                                />
+                            </View>
+                            {/* <Text
                                 style={{
                                     paddingTop: 20,
                                     color: 'white',
@@ -89,7 +102,7 @@ const CreateEvent = () => {
                                     <Repeat day="Sa" />
                                     <Repeat day="Su" />
                                 </View>
-                            </View>
+                            </View> */}
                         </View>
 
                         <TouchableOpacity style={styles.createbutton}>
@@ -125,9 +138,9 @@ const styles = StyleSheet.create({
         // marginTop: 60,
         // height: '80%',
         // width: '90%',
-        marginHorizontal: 20,
+        // marginHorizontal: 20,
         justifyContent: 'space-between',
-        backgroundColor: 'black',
+        // backgroundColor: 'black',
         borderRadius: 20,
         // paddingHorizontal: 20,
         // paddingBottom: 10,
@@ -146,11 +159,12 @@ const styles = StyleSheet.create({
         // paddingBottom: 10,
     },
     body: {
+        width: '80%',
         // paddingBottom: 10,
-        marginTop: 10,
+        // marginTop: 10,
     },
     object: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-between',
         paddingVertical: 12,
 
@@ -214,12 +228,13 @@ const styles = StyleSheet.create({
     },
 
     textInput: {
-        paddingHorizontal: 5,
+        // width: 15,
+        // paddingHorizontal: 5,
         // paddingRight: 10,
-        // paddingVertical: 10,
-
-        borderColor: 'white',
-        borderWidth: 1,
+        // paddingVertical: 5,
+        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+        // borderColor: 'white',
+        // borderWidth: 1,
         borderRadius: 5,
         color: 'white',
         width: '70%',

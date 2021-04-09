@@ -1,72 +1,19 @@
 import React, {useState} from 'react'
 import TaskAcc from './CalTaskAcc'
-import CreateEvent from './CreateEvent'
 
-import {View, Text, FlatList, ImageBackground, StyleSheet} from 'react-native'
+import {
+    View,
+    Text,
+    FlatList,
+    ImageBackground,
+    StyleSheet,
+    TouchableOpacity,
+    Image,
+} from 'react-native'
 import {ScrollView} from 'react-native-gesture-handler'
 
-const Task_expanded = (props) => {
-    const show = props.show
-    const DATA = props.DATA
-    const Date = props.date
-    // const [show, setShowState] = useState(props.show)
-
-    // const DATA = [
-    //     {
-    //         id: '1',
-    //         title: 'First Item',
-    //         assignees: 'Turu',
-    //         assigner: 'Adnan',
-    //         deadline: 'kal',
-    //         description: 'KAAM KAROOOO',
-    //         completed: '',
-    //     },
-    //     {
-    //         id: '2',
-    //         title: 'Second Item',
-    //         assignees: 'Turu',
-    //         assigner: 'Adnan',
-    //         deadline: 'kal',
-    //         description: 'KAAM KAROOOO',
-    //         completed: '',
-    //     },
-    //     {
-    //         id: '3',
-    //         title: 'Third Item',
-    //         assignees: 'Turu',
-    //         assigner: 'Adnan',
-    //         deadline: 'kal',
-    //         description: 'KAAM KAROOOO',
-    //         completed: '',
-    //     },
-    //     {
-    //         id: '4',
-    //         title: 'fourth Item',
-    //         assignees: 'Turu',
-    //         assigner: 'Adnan',
-    //         deadline: 'kal',
-    //         description: 'KAAM KAROOOO',
-    //         completed: '',
-    //     },
-    //     {
-    //         id: '5',
-    //         title: 'fifth Item',
-    //         assignees: 'Turu',
-    //         assigner: 'Adnan',
-    //         deadline: 'kal',
-    //         description: 'KAAM KAROOOO',
-    //         completed: '',
-    //     },
-    //     {
-    //         id: '6',
-    //         title: 'sixt Item',
-    //         assignees: 'Turu',
-    //         assigner: 'Adnan',
-    //         deadline: 'kal',
-    //         description: 'KAAM KAROOOO',
-    //         completed: '',
-    //     },
-    // ]
+const Task_expanded = ({show, DATA, navigation,date}) => {
+  
     const renderSeparator = () => {
         return (
             <View
@@ -95,11 +42,25 @@ const Task_expanded = (props) => {
                 >
                     <View style={styles.header}>
                         <View>
-                            <Text style={{color: 'white'}}>{Date}</Text>
+                            <Text style={{color: 'white'}}>{date}</Text>
                         </View>
-                        {/* <View>
-                            <CreateEvent />
-                        </View> */}
+                        <View>
+                            <TouchableOpacity
+                                style={[styles.button, styles.buttonOpen]}
+                                onPress={
+                                    () => {navigation.navigate('CreateEvent')}
+                                    // alert('AYY')
+                                }
+
+                                //
+                            >
+                                <Text style={styles.textStyle}>New Event</Text>
+                                <Image
+                                    source={require('../../assets/invite.png')}
+                                    style={styles.removeicon}
+                                />
+                            </TouchableOpacity>
+                        </View>
                     </View>
 
                     <View style={styles.separator}></View>
@@ -109,7 +70,7 @@ const Task_expanded = (props) => {
                                 data={DATA}
                                 renderItem={renderItem}
                                 ItemSeparatorComponent={renderSeparator}
-                                // keyExtractor={(item) => item.id}
+                                keyExtractor={(item) => item.id}
                             />
                         </View>
                     </ScrollView>
@@ -145,6 +106,32 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         borderRadius: 8,
         // opacity: 0.5,
+    },
+    button: {
+        flexDirection: 'row',
+        // fontSize: 20,
+        borderRadius: 20,
+        // marginRight: 15,
+        textDecorationColor: 'white',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        // alignItems: 'center',
+        // height: 25,
+    },
+    buttonOpen: {
+        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+        // backgroundColor: 'grey',
+    },
+    textStyle: {
+        color: 'white',
+        fontSize: 15,
+        justifyContent: 'flex-start',
+        textAlignVertical: 'center',
+        paddingRight: 10,
+    },
+    removeicon: {
+        height: 20,
+        width: 20,
     },
 
     header: {
