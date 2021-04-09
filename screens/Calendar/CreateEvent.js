@@ -12,12 +12,26 @@ import {
     ImageBackground,
     KeyboardAvoidingView,
 } from 'react-native'
+import { Title } from 'react-native-paper'
 
 // import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const CreateTasks = ({navigation}) => {
+    const [title, setTitle] = React.useState('')
+    const [Date, setDate] = React.useState('')
+    const [Time, setTime] = React.useState('')
+    const [Duration, setDuration] = React.useState('')
+    const [Desription, setDescription] = React.useState('')
+    
+    const onChangeTitle = (query) => setTitle(query)
+    const onChangeDate = (query) => setDate(query)
+    const onChangeTime = (query) => setTime(query)
+    const onChangeDuration = (query) => setDuration(query)
+    const onChangeDescription = (query) => setDescription(query)
+    
+
     return (
         <ImageBackground
             source={require('../../assets/Notification-background.png')}
@@ -33,23 +47,23 @@ const CreateTasks = ({navigation}) => {
                     <View style={styles.sblock}>
                         <Text style={styles.text}> Add Title</Text>
 
-                        <TextInput style={styles.input} />
+                        <TextInput style={styles.input} onChangeText ={(value) => onChangeTitle(value)}/>
                     </View>
 
                     <View style={styles.sblock}>
                         <Text style={styles.text}> Add Date</Text>
 
-                        <TextInput style={styles.input} />
+                        <TextInput style={styles.input} onChangeText ={(value) => onChangeDate(value)}/>
                     </View>
                     <View style={styles.sblock}>
                         <Text style={styles.text}> Add Time</Text>
 
-                        <TextInput style={styles.input} />
+                        <TextInput style={styles.input} onChangeText ={(value) => onChangeTime(value)} />
                     </View>
                     <View style={styles.sblock}>
                         <Text style={styles.text}> Add Duration</Text>
 
-                        <TextInput style={styles.input} />
+                        <TextInput style={styles.input} onChangeText ={(value) => onChangeDuration(value)} />
                     </View>
 
                     <View style={styles.tblock}>
@@ -58,10 +72,12 @@ const CreateTasks = ({navigation}) => {
                             style={styles.dinput}
                             textAlignVertical="top"
                             multiline={true}
+                            onChangeText ={(value) => onChangeDescription(value)}
                         />
                         <TouchableOpacity
                             onPress={() => {
-                                navigation.goBack()
+                                //navigation.goBack()
+                                console.log(Title,Date,Time,Duration,Desription)
                             }}
                             style={styles.btn}
                         >
@@ -450,8 +466,4 @@ export default CreateTasks
 //     },
 // })
 
-<<<<<<< HEAD
-export default CreateEvent;
-=======
 // export default CreateEvent
->>>>>>> 2ec4615045b97c0c9786f7df7cc60797ab961fc8

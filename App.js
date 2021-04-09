@@ -8,8 +8,11 @@ import NoteModal from './components/NoteModal'
 import TestM from './components/TestM'
 import {Provider as PaperProvider} from 'react-native-paper'
 import Calendar from './screens/Calendar/Calendar.js'
+
+import CreateTasks from './screens/Calendar/CreateEvent'
+
 export default function App() {
     return (
-        <Calendar />
+        <CreateTasks />
     )
 }

@@ -12,7 +12,7 @@ import {
 } from 'react-native'
 import {ScrollView} from 'react-native-gesture-handler'
 
-const Task_expanded = ({show, DATA, navigation,date}) => {
+const Task_expanded = ({show, DATA, navigation,date,month}) => {
   
     const renderSeparator = () => {
         return (
@@ -31,7 +31,7 @@ const Task_expanded = ({show, DATA, navigation,date}) => {
         )
     }
 
-    const renderItem = ({item}) => <TaskAcc data={item} />
+    const renderItem = ({item}) => <TaskAcc data={item} time={date} month ={month}/>
 
     if (show) {
         return (

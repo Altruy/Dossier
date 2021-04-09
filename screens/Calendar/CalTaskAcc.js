@@ -18,7 +18,7 @@ import {
 import Colors from '../../constants/colors'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
-export default Accordian = ({data}) => {
+export default Accordian = ({data,time,month}) => {
     const [showInfo, setShowInfo] = useState(false)
     UIManager.setLayoutAnimationEnabledExperimental(true)
 
@@ -48,12 +48,13 @@ export default Accordian = ({data}) => {
             style={styles.accordian}
             onPress={() => toggleDropbox(!showInfo)}
         >
+            {console.log("dddddddddddddddddddddddddd",data)}
             <View style={styles.box}>
                 <View style={styles.dropdown}>
                     <View>
-                        <Text style={styles.title}>TITLE</Text>
+                        <Text style={styles.title}>{data.title}</Text>
                         <Text style={styles.deadline}>
-                            July 12, 2021 {deadline}
+                            {month}
                         </Text>
                     </View>
                     {showInfo ? null : (
@@ -66,7 +67,7 @@ export default Accordian = ({data}) => {
                     )}
                     <View style={{alignSelf: 'center', flexDirection: 'row'}}>
                         <View style={styles.clockicon}>
-                            <Text style={styles.clockicontext}> 11:00 </Text>
+                            <Text style={styles.clockicontext}> {data.duration} </Text>
                         </View>
 
                         <Icon

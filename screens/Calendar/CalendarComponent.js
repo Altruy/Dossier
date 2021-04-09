@@ -21,6 +21,7 @@ const Calen = ({data, navigation}) => {
     const [tasks, settasks] = useState([])
     const [show_date, setdate] = useState('')
     const [Date, setDate] = useState('')
+    const [Month, setMonth] = useState('')
     
     data.forEach((day) => {
        
@@ -46,9 +47,14 @@ const Calen = ({data, navigation}) => {
                         let arr = []
                         setdate(day.dateString)
                         var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                        var theMonths = [' ',"January", "February", "March", "April", "May",
+                                         "June", "July", "August", "September", "October", "November", "December"];
+                        
                         var d = new window.Date(day.dateString);
                         var dayName = days[d.getDay()];
                         dayName = dayName + " " + day.day+"th"
+                        var month = theMonths[day.month]
+                        setMonth(month +" " + day.day +"," +" "+day.year)
                         console.log("sdsdsdsds",dayName); // the Day
                         setDate(dayName)
                         console.log(day)
@@ -106,6 +112,7 @@ const Calen = ({data, navigation}) => {
                     DATA={tasks}
                     navigation={navigation}
                     date = {Date}
+                    month ={Month}
                 />
             </View>
         </ImageBackground>
