@@ -3,19 +3,21 @@ import {Alert} from 'react-native'
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native'
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useAuth } from '../../auth_providers/Auth'
-import {removeAdmin , addAdmin} from '../../API'
+import {removeAdmin , addAdmin, addNotif} from '../../API'
 
 const Roleicon = ({role, creator, user,navigation}) => {
     const {username , collabId} = useAuth()
 
     const handleRemove = async () => {
         removeAdmin(collabId,user).then((resp)=>{
+            addNotif(collabId,username,`${username} removed ${user} Admin`)
             navigation.replace('Members')
         })
     }
 
     const handleAdd = async () => {
         addAdmin(collabId,user).then((resp)=>{
+            addNotif(collabId,username,`${username} made ${user} Admin`)
             navigation.replace('Members')
         })
     }

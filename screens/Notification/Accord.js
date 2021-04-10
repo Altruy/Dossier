@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState , useEffect} from 'react'
 import {
     View,
     Text,
@@ -9,21 +9,45 @@ import {
 } from 'react-native'
 import Colors from '../../constants/colors'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-
+import { getNotif } from "../../API";
 import Notif from './Notif'
+import { useAuth } from '../../auth_providers/Auth';
 
-export default Accordion = ({data}) => {
+
+const delay = (seconds) => 
+  new Promise((resolve) => setTimeout(resolve, seconds * 1000))
+
+
+
+export default Accordion = ({col}) => {
     const [showInfo, setShowInfo] = useState(false)
-    const {
-        id,
-        collab,
-        title,
-        assignees,
-        assigner,
-        deadline,
-        description,
-        completed,
-    } = data
+    const [data, setdata] = useState([])
+    const { name , collab } = col
+    const { username } = useAuth()
+    let len = 0;
+
+    useEffect(() => {
+        if(showInfo){
+            refresh()
+        }
+
+    }, [showInfo])
+    
+    const refresh = async () =>{
+        if(showInfo){
+            let notifs = await getNotif(username,collab)
+            if (notifs.length != len){
+                console.log(notifs.length , len)
+                setdata(notifs)
+                len = notifs.length
+            }
+            await delay(15);
+            if(showInfo){
+                refresh()
+            }
+        }
+        
+    }
 
     return (
         <View style={styles.accordion}>
@@ -32,7 +56,7 @@ export default Accordion = ({data}) => {
                     style={styles.accordionbutton}
                     onPress={() => setShowInfo(!showInfo)}
                 >
-                    <Text style={styles.titletext}>Collaboration</Text>
+                    <Text style={styles.titletext}>{name}</Text>
 
                     {showInfo ? (
                         <Icon
@@ -55,38 +79,15 @@ export default Accordion = ({data}) => {
                     {showInfo && (
                         <ScrollView
                             style={styles.answers}
-                            nestedScrollEnabled={true}
                         >
-                            <View>
                                 <FlatList
                                     nestedScrollEnabled={true}
-                                    data={[
-                                        {key: 'Devin'},
-                                        {key: 'Dan'},
-                                        {key: 'Dominic'},
-                                        {key: 'Jackson'},
-                                        {key: 'James'},
-                                        {key: 'Joel'},
-                                        {key: 'John'},
-                                        {key: 'Jillian'},
-                                        {key: 'Jimmy'},
-                                        {key: 'Julie'},
-                                        {key: 'asdsad'},
-                                        {key: 'Dasn'},
-                                        {key: 'Dosminic'},
-                                        {key: 'Jassckson'},
-                                        {key: 'Jasmes'},
-                                        {key: 'Josel'},
-                                        {key: 'Joshn'},
-                                        {key: 'Jisllian'},
-                                        {key: 'Jismmy'},
-                                        {key: 'Juslie'},
-                                    ]}
+                                    data={data}
                                     renderItem={({item}) => (
-                                        <Notif data={item} />
+                                        <Notif notifs={item} />
                                     )}
+                                    keyExtractor={(v,i)=>i.toString()}
                                 />
-                            </View>
                         </ScrollView>
                     )}
                 </View>
@@ -114,12 +115,10 @@ const styles = StyleSheet.create({
         // paddingRight: 40,
         // alignItems: 'center',
         flexDirection: 'column',
-        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         width: '100%',
         borderRadius: 25,
 
-        borderWidth: 1,
-        borderColor: 'gray',
         paddingTop: 15,
         paddingBottom: 10,
         paddingHorizontal: 10,

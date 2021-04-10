@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ToggleButton } from 'react-native-paper';
 import ToggleSwitch from 'toggle-switch-react-native'
 import {
@@ -18,34 +18,43 @@ import {
 import Colors from "../constants/colors";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Toggle from 'react-native-toggle-element';
-import data from "../data/settings-data";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default SettingsAccordian= ({ data }) => {
-    // const [status, setStatus] = useState('checked');
-  
-    // const onButtonToggle = value => {
-    //   setStatus(status === 'checked' ? 'unchecked' : 'checked');
-    // };
-    const [toggleValue, setToggleValue] = useState(false);
+  const [chat, setchat] = useState(true);
+  const [all, setall] = useState(true)
   const [showInfo, setShowInfo] = useState(false);
   const {
-    title,
-    all,
-    chat,
-  } = data;
-  const renderSeparator = () => {
-    return (
-      <View
-        style={{
-          height: 1,
-          width: "86%",
-          backgroundColor: "#CED0CE",
-          marginLeft: "4.5%",
-          opacity: 0.2,
-        }}
-      />
-    );
-  };
+    name,
+    collab
+  } = data ;
+
+  useEffect(() => {
+    AsyncStorage.getItem(collab).then((v)=>{
+      if(!!v){
+        let val = JSON.parse(v)
+        setall(val.all)
+        setchat(val.chat)
+      }
+      else{
+        handleToggle(true,true)
+      }
+    })
+    
+  }, [collab])
+
+  const handleToggle = (a,b) => AsyncStorage.setItem(collab,JSON.stringify({ all : a, chat : b }))
+
+  const handleAll = (a) =>{
+    setall(a)
+    handleToggle(a,chat)
+  }
+
+  const handleChat = (b) =>{
+    setchat(b)
+    handleToggle(all,b)
+  }
+
   return (
     <TouchableOpacity
       style={styles.accordian}
@@ -53,7 +62,7 @@ export default SettingsAccordian= ({ data }) => {
     >
       <View style={styles.box}>
         <View style={styles.dropdown}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{name}</Text>
           {showInfo ? (
           <Icon name="angle-up" size={25} style={styles.times} color="white" />
         ) : (
@@ -67,7 +76,7 @@ export default SettingsAccordian= ({ data }) => {
           <View style={styles.toggle}> 
             <Text style={styles.answer}>All Notifications: </Text>
             <View  style={styles.toggleb}> 
-            <Toggle value={all} onPress={(all) => setToggleValue(all)} 
+            <Toggle value={all} onPress={(all) => handleAll(all)} 
             trackBar={{
                   activeBackgroundColor: '#9ee3fb',
                   inActiveBackgroundColor: '#3c4145',
@@ -87,9 +96,9 @@ export default SettingsAccordian= ({ data }) => {
                         </View>
             </View>
             <View style={styles.toggle}> 
-            <Text style={styles.answer}>Chat Notifications: </Text>
+            {/* <Text style={styles.answer}>Chat Notifications: </Text>
             <View  style={styles.toggleb}> 
-            <Toggle value={chat} onPress={(chat) => setToggleValue(chat)} 
+            <Toggle value={chat} onPress={(chat) => handleChat(chat)} 
             trackBar={{
                   activeBackgroundColor: '#9ee3fb',
                   inActiveBackgroundColor: '#3c4145',
@@ -106,7 +115,7 @@ export default SettingsAccordian= ({ data }) => {
                       radius: 30,
                     }}
                         />
-                        </View>
+                        </View> */}
             </View>
           </View>
         )}
@@ -148,11 +157,11 @@ const styles = StyleSheet.create({
   },
   box: {
     padding: 10,
-    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     width: "90%",
-    borderRadius: 15,
+    borderRadius: 30,
     alignItems: "flex-start",
-    marginBottom:10
+    marginBottom:10,
   },
   title: {
     // alignItems: "flex-start",

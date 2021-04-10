@@ -17,12 +17,13 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/MaterialIcons"
 import colors from "../constants/colors";
 import {useAuth} from '.././auth_providers/Auth'
+import {addNotif} from '../API'
 
 const NoteTile = ({ data, navigation }) => {
   const [note, setNote] = useState({})
   const [Star, setStar] = useState(false);
   const { id, title, creator, editing, fave } = data;
-  const { realm , username} = useAuth();
+  const { realm , username,collabId} = useAuth();
 
 
   useEffect(() => {
@@ -43,7 +44,8 @@ const NoteTile = ({ data, navigation }) => {
       realm.write(() => {
         realm.delete(not);
       });
-      Alert.alert(`Successfully Deleted Note '${titl}'`)
+      addNotif(collabId,username,`${username} deleted a Note '${title}'`)
+      Alert.alert(`Successfully Deleted Note '${title}'`)
       navigation.replace('Notes') // check
     }
   }

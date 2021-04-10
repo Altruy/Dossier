@@ -1,7 +1,9 @@
-import React from 'react'
+import React ,{useState , useEffect} from 'react'
 import {View, StyleSheet, FlatList} from 'react-native'
 import {Searchbar} from 'react-native-paper'
-import data from '../../data/taskacc-data'
+import { getCollabs } from '../../API'
+import { useAuth } from '../../auth_providers/Auth'
+import TopBar from '../../components/TopBar'
 import Accordion from './Accord'
 
 const renderSeparator = () => {
@@ -19,9 +21,29 @@ const renderSeparator = () => {
 }
 
 const Notification = ({navigation}) => {
+    const [data, setData] = useState([])
+    const [fil, setfil] = useState([])
     const [searchQuery, setSearchQuery] = React.useState('')
-    const onChangeSearch = (query) => setSearchQuery(query)
+    const {username } = useAuth()
+    const onChangeSearch = (query) => {
+        setSearchQuery(query)
+        setfil(data.filter((val)=>val.name.includes(query)))
+    }
+
+    useEffect(() => {
+        collabs()
+    }, [])
+
+
+    const collabs = async () => getCollabs(username).then((vals)=>{
+        setData(vals)
+        setfil(vals)
+    });
+
     return (
+        <View style={{height:'100%',width:'100%'}}>
+        
+        <TopBar navigation={navigation} title={'Notifications'} />
         <View style={styles.container}>
             <View style={styles.upperbar}>
                 <Searchbar
@@ -34,15 +56,16 @@ const Notification = ({navigation}) => {
                 />
             </View>
             <FlatList
-                data={data}
+                data={fil}
                 renderItem={({item}) => (
-                    <Accordion data={item} navigation={navigation} />
+                    <Accordion col={item} navigation={navigation} />
                 )}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item,i) => i.toString()}
                 ItemSeparatorComponent={renderSeparator}
                 ListFooterComponent={<View style={{height: 20}} />}
                 style={styles.fl}
             />
+        </View>
         </View>
     )
 }
@@ -66,7 +89,7 @@ const styles = StyleSheet.create({
     search: {
         width: '50%',
         borderRadius: 30,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
     },
     btn: {
         position: 'absolute',

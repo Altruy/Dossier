@@ -1,7 +1,3 @@
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars'
-import React, {useState} from 'react'
-import Task_expanded from './Task_expanded'
-
 import {
     View,
     Text,
@@ -13,6 +9,9 @@ import {
     FlatList,
     ImageBackground,
 } from 'react-native'
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars'
+import React, {useState} from 'react'
+import Task_expanded from './Task_expanded'
 
 const Calen = ({data}) => {
     const [show, setShowState] = useState(false)
@@ -42,15 +41,7 @@ const Calen = ({data}) => {
                         data.forEach((item) => {
                             for (const [key, value] of Object.entries(item)) {
                                 if (key === day.dateString) {
-                                    console.log(`woah woah ${value}`)
-                                    console.log('sdsds', show)
                                     setShowState(!show)
-                                    // newDaysObject[day.dateString] = {
-                                    //     marked: true,
-                                    //     selected: true,
-                                    //     selectedColor: 'blue'
-                                    // };
-                                    // console.log(newDaysObject)
                                 }
                             }
                         })
@@ -61,7 +52,7 @@ const Calen = ({data}) => {
                     onMonthChange={(month) => {
                         console.log('month changed', month)
                     }}
-                    // If firstDay=1 week starts from Monday. Note that dayNames and dayNamesShort should still start from Sunday.
+
                     firstDay={1}
                     onPressArrowLeft={(subtractMonth) => subtractMonth()}
                     onPressArrowRight={(addMonth) => addMonth()}

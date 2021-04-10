@@ -17,6 +17,7 @@ import Colors from "../constants/colors";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { Alert } from "react-native";
 import {useAuth} from '../auth_providers/Auth'
+import { addNotif } from '../API';
 
 export default Accordian = ({ data , navigation}) => {
   const [showInfo, setShowInfo] = useState(false);
@@ -58,6 +59,7 @@ export default Accordian = ({ data , navigation}) => {
     realm.write(() => {
       realm.delete(tas);
     });
+    addNotif(collabId,username,`${username} deleted a Task '${title}'`,assignee)
     navigation.replace('Tasks') // check
   }
 
@@ -67,6 +69,14 @@ export default Accordian = ({ data , navigation}) => {
       tas.completed = !completed;
     });
     (!completed)?Alert.alert(`${title} marked as complete`):Alert.alert(`${title} marked as incomplete`)
+    let data = ''
+    if(!completed){
+      data = `${username} marked Task '${title}' as complete`
+    }
+    else {
+      data = `${username} marked Task '${title}' as incomplete`
+    }
+    addNotif(collabId,username,data,assignee)
     navigation.replace('Tasks')
   }
  
@@ -145,6 +155,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     paddingTop: 0,
     paddingBottom: 0,
+    width:'65%',
   },
   titleDon: {
     // alignItems: "flex-start",
@@ -154,6 +165,7 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     textDecorationLine:'line-through',
     textDecorationStyle:'solid',
+    width:'65%',
   },
   answer: {
     paddingLeft: 15,
@@ -191,8 +203,6 @@ const styles = StyleSheet.create({
     // right: "5%",
   },
   btn : {
-    position: "absolute",
-    right:'-80%',
     flexDirection : 'row',
     width:'33%',
     justifyContent:'flex-end'

@@ -3,6 +3,7 @@ import {View, StyleSheet, FlatList} from 'react-native'
 import {Searchbar} from 'react-native-paper'
 import { getCollabs } from '../../API'
 import { useAuth } from '../../auth_providers/Auth'
+import TopBar from '../../components/TopBar'
 import Accordion from './Accord'
 
 const renderSeparator = () => {
@@ -32,6 +33,8 @@ const Members = ({navigation}) => {
     const collabs = async () => getCollabs(username).then((vals)=>setData(vals));
   
     return (
+        <View style={{height:'100%'}}>
+        <TopBar navigation={navigation} title={'Members'} />
         <View style={styles.container}>
             <View style={styles.upperbar}>
                 <Searchbar
@@ -53,6 +56,7 @@ const Members = ({navigation}) => {
                 ListFooterComponent={<View style={{height: 20}} />}
                 style={styles.fl}
             />
+        </View>
         </View>
     )
 }

@@ -29,7 +29,7 @@ const Homebar = ({ navigation }) => {
     const [newN, setnew] = useState('')
     const [collab,setcollab]=useState("")
     const [newId, setnewId] = useState('')
-    const { username } = useAuth()
+    const { username,collabId,colname } = useAuth()
     
     const onChangeSearch = (query) => setSearchQuery(query);
 
@@ -39,6 +39,7 @@ const Homebar = ({ navigation }) => {
       }
       else{
         joinCollab( collab , username )
+        addNotif(collabId,username,`${username} joined ${colname}`)
         Alert.alert("Joining Collaboration...")
         navigation.replace('Collabs')
       }
@@ -84,7 +85,11 @@ const Homebar = ({ navigation }) => {
               </Text>
               <Icon name="link" size={19} color="white" style={styles.joinico} />
             </TouchableOpacity>
-            <Modal transparent={true} visible ={show} navigation={navigation}>
+            <Modal animationType="fade" transparent={true} visible ={show} navigation={navigation}>
+            <TouchableOpacity 
+              activeOpacity={1} 
+              style={{height:'100%',width:'100%'}}  
+              onPress={() => setShowState(false)}>
             <View style ={{ backgroundColor:"rgba(52, 52, 52, 0.8)", flex:1}}>
             <View style={styles.modal}>
                 <View style={styles.modaltext}>
@@ -112,6 +117,7 @@ const Homebar = ({ navigation }) => {
                 </View>
             </View>
             </View>
+            </TouchableOpacity>
             </Modal>
             <TouchableOpacity
               onPress={() => setShowState2(true)}
@@ -122,7 +128,11 @@ const Homebar = ({ navigation }) => {
               </Text>
               <Icon name="add" size={20} color="white" style={styles.plus} />
             </TouchableOpacity>
-            <Modal transparent={true} visible ={show2} navigation={navigation}>
+            <Modal animationType="fade" transparent={true} visible ={show2} navigation={navigation}>
+            <TouchableOpacity 
+              activeOpacity={1} 
+              style={{height:'100%',width:'100%'}}  
+              onPress={() => setShowState2(false)}>
             <View style ={{ backgroundColor:"rgba(52, 52, 52, 0.8)", flex:1}}>
             <View style={styles.modal}>
                 <View style={styles.modaltext}>
@@ -165,6 +175,7 @@ const Homebar = ({ navigation }) => {
                 </View>
             </View>
             </View>
+            </TouchableOpacity>
             </Modal>
           </View>
         </View>

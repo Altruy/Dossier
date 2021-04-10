@@ -25,6 +25,9 @@ const NoteModal = ({modal,setModal,text,setText,handleNew}) => {
             setModal(false)
         }}
       >
+        <TouchableOpacity activeOpacity={1} 
+          style={{height:'100%',width:'100%'}}  
+          onPress={() => setModal(false)}>
       <View style={styles.modal}>
         <Icon style={styles.times} name="times" size={30} color="white" 
         onPress={()=>{
@@ -45,6 +48,7 @@ const NoteModal = ({modal,setModal,text,setText,handleNew}) => {
           <Text style={styles.btn}>Create</Text>
         </TouchableOpacity>
       </View>
+      </TouchableOpacity>
       </Modal>
     </View> 
   );

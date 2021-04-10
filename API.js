@@ -43,6 +43,22 @@ export async function signup(email,password,username) {
 }
 
 
+export async function changepwd(email,password) {
+  return await fetch(resturi+'updatePassword', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "email": email,
+      "password": password
+    })
+  }).then((response) => response.json()).catch(console.dir);
+}
+
+
+
 export async function getCollabs(username) {
   return await fetch(resturi+`getCollab?user=${username}`, {
     method: 'Get',
@@ -218,6 +234,51 @@ export async function addChat(collab,text,user,username) {
     })
   }).then((response) => response.json()).then((resp)=>{
     return resp
+  }).catch((e)=>null);  
+}
+
+
+export async function addNotif(collab,username,data,to=['ALL']) {
+  return await fetch(resturi+`addNotification`, {
+    method: 'Post',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body:JSON.stringify({
+      'collab' : collab,
+      'by' : username,
+      'to':to,
+      'data':data
+    })
+  }).then((response) => response.json()).then((resp)=>{
+    return resp
+  }).catch((e)=>null);  
+}
+
+
+export async function getNotif(username,collab) {
+  return await fetch(resturi+`getNotifications?user=${username}&collabId=${collab}`, {
+    method: 'Get',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+  }).then((response) => response.json()).then((resp)=>{
+    return resp.reverse()
+  }).catch((e)=>null);  
+}
+
+
+export async function getNotifCount(username,collab) {
+  return await fetch(resturi+`getNotifications?user=${username}&collabId=${collab}`, {
+    method: 'Get',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+  }).then((response) => response.json()).then((resp)=>{
+    return resp.length
   }).catch((e)=>null);  
 }
 

@@ -18,6 +18,7 @@ import {useAuth} from '../../auth_providers/Auth'
 import AssigneeModal from "../../components/AssigneeModal";
 import { getUsers } from "../../API";
 import {ObjectID} from 'react-native-bson'
+import { addNotif } from '../../API'
 
 const CreateTasks = ({ navigation }) => {
   const [title,setTitle] = useState('')
@@ -68,6 +69,7 @@ const CreateTasks = ({ navigation }) => {
           competed:false
         });
       });
+      addNotif(collabId,username,`${username} added a new Task '${title}'`,assignee)
       setModal(false);
       Alert.alert(`New Task '${title}' Created`)
       navigation.navigate('Tasks')

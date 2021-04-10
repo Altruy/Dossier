@@ -16,7 +16,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
 import {useAuth} from '../../auth_providers/Auth'
 import AssigneeModal from "../../components/AssigneeModal";
-import { getUsers } from "../../API";
+import { getUsers,addNotif } from "../../API";
 
 const EditTasks = ({ navigation }) => {
   const [title,setTitle] = useState('')
@@ -62,6 +62,7 @@ const EditTasks = ({ navigation }) => {
         tas.deadline = Date(deadline);
         tas.description = desc
       });
+      addNotif(collabId,username,`${username} added a new Task '${title}'`,assignee)
       Alert.alert(`Task '${title}' Updated`)
       navigation.navigate('Tasks')
     }

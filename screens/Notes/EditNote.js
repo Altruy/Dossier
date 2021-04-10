@@ -15,6 +15,7 @@ import {
 import Icon2 from "react-native-vector-icons/Feather";
 import Icon from "react-native-vector-icons/Ionicons";
 import {useAuth} from '../../auth_providers/Auth'
+import {addNotif} from '../../API'
 
 
 const EditNote = ({ navigation }) => {
@@ -23,7 +24,7 @@ const EditNote = ({ navigation }) => {
   const [id,setId] = useState(navigation.getParam('id'))
   const [edit, setEdit] = useState(false)
   const [note,setNote] = useState({})
-  const { realm ,username} = useAuth();
+  const { realm ,username,collabId} = useAuth();
 
   useEffect(() => {
     if(realm!==null && !!id)
@@ -56,6 +57,7 @@ const EditNote = ({ navigation }) => {
       not.editing = '';
     });
     setEdit(false);
+    addNotif(collabId,username,`${username} editied a Note '${title}'`)
   }
 
   return (
@@ -104,7 +106,7 @@ const EditNote = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
-    marginTop: "20%",
+    marginTop: "10%",
   },
   title: {
     color: "white",

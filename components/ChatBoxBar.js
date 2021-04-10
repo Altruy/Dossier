@@ -14,12 +14,14 @@ import { Searchbar } from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import data from "../data/settings-data";
 import ChatHomeScreen from "./ChatHomeScreen";
+import {useAuth} from '../auth_providers/Auth'
 
 
 
 const ChatBoxBar = ({ data , navigation}) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
+  const {username} = useAuth()
   return (
       <View>
       <View style={styles.container}>
@@ -30,9 +32,8 @@ const ChatBoxBar = ({ data , navigation}) => {
             style={styles.bar}
           >
            <Image source={require('../assets/back-arrow.png')} style={styles.image} />
-           <Text style={styles.text}>
-               {data.name}
-           </Text>
+            {username === data.name && <Text style={styles.text}>{data.name} (Me)</Text>}
+            {username !== data.name && <Text style={styles.text}>{data.name}</Text>}
           </TouchableOpacity>
           {!!data.image && <Image source={data.image} style={styles.user} />}
         </View>

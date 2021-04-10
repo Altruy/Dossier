@@ -36,6 +36,9 @@ const Modalinvite = () => {
                     setModalVisible(!modalVisible)
                 }}
             >
+                <TouchableOpacity activeOpacity={1} 
+                    style={{height:'100%',width:'100%'}}  
+                    onPress={() => setModalVisible(!modalVisible)}>
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
                         <View style={styles.head}>
@@ -73,6 +76,7 @@ const Modalinvite = () => {
                         </TouchableOpacity>
                     </View>
                 </View>
+                </TouchableOpacity>
             </Modal>
             <TouchableOpacity
                 style={[styles.button, styles.buttonOpen]}

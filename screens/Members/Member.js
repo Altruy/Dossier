@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Text, View, StyleSheet, TouchableOpacity, Image, Alert} from 'react-native'
 import Roleicon from './Roleicon'
 import { useAuth } from '../../auth_providers/Auth'
-import {removeUser} from '../../API'
+import {addNotif, removeUser} from '../../API'
 
 const Member = ({data,creator,navigation}) => {
     const { role, user } = data
@@ -10,6 +10,7 @@ const Member = ({data,creator,navigation}) => {
 
     const handleRemove = async () => {
         removeUser(collabId,user).then((resp)=>{
+            addNotif(collabId,username,`${username} removed ${user}`)
             navigation.replace('Members')
         })
     }

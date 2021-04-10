@@ -17,9 +17,12 @@ const AuthContext = React.createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(app.currentUser);
   const [collabId, setCollabId] = useState('');
+  const [colname, setColname] = useState('');
   const [realm , setRealm] = useState(null);
   const realmRef = useRef(null);
   const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
 
   useEffect(() => {
     AsyncStorage.getItem('username').then((v)=>{
@@ -97,14 +100,16 @@ const AuthProvider = ({ children }) => {
   const signIn = async (email,password) => {
     console.log('still a dunm')
     // Custom
-    let usern = await signin('turyal.neeshat5@gmail.com','tazor5')
+    let usern = await signin(email,password)
     if(usern===null){
       throw 'Invalid Email or Password';
     }
     setUsername(usern.username);
+    setPassword(usern.password);
+    setEmail(usern.email);
     AsyncStorage.setItem('username',usern.username)
     console.log('not that big a dunm')
-    const creds = Realm.Credentials.function({ 'email' : 'turyal.neeshat5@gmail.com' , 'password' : 'tazor5' });
+    const creds = Realm.Credentials.function({ 'email' : email , 'password' : password });
     // const creds = Realm.Credentials.anonymous();
     const newUser = await app.logIn(creds);
     console.log('so it worked')
@@ -138,10 +143,14 @@ const AuthProvider = ({ children }) => {
         user,
         username,
         setCollabId,
-        realmRef,
         realm,
         setCollabId,
-        collabId, // list of projects the user is a memberOf
+        colname,
+        setColname,
+        collabId, 
+        password,
+        setPassword,
+        email
       }}
     >
       {children}

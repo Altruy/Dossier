@@ -28,6 +28,10 @@ import {
   Entypo,
   Fontisto,
 } from '@expo/vector-icons';
+import TopBar from "../../components/TopBar";
+
+const delay = (seconds) => 
+  new Promise((resolve) => setTimeout(resolve, seconds * 1000))
 
 
 
@@ -42,8 +46,10 @@ const TestGroupChat = ({ navigation }) => {
     refresh()
   }, [])
 
-  const refresh = ()=>{
+  const refresh = async ()=>{
     getGroup(collabId).then((res)=>setdata(res))
+    await delay(15);
+    refresh()
   }
 
   const handleSend=()=>{
@@ -62,7 +68,6 @@ const TestGroupChat = ({ navigation }) => {
       source={require("../../assets/Chat-background.png")}
       style={styles.image}
     >
-   
        <View >
         <ChatBoxBar navigation={navigation} data={{name:'Group Chat'}} />
       </View> 

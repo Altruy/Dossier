@@ -15,9 +15,11 @@ import {
 } from "react-native";
 import Colors from "../constants/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
+import {useAuth} from '../auth_providers/Auth'
 
 export default ChatHomeScreen = ({ navigation, data }) => {
   const [showInfo, setShowInfo] = useState(true);
+  const {username} = useAuth()
 
   const RenderSeparator = () => {
     return (
@@ -57,9 +59,9 @@ export default ChatHomeScreen = ({ navigation, data }) => {
             data={data}
             renderItem={({ item }) => <TouchableOpacity
                 style={styles.container}
-                onPress={() => {
-                  navigation.navigate('ChatBox')
-                  console.log('chatbox')}}
+                onPress={() => navigation.navigate('Chatbox',{
+                  user:item.username
+                })}
               >
                 <Image 
                   source={{
@@ -67,7 +69,8 @@ export default ChatHomeScreen = ({ navigation, data }) => {
                   }} 
                   style={styles.image}
                   />
-                <Text style={styles.text}>{item.username}</Text>
+                {username === item.username && <Text style={styles.text}>{item.username} (Me)</Text>}
+                {username !== item.username && <Text style={styles.text}>{item.username}</Text>}
                 <Image 
                 source={require('../assets/next.png')} 
                 style={styles.ImageIconStyle} 

@@ -47,7 +47,7 @@ export default ChatBox = ({ data }) => {
              
             }}
             
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item,i) => i.toString()}
           />
         )}
         </View>

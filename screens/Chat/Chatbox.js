@@ -28,6 +28,11 @@ import {
 } from '@expo/vector-icons';
 import {useAuth} from '../../auth_providers/Auth'
 import {getChat, addChat} from '../../API'
+import TopBar from "../../components/TopBar";
+
+
+const delay = (seconds) => 
+  new Promise((resolve) => setTimeout(resolve, seconds * 1000))
 
 
 const  Chatbox = ({ navigation }) => {
@@ -35,15 +40,17 @@ const  Chatbox = ({ navigation }) => {
   const onChangeSearch = (query) => setSearchQuery(query);
   const [text, setText] = React.useState('');
   const [data , setdata] = useState([])
-  const user = 'Jellybean'
+  const user = navigation.getParam('user')
   const { collabId, username , realm} = useAuth()
 
   useEffect(() => {
     refresh()
   }, [])
 
-  const refresh = ()=>{
+  const refresh = async ()=>{
     getChat(collabId,username,user).then((res)=>setdata(res))
+    await delay (15)
+    refresh()
   }
 
   const handleSend=()=>{
@@ -63,7 +70,6 @@ const  Chatbox = ({ navigation }) => {
       source={require("../../assets/Chat-background.png")}
       style={styles.image}
     >
-    
       <View >
         <ChatBoxBar navigation={navigation} data={{name:user,image:{
                     uri: 'https://robohash.org/'+user,
