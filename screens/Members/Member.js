@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         color: 'white',
         // paddingRight: 10,
         alignSelf: 'flex-start',
-        fontSize: 18,
+        fontSize: 16,
         width:'60%'
     },
 
@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
 
         alignSelf: 'flex-end',
         height: 30,
+        right:8,
 
         // alignContent: 'center',
         paddingHorizontal: 10,

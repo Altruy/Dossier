@@ -282,3 +282,53 @@ export async function getNotifCount(username,collab) {
   }).catch((e)=>null);  
 }
 
+
+export async function getEvents(collab,year,month) {
+  return await fetch(resturi+`getEvents`, {
+    method: 'Post',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body:JSON.stringify({
+      'collabId' : collab,
+      'year' : year,
+      'month':month
+    })
+  }).then((response) => response.json()).then((resp)=>{
+    return resp
+  }).catch((e)=>null);  
+}
+
+export async function addEvent(collab, username , title , date , duration='' , description='') {
+  return await fetch(resturi+`addEvent`, {
+    method: 'Post',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body:JSON.stringify({
+      'collabId' : collab,
+       'date'  : date,
+       'duration':  duration, 
+       'title':  title, 
+       'user': username, 
+       'description': description
+    })
+  }).then((response) => response.json()).then((resp)=>{
+    return resp
+  }).catch((e)=>null);  
+} 
+
+
+export async function deleteEvent(id) {
+  return await fetch(resturi+`deleteEvent?id=${id}`, {
+    method: 'Get',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }).then((response) => response.json()).then((resp)=>{
+    return resp
+  }).catch((e)=>null);  
+} 

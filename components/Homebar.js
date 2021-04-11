@@ -22,6 +22,8 @@ import {joinCollab,newCollab} from '../API'
 import {useAuth} from '../auth_providers/Auth'
 import { Alert } from "react-native";
 import Feather from 'react-native-vector-icons/Feather'
+import { Dimensions } from 'react-native';
+const h = Dimensions.get('window').height;
 const Homebar = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = React.useState("");
     const [show,setShowState] = useState(false)
@@ -66,6 +68,7 @@ const Homebar = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+          <View style={styles.top}></View>
           <View style={styles.upperbar}>
             <Searchbar
               style={styles.search}
@@ -76,15 +79,7 @@ const Homebar = ({ navigation }) => {
               value={searchQuery}
               onPress={()=>console.log('pressed')}
             />
-             <TouchableOpacity
-              onPress={() => setShowState(true)}
-              style={styles.join}
-            >
-              <Text style={styles.text}>
-                Join
-              </Text>
-              <Icon name="link" size={19} color="white" style={styles.joinico} />
-            </TouchableOpacity>
+             
             <Modal animationType="fade" transparent={true} visible ={show} navigation={navigation}>
             <TouchableOpacity 
               activeOpacity={1} 
@@ -94,7 +89,7 @@ const Homebar = ({ navigation }) => {
             <View style={styles.modal}>
                 <View style={styles.modaltext}>
                   <Text style={styles.text2}>Join Collaboration</Text>
-                  <Icon2 style={styles.cross} name="times" size={30} color="white" 
+                  <Icon2 style={styles.cross} name="times" size={25} color="white" 
                     onPress={() => setShowState(false)} />
                 </View>
                 <View style={{flexDirection:"row"}}>
@@ -119,15 +114,7 @@ const Homebar = ({ navigation }) => {
             </View>
             </TouchableOpacity>
             </Modal>
-            <TouchableOpacity
-              onPress={() => setShowState2(true)}
-              style={styles.btn}
-            >
-              <Text style={styles.text}>
-                New
-              </Text>
-              <Icon name="add" size={20} color="white" style={styles.plus} />
-            </TouchableOpacity>
+            
             <Modal animationType="fade" transparent={true} visible ={show2} navigation={navigation}>
             <TouchableOpacity 
               activeOpacity={1} 
@@ -137,7 +124,7 @@ const Homebar = ({ navigation }) => {
             <View style={styles.modal}>
                 <View style={styles.modaltext}>
                   <Text style={styles.text2}>Create Collaboration</Text>
-                  <Icon2 style={styles.cross} name="times" size={30} color="white" 
+                  <Icon2 style={styles.cross} name="times" size={25} color="white" 
                     onPress={() => handleBack()} />
                 </View>
                 <View >
@@ -177,11 +164,30 @@ const Homebar = ({ navigation }) => {
             </View>
             </TouchableOpacity>
             </Modal>
+            <TouchableOpacity
+              onPress={() => setShowState(true)}
+              style={styles.btn}
+            >
+              <Icon name="link" size={19} color="white"  />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setShowState2(true)}
+              style={styles.btnp}
+            >
+              <Icon name="add" size={30} color="white"  />
+            </TouchableOpacity>
           </View>
         </View>
     );
   };
 const styles = StyleSheet.create({
+    top:{
+      backgroundColor: "rgba(0,0,0,0.65)",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection:'row',
+      height:60,
+    },
     link:{
         color: "white",
         fontSize: 18,
@@ -194,17 +200,14 @@ const styles = StyleSheet.create({
       fontSize: 18,
       width: "35%",
       height: 40,
-      //backgroundColor: "rgba(0, 0, 0, 0.5)",
+      backgroundColor: "white",
       borderWidth: 1,
       borderRadius: 30,
-      paddingLeft: 10,
       paddingTop: 12,
       left: "33%",
-      color:"white",
-      borderColor:"white",
       paddingBottom:15,
       justifyContent:"center",
-      marginTop:'6%'
+      marginTop:'7%'
     },
     cancel:{
       position: "absolute",
@@ -226,7 +229,7 @@ const styles = StyleSheet.create({
      },
      link2:{
       color: "white",
-      fontSize: 18,
+      fontSize: 16,
       left:"10%",
       paddingRight:25,
   },
@@ -245,7 +248,6 @@ const styles = StyleSheet.create({
       justifyContent:"center"
      },
     modaltext:{
-      paddingBottom:20,
       //left:"33%",
       paddingTop:25,
       alignContent:"center",
@@ -254,42 +256,39 @@ const styles = StyleSheet.create({
       justifyContent:'center'
     },
     modal:{
-      backgroundColor:"#1F0915",
+      backgroundColor:"black",
         marginLeft:'7%',
         borderRadius:40,
-        marginTop:190,
+        marginTop:'60%',
         alignContent:"center"  ,
         justifyContent:'center',
         width:'85%',  
-        height:300
+        height:260
     },
     entire: {
         width: "100%",
         height: "100%",
       },
       container: {
-        paddingTop: 20,
         justifyContent: "center",
         justifyContent: 'space-between'
       },
       upperbar: {
-        flex: 1,
-        paddingTop: 60,
-        alignItems: "center",
+        width:'100%',
+        marginBottom: "5%",
+        marginTop:'10%',
         flexDirection: "row",
-        paddingBottom: 10,
+        justifyContent:'center'
       },
       search: {
-        position: "absolute",
-        width: "30%",
+        width: "55%",
+        height:45,
         borderRadius: 30,
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        left: "9%",
-        paddingRight:0
+        backgroundColor: "rgba(0,0,0,0.50)"
       },
       join: {
         position: "absolute",
-        fontSize: 18,
+        fontSize: 16,
         width: "22%",
         height: 50,
         backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -300,26 +299,48 @@ const styles = StyleSheet.create({
        justifyContent:'space-between',
       },
       btn: {
-        position: "absolute",
-        fontSize: 18,
-        width: "22%",
-        height: 50,
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        borderWidth: 1,
-        borderRadius: 30,
-        paddingLeft: 10,
-        paddingTop: 12,
-        left: "67%",
+        position:'absolute',
+        fontSize: 15,
+        width: 60,
+        height: 60,
+        backgroundColor: '#6508B5',
+        borderRadius: 50,
+        top:h-280,
+        right:'10%',
+        justifyContent:'center',
+        alignItems:'center',
+        shadowColor: 'rgba(0, 0, 0, 0.1)',
+        shadowOpacity: 0.8,
+        elevation: 10,
+        shadowRadius: 15 ,
+        shadowOffset : { width: 1, height: 13},
+      },
+      btnp: {
+        position:'absolute',
+        fontSize: 15,
+        width: 60,
+        height: 60,
+        backgroundColor: '#B100FF',
+        borderRadius: 50,
+        top:h-200,
+        right:'10%',
+        justifyContent:'center',
+        alignItems:'center',
+        shadowColor: 'rgba(0, 0, 0, 0.1)',
+        shadowOpacity: 0.8,
+        elevation: 10,
+        shadowRadius: 15 ,
+        shadowOffset : { width: 1, height: 13},
       },
       text: {
         paddingLeft:'9%',
         color: "white",
-        fontSize: 18,
+        fontSize: 16,
       },
       text2: {
         top:'-10%',
         color: "white",
-        fontSize: 22,
+        fontSize: 20,
       },
       fl: {
         paddingTop: 30,
@@ -345,12 +366,12 @@ const styles = StyleSheet.create({
         top:'38%'
       },
       joinbuton:{
-        color:'white',
-        paddingLeft:'30%'
+        color:'black',
+        textAlign:'center'
       },
       cross: {
         position: "absolute",
-        top: '-37%',
+        top: '-36%',
         right: "10%",
       },
       textInput: {

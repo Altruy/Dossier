@@ -95,22 +95,21 @@ const Chat = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
+    paddingTop: 10,
     justifyContent: "center",
   },
   upperbar: {
-    flex: 1,
-    paddingTop: 60,
-    alignItems: "center",
+    width:'100%',
+    paddingBottom: '10%',
+    marginTop:'8%',
     flexDirection: "row",
-    paddingBottom: 20,
-    justifyContent:'center'
+    justifyContent:'center',
   },
   search: {
-    position:'absolute',
-    width: "50%",
+    width: "55%",
+    height:45,
     borderRadius: 30,
-    backgroundColor: "#26272C",
+    backgroundColor: "#26272C"
   },
   btn: {
     position: "absolute",

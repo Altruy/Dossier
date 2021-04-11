@@ -27,7 +27,7 @@ export default CollabText = ({ navigation , setCollabId, data ,setColname}) => {
           height: 1,
           width: "86%",
           backgroundColor: "#CED0CE",
-          marginLeft: "4.5%",
+          marginLeft: "6%",
           opacity: 0.2,
         }}
       />
@@ -35,9 +35,9 @@ export default CollabText = ({ navigation , setCollabId, data ,setColname}) => {
   };
 
   return (
-    <ScrollView style={{marginHorizontal: 20}}> 
-  <View>
-         {(
+    <ScrollView > 
+      <View>
+  
           <FlatList
             data={data}
             renderItem={({ item }) => (
@@ -60,7 +60,7 @@ export default CollabText = ({ navigation , setCollabId, data ,setColname}) => {
             ItemSeparatorComponent={RenderSeparator}
             keyExtractor={(item) => item.collab}
           />
-        )}
+        
         </View>
         </ScrollView>
   );
@@ -69,21 +69,21 @@ export default CollabText = ({ navigation , setCollabId, data ,setColname}) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    paddingVertical: 10,
-    borderRadius: 30,
-    marginVertical:7,
-    justifyContent: 'space-between',
-    width:300,
-    borderWidth:0.5,
-    height:50
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        width: 360,
+        borderRadius: 25,
+        paddingTop: 20,
+        paddingBottom: 20,
+        paddingHorizontal: 10,
+        marginVertical: 10,
+        justifyContent:'space-between'
     
   },
   text:
   {
     paddingLeft:15,
     color : 'white',
-    fontSize: 12,
+    fontSize: 16,
     alignSelf:'center'
   },
   ImageIconStyle:{

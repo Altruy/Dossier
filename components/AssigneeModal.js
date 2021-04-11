@@ -68,6 +68,10 @@ const AssigneeModal = ({modal,setModal,assignee,setAssi,users}) => {
             setModal(false)
         }}
       >
+        <TouchableOpacity 
+        activeOpacity={1} 
+        style={{height:'100%',width:'100%',backgroundColor:"rgba(52, 52, 52, 0.8)"}}  
+        onPress={() => setModal(false)}>
       <View style={styles.modal}>
         <Icon style={styles.times} name="times" size={30} color="white" 
         onPress={()=>{
@@ -105,6 +109,7 @@ const AssigneeModal = ({modal,setModal,assignee,setAssi,users}) => {
           <Text style={styles.btn}>Done</Text>
         </TouchableOpacity>
       </View>
+      </TouchableOpacity>
       </Modal>
     </View> 
   )
@@ -130,12 +135,13 @@ const styles = StyleSheet.create({
     opacity:0.91
   },
   note: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight:'bold',
     color: "white",
+    top:-13
   },
   title: {
-    left: '-30%',
+    left: '-27%',
     paddingTop: '3%',
     fontSize: 15,
     color: "white",
@@ -153,7 +159,7 @@ const styles = StyleSheet.create({
     fontSize:18
   },
   title2: {
-    left: '-35%',
+    left: '-32%',
     marginTop: '7%',
     fontSize: 15,
     color: "white",
@@ -173,8 +179,8 @@ const styles = StyleSheet.create({
   btn: {
     top: 15,
     left: "1%",
-    color: "white",
-    backgroundColor: "black",
+    color: "black",
+    backgroundColor: "white",
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 14,
@@ -196,13 +202,13 @@ const styles = StyleSheet.create({
   },
   label:{
     color:'white',
-    fontSize:18,
+    fontSize:16,
     paddingTop: '3%',
     paddingBottom: '3%'
   },
   labels:{
     color:'white',
-    fontSize:18,
+    fontSize:16,
     paddingTop: '3%',
     paddingBottom: '3%'
   },

@@ -41,7 +41,7 @@ const Settings = ({navigation}) => {
           width: "86%",
           backgroundColor: "#CED0CE",
           marginLeft: "5.5%",
-          marginTop: 10,
+          marginTop: 5,
           opacity: 0.2,
         }}
       />
@@ -74,7 +74,7 @@ const Settings = ({navigation}) => {
           )}
           keyExtractor={(item,i) => i.toString()}
           ItemSeparatorComponent={RenderSeparator}
-          ListFooterComponent={<View style={{ height: 20 }} />}
+          ListFooterComponent={<View style={{ height: 10 }} />}
           style={styles.fl}
         />
       </View>   

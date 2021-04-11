@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
         maxWidth: 200,
         width: 200,
         fontWeight: 'bold',
+        left:12,
     },
     answers: {
         paddingTop: 10,
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
     invitebtn: {
         flexDirection: 'row',
         fontSize: 18,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: '#B100FF',
         borderRadius: 30,
         paddingHorizontal: 10,
         // paddingVertical: 10,

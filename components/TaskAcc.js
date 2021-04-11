@@ -41,7 +41,7 @@ export default Accordian = ({ data , navigation}) => {
 
   const alertDelete = () => {
     Alert.alert(
-      `Delete '${title}'`,
+      `Delete Task '${title}'`,
       `Are you sure you want to delete this task?\nThis cannot be undone.`,
       [
         {
@@ -59,7 +59,7 @@ export default Accordian = ({ data , navigation}) => {
     realm.write(() => {
       realm.delete(tas);
     });
-    addNotif(collabId,username,`${username} deleted a Task '${title}'`,assignee)
+    addNotif(collabId,username,`${username} deleted a Task '${title}'`,assignees)
     navigation.replace('Tasks') // check
   }
 
@@ -79,6 +79,9 @@ export default Accordian = ({ data , navigation}) => {
     addNotif(collabId,username,data,assignee)
     navigation.replace('Tasks')
   }
+  
+  let dat = new Date(deadline).toString()
+  let toShow = dat.slice(0,dat.indexOf('GMT'))
  
   return (
     <TouchableOpacity
@@ -92,15 +95,15 @@ export default Accordian = ({ data , navigation}) => {
             <Icon
               style={styles.clip}
               name="clipboard-check"
-              size={30}
+              size={23}
               color="white"
               onPress={()=>handleDone()}
             />
             { (username===assigner) &&
-              <Icon style={styles.edit} name="edit" size={30} color="white" onPress={()=>handleEdit()}/>
+              <Icon style={styles.edit} name="edit" size={22} color="white" onPress={()=>handleEdit()}/>
             }
             { (username===assigner) &&
-            <Icon style={styles.times} name="times" size={30} color="white" onPress={()=>alertDelete()}/>
+            <Icon style={styles.times} name="times" size={26} color="white" onPress={()=>alertDelete()}/>
             }
           </View>
         </View>
@@ -108,7 +111,7 @@ export default Accordian = ({ data , navigation}) => {
         {showInfo && (
           <View style={styles.answers}>
             <Text style={styles.answer}>Co-Assignees: {assignees.join(' , ')}</Text>
-            <Text style={styles.answer}>Deadline: {Date(deadline).slice(0,Date(deadline).indexOf('GMT'))} </Text>
+            <Text style={styles.answer}>Deadline: {toShow} </Text>
             <Text style={styles.answer}>Description: {description} </Text>
             <Text style={styles.answer}>Assigner: {assigner} </Text>
           </View>
@@ -137,9 +140,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     flexDirection: "row",
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingBottom: 10,
+    paddingTop: 5,
+    paddingLeft: 5,
+    paddingBottom: 5,
     alignItems: "center",
   },
   box: {
@@ -152,27 +155,23 @@ const styles = StyleSheet.create({
   title: {
     // alignItems: "flex-start",
     color: "white",
-    fontSize: 22,
-    paddingTop: 0,
-    paddingBottom: 0,
+    fontSize: 16,
     width:'65%',
   },
   titleDon: {
     // alignItems: "flex-start",
     color: "white",
-    fontSize: 22,
-    paddingTop: 0,
-    paddingBottom: 0,
+    fontSize: 16,
     textDecorationLine:'line-through',
     textDecorationStyle:'solid',
     width:'65%',
   },
   answer: {
     paddingLeft: 15,
-    paddingTop: 8,
+    paddingTop: 3,
     paddingBottom: 7,
     color: "white",
-    fontSize: 17,
+    fontSize: 14,
   },
   answers: {
     paddingTop: 10,
@@ -187,19 +186,19 @@ const styles = StyleSheet.create({
   },
   clip: {
     // position: "absolute",
-    padding: 3,
+    padding: 5,
     // left: "69%",
   },
   edit: {
     // position: "absolute",
-    padding: 3,
+    padding: 5,
     marginLeft:'5%'
     // right:'31%'
     // left: "81%",
   },
   times: {
     // position: "absolute",
-    padding: 4,
+    padding: 5,
     // right: "5%",
   },
   btn : {

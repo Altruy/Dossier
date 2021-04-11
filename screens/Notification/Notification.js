@@ -41,7 +41,8 @@ const Notification = ({navigation}) => {
     });
 
     return (
-        <View style={{height:'100%',width:'100%'}}>
+        <View style={{height:'100%',
+        backgroundColor: '#341024',}}>
         
         <TopBar navigation={navigation} title={'Notifications'} />
         <View style={styles.container}>
@@ -77,20 +78,23 @@ Notification.navigationOptions = {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 20,
         justifyContent: 'center',
         backgroundColor: '#341024',
         alignItems: 'center',
     },
     upperbar: {
-        alignItems: 'center',
-        paddingBottom: 10,
-    },
-    search: {
-        width: '50%',
+        width:'100%',
+        marginBottom: "3%",
+        marginTop:'10%',
+        flexDirection: "row",
+        justifyContent:'center'
+      },
+      search: {
+        width: "55%",
+        height:45,
         borderRadius: 30,
-        backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    },
+        backgroundColor: "rgba(0,0,0,0.50)"
+      },
     btn: {
         position: 'absolute',
         fontSize: 18,

@@ -6,7 +6,7 @@ const Member = ({notifs}) => {
     const {date, data} = notifs
     const [showRole, setShowRole] = useState(false)
     let dat = new Date(parseInt(date['$date']['$numberLong'])).toString()
-    let toShow = dat.slice(0,dat.indexOf('GMT'))
+    let toShow = dat.slice(0,dat.indexOf('GMT')-4)
 
     return (
         <View style={styles.item}>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         color: 'white',
         // paddingRight: 10,
         alignSelf: 'flex-start',
-        fontSize: 18,
+        fontSize: 15,
     },
 
     roleOwner: {

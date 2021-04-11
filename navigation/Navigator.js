@@ -17,51 +17,21 @@ import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import SideBar from "../components/SideBar";
 import Tasks from "../screens/Tasks/Tasks";
-import Collaborations from "../screens/Home/Collaborations";
 import Settings from "../screens/Home/Settings";
 import Chat from "../screens/Chat/Chat";
-import Calendar from "../screens/Calendar/CalendarHome";
+import CalendarHome from "../screens/Calendar/CalendarHome";
 import Notes from "../screens/Notes/Notes";
 import Notification from "../screens/Notification/Notification";
 import Members from "../screens/Members/Members";
 
-const SettingsNavigator = createStackNavigator(
-    {
-        Settings: Settings,
-    },
-    {
-        headerMode:'none',
-        // defaultNavigationOptions: {
-        //     headerStyle: {
-        //         backgroundColor: 'black',
-        //     },
-        //     headerTintColor: 'white',
-        // },
-    }
-)
 
-  
-const MembersNavigator = createStackNavigator(
-    {
-        Members: Members,
-    },
-    {
-        headerMode:'none',
-        // defaultNavigationOptions: {
-        //     headerStyle: {
-        //         backgroundColor: 'black',
-        //     },
-        //     headerTintColor: 'white',
-        // },
-    }
-)
 
 const DrawerNavigator = createDrawerNavigator(
   {
     Notes: Notes,
     Tasks: Tasks,
     Chat: Chat,
-    Calendar: Calendar,
+    Calendar: CalendarHome,
     Members: Members,
     Settings: Settings,
     Notifs: Notification,

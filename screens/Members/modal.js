@@ -44,7 +44,7 @@ const Modalinvite = ({collab,name}) => {
                 }}
             >
                 <TouchableOpacity activeOpacity={1} 
-                    style={{height:'100%',width:'100%'}}  
+                    style={{height:'100%',width:'100%',backgroundColor:"rgba(52, 52, 52, 0.8)"}}  
                     onPress={() => setModalVisible(!modalVisible)}>
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
@@ -110,16 +110,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     modalView: {
-        height: '50%',
+        height: '40%',
         width: '80%',
         margin: 20,
         justifyContent: 'space-around',
-        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+        backgroundColor: 'black',
         borderRadius: 40,
         // paddingHorizontal: 50,
         // paddingVertical: 100,
         alignItems: 'center',
-        opacity: 10,
     },
     copy:{
         position:'absolute',
@@ -138,10 +137,10 @@ const styles = StyleSheet.create({
         // height: 25,
     },
     buttonOpen: {
-        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+        backgroundColor: 'rgba(177, 0, 255, 0.5)',
     },
     buttonClose: {
-        backgroundColor: '#2196F3',
+        backgroundColor: 'rgba(2557, 0, 17, 0.5)',
     },
     textStyle: {
         color: 'white',
@@ -195,15 +194,13 @@ const styles = StyleSheet.create({
     },
 
     invitetext: {
-        color: 'white',
-        fontSize: 20,
+        color: 'black',
+        fontSize: 16,
     },
     invitebtn: {
         flexDirection: 'row',
         fontSize: 20,
-        borderWidth: 1,
-        borderColor: 'white',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: 'white',
         borderRadius: 30,
         paddingHorizontal: 30,
         paddingVertical: 20,

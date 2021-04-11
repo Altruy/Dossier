@@ -1,27 +1,34 @@
 import React from 'react'
-import {View, Text, Image, Button, StyleSheet, ScrollView} from 'react-native'
+import {View, Text, Image, Button, StyleSheet, ScrollView, ImageBackground} from 'react-native'
 
-import TaskExpandedComponent from '../../components/Task_expanded'
-// import CalenderComponent from '../../components/Test_Calendar'
-import CalendarCom from '../../components/Calendar'
 import TopBar from '../../components/TopBar'
 import CalendarNav from '../../navigation/CalenderNav'
 
-const Calendar = () => {
+const Calendar = ({navigation}) => {
     return (
-        <View style={styles.container}>
+        <ImageBackground
+            source={require('../../assets/Calendar-background.png')}
+            style={styles.image}
+        >
             <TopBar navigation={navigation} title={'Calendar'} />
             <CalendarNav/>
-        </View>
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
+        width:'100%',
+        height:'100%',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    image: {
+        // flex: 1,
+        height: '100%',
+        width: '100%',
+        resizeMode: 'cover',
+        overflow: 'hidden',
     },
 })
 

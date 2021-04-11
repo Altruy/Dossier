@@ -27,6 +27,7 @@
     "react-native-background-fetch": "^4.0.2",
     "react-native-bson": "0.0.3",
     "react-native-calendars": "^1.1254.0",
+    "react-native-date-picker": "^3.2.10",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^3.3.2",
     "react-native-form-validator": "^0.3.5",

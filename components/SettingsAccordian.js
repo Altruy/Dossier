@@ -64,9 +64,9 @@ export default SettingsAccordian= ({ data }) => {
         <View style={styles.dropdown}>
           <Text style={styles.title}>{name}</Text>
           {showInfo ? (
-          <Icon name="angle-up" size={25} style={styles.times} color="white" />
+          <Icon name="angle-up" size={18} style={styles.times} color="white" />
         ) : (
-          <Icon name="angle-down" size={25} style={styles.times} color="white" />
+          <Icon name="angle-down" size={18} style={styles.times} color="white" />
         )}
         
         </View>
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   title: {
     // alignItems: "flex-start",
     color: "white",
-    fontSize: 21,
+    fontSize: 16,
     paddingTop: 0,
     paddingBottom: 0,
   },
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   accordian: {
     width: "100%",
     alignItems: "center",
-    paddingTop:20
+    paddingTop:10
   },
   clip: {
     position: "absolute",

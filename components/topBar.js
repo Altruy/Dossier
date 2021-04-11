@@ -50,13 +50,13 @@ const TopBar = ({navigation,title}) => {
           />
           </View>
           <Text style={styles.note}> {title} </Text>
-          <View style={styles.right}>
+          <View style={styles.right1}>
              <Icon3
             name="bell"
             color="white"
-            size={30}
+            size={25}
             
-            style={{padding: 12}}
+            style={{padding: 12,paddingTop:15}}
             onPress={() => navigation.navigate('Notifs')}
           />
           <Icon3
@@ -71,8 +71,8 @@ const TopBar = ({navigation,title}) => {
           <Icon2
             name="options-vertical"
             color="white"
-            size={30}
-            style={{padding: 10}}
+            size={25}
+            style={{padding: 10,paddingTop:15}}
             onPress={() => setModalVisible(!modalVisible)}
           />
           </View>
@@ -91,7 +91,7 @@ const TopBar = ({navigation,title}) => {
       <View style={styles.modal}>
         <View style={styles.name}>
           <Image source={{uri: 'https://robohash.org/'+username}} style={styles.image}/>
-          <Text style={styles.note}> {username} </Text>
+          <Text style={styles.title2}> {username} </Text>
         </View>
 
         <TouchableOpacity style={styles.title} onPress={() => handleChange()}>
@@ -112,7 +112,7 @@ const TopBar = ({navigation,title}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "black",
+    backgroundColor: "rgba(0,0,0,0.65)",
     alignItems: "center",
     justifyContent: "center",
     flexDirection:'row',
@@ -120,6 +120,11 @@ const styles = StyleSheet.create({
 
   },
   right:{
+    position:'absolute',
+    flexDirection:'row',
+    right:0,
+  },
+  right1:{
     position:'absolute',
     flexDirection:'row',
     right:0,
@@ -133,18 +138,17 @@ const styles = StyleSheet.create({
     top:60,
     right:0,
     margin:5,
-    height: 190,
-    width: "55%",
+    height: 155,
+    width: 170,
     alignItems: "center",
     borderRadius: 15,
-    backgroundColor: "black",
+    backgroundColor: "rgba(0,0,0,1)",
     paddingTop:5
   },
   name:{
     flexDirection:'row',
     paddingTop: 10,
-    paddingLeft:20,
-    paddingBottom:10
+    paddingBottom:8
   },
   note: {
     position: "relative",
@@ -157,16 +161,24 @@ const styles = StyleSheet.create({
   title: {
     position: "relative",
     left: 0,
-    paddingTop: 6,
-    fontSize: 20,
+    paddingTop: 5,
+    fontSize: 15,
+    color: "white",
+  },
+  title2: {
+    position: "relative",
+    left: 0,
+    paddingTop: 13,
+    fontSize: 18,
     color: "white",
   },
   image:{
-    height: 60,
-    width:60,
+    height: 50,
+    width:50,
     borderRadius: 400/ 2,
     borderColor:'#26272C',
-    backgroundColor:'#26272C'
+    backgroundColor:'#26272C',
+    marginRight:4
   },
 });
 

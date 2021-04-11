@@ -98,7 +98,7 @@ const Collaboration = ({navigation}) => {
           height: 1,
           width: "86%",
           backgroundColor: "#CED0CE",
-          marginLeft: "4.5%",
+          marginLeft: "7%",
           opacity: 0.2,
         }}
       />
@@ -120,7 +120,7 @@ const Collaboration = ({navigation}) => {
     />
     </View>
     
-    <View style={{marginTop:25}}></View>
+    <View style={{marginTop:10}}></View>
      <RenderSeparator />
   </View>
     
@@ -134,14 +134,9 @@ const styles = StyleSheet.create({
     backgroundColor:'#341024'
   },
   rest:{
-    paddingTop:25,
+    paddingTop:10,
     alignItems: "center",
   },
-  search:{
-    paddingLeft:50,
-    paddingTop:50,
-    paddingBottom:25,
-  }
   
 });
 

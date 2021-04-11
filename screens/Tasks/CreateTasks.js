@@ -16,27 +16,26 @@ import Icon from "react-native-vector-icons/Ionicons";
 import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
 import {useAuth} from '../../auth_providers/Auth'
 import AssigneeModal from "../../components/AssigneeModal";
+import DateTimeModal from "../../components/DateTimeModal";
 import { getUsers } from "../../API";
 import {ObjectID} from 'react-native-bson'
 import { addNotif } from '../../API'
 
+
 const CreateTasks = ({ navigation }) => {
   const [title,setTitle] = useState('')
   const [modal,setModal] = useState(false)
+  const [modal1,setModal1] = useState(false)
   const [assignee,setAssi] = useState([])
-  const [deadline,setDeadline] = useState(Date.now())
+  const [deadline,setdeadline] = React.useState(new Date())
   const [desc, setDesc] = useState('')
-  const [users, setusers] = useState([])
   const [all, setall] = useState([])
   const { realm ,username ,collabId} = useAuth();
 
   useEffect(() => {
-    if(realm!== null){
-      let use = realm.objects('user')
-      setusers(use)
-    }
-   
-  }, [realm])
+    setdeadline(Date.now())
+  }, [])
+
 
   useEffect(() => {
     getUsers(collabId).then((resp)=>{
@@ -63,7 +62,7 @@ const CreateTasks = ({ navigation }) => {
           description: desc,
           assigner : username,
           assignees : assignee,
-          deadline : Date(deadline),
+          deadline : new Date(deadline),
           title : title,
           id : nid.toString(),
           competed:false
@@ -83,12 +82,13 @@ const CreateTasks = ({ navigation }) => {
       style={styles.image}
     >
       <AssigneeModal modal={modal} setModal={setModal} users={all} assignee={assignee} setAssi={setAssi} />
-
+      <DateTimeModal modal={modal1} setModal={setModal1} datetime={deadline} setdatetime={setdeadline} />
+      <Text style={{color:'white',fontSize:18,alignSelf:'center',top:40}}> Create New Task</Text>
       <View style={styles.block}>
       
       <View style={styles.fblock}>
         <View style={{ flexDirection: "row" }}>
-          <Text style={styles.assignee} > Add Title</Text>
+          <Text style={styles.title} > Add Title</Text>
         </View>
         <TextInput style={styles.input} 
           onChangeText={(text)=>setTitle(text)}
@@ -110,17 +110,21 @@ const CreateTasks = ({ navigation }) => {
         </View>
 
         <View style={styles.sblock}>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={styles.deadline}> Add Deadline</Text>
+        <TouchableOpacity onPress={()=>setModal1(true)}>
+          <View style={{ flexDirection: "row" }} >
+          <Text style={styles.deadline}> Add Deadline</Text>
             <Icon2
-              name="calendar-range"
-              size={25}
-              color="white"
-              style={styles.icon}
-            />
+                name="calendar-clock"
+                size={30}
+                color="white"
+                style={styles.icon}
+              />
           </View>
-          <TextInput style={styles.input} defaultValue={Date(deadline).slice(0,Date(deadline).indexOf('GMT'))}
-          onChangeText={(text)=>setDeadline(text)} />
+          <TextInput style={styles.input} editable={false} 
+            value={new Date(deadline).toString().slice(0,new Date(deadline).toString().indexOf('GMT')-4)} />
+          </TouchableOpacity>
+
+          
         </View>
         <View style={styles.tblock}>
           <Text style={styles.desc}> Add Description</Text>
@@ -159,13 +163,13 @@ const styles = StyleSheet.create({
     borderColor: '#999'
   },
   input: {
-    borderWidth: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     padding: 8,
     borderRadius: 8,
     margin: 10,
     width: "75%",
-    color:'white'
+    color:'white',
+    paddingLeft:20
   },
   dinput: {
     borderWidth: 1,
@@ -173,21 +177,30 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 8,
     margin: 10,
+    marginTop:20,
     width: "75%",
     color:'white',
     height: "40%",
   },
   assignee: {
     color: "white",
+    marginLeft:10
+  },
+  title: {
+    color: "white",
+    marginLeft:10,
+    marginBottom: 10
   },
   deadline: {
     color: "white",
+    marginLeft:10
   },
   desc: {
     color: "white",
+    marginLeft:10
   },
   block: {
-    top: "7%",
+    top: "8%",
     left: "10%",
   },
   sblock: {
@@ -208,9 +221,18 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     borderWidth: 1,
     borderRadius: 40,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "#B100FF",
     width: "25%",
-    height: "7%",
+    height: "6%",
+    shadowColor: "#000",
+    shadowOffset: {
+        width: 0,
+        height: 6,
+    },
+    shadowOpacity: 0.39,
+    shadowRadius: 8.30,
+
+    elevation: 13,
   },
   textbtn: {
     color: "white",

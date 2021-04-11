@@ -110,6 +110,8 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         borderRadius: 50,
+        marginBottom:5,
+        marginTop:5
     },
     accordionbox: {
         // paddingRight: 40,
@@ -157,6 +159,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         maxWidth: 200,
         width: 200,
+        left:10,
         fontWeight: 'bold',
     },
     answers: {

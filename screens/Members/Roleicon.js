@@ -53,7 +53,7 @@ const Roleicon = ({role, creator, user,navigation}) => {
                     >
 
                         <Text style={styles.btntext}>Admin</Text>
-                        <Icon style={styles.cross} name="times" size={20} color="white" />
+                        <Icon style={styles.cross} name="times" size={18} color="white" />
                  
                     </TouchableOpacity>
                     
@@ -79,7 +79,7 @@ const Roleicon = ({role, creator, user,navigation}) => {
                     >
 
                         <Text style={styles.btntext}>Admin</Text>
-                        <Icon style={styles.cross} name="plus" size={20} color="white" />
+                        <Icon style={styles.cross} name="plus" size={18} color="white" />
                  
                     </TouchableOpacity>
                     
@@ -90,9 +90,9 @@ const Roleicon = ({role, creator, user,navigation}) => {
             return (
                 <View >
                     <TouchableOpacity
-                        style={styles.roleAdmins}
+                        style={styles.roleAdmins2}
                     >
-                        <Text style={styles.btntext}>Admin</Text>
+                        <Text style={styles.btntext2}>Admin</Text>
                     </TouchableOpacity>
                 </View>
             )
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 2,
         top:'7%',
-        right:0,
+        right:10,
 
         borderRadius: 20,
     },
@@ -159,14 +159,30 @@ const styles = StyleSheet.create({
         top:'6%',
         right:0,
     },
+    roleAdmins2: {
+        position : 'absolute',
+        backgroundColor: '#3F1851',
+        paddingLeft:15,
+        paddingVertical: 2,
+        borderRadius: 20,
+        width : 71,
+        top:'6%',
+        right:10,
+    },
     cross :{
         position: "absolute",
-        top: 2,
-        right: "12%",
+        top:3,
+        right: "15%",
     },
     btntext: {
         color: 'white',
         // paddingRight: 10,
+        paddingBottom: 3,
+        // marginVertical: 10,
+    },
+    btntext2: {
+        color: 'white',
+        paddingRight: 10,
         paddingBottom: 3,
         // marginVertical: 10,
     },

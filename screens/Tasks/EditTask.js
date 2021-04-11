@@ -16,16 +16,18 @@ import Icon from "react-native-vector-icons/Ionicons";
 import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
 import {useAuth} from '../../auth_providers/Auth'
 import AssigneeModal from "../../components/AssigneeModal";
+import DateTimeModal from "../../components/DateTimeModal";
 import { getUsers,addNotif } from "../../API";
 
 const EditTasks = ({ navigation }) => {
   const [title,setTitle] = useState('')
   const [modal,setModal] = useState(false)
+  const [modal1,setModal1] = useState(false)
   const [assignee,setAssi] = useState([])
   const [deadline,setDeadline] = useState(null)
   const [desc, setDesc] = useState('')
   const [all, setall] = useState([])
-  const { realm , collabId } = useAuth();
+  const { realm , collabId , username } = useAuth();
 
   useEffect(() => {
     if(realm!== null){
@@ -38,6 +40,7 @@ const EditTasks = ({ navigation }) => {
    
   }, [realm])
 
+ 
 
   useEffect(() => {
     getUsers(collabId).then((resp)=>{
@@ -59,7 +62,7 @@ const EditTasks = ({ navigation }) => {
       realm.write(() => {
         tas.title = title;
         tas.assignees= assignee;
-        tas.deadline = Date(deadline);
+        tas.deadline = new Date(deadline);
         tas.description = desc
       });
       addNotif(collabId,username,`${username} added a new Task '${title}'`,assignee)
@@ -75,7 +78,8 @@ const EditTasks = ({ navigation }) => {
       style={styles.image}
     >
       <AssigneeModal modal={modal} setModal={setModal} users={all} assignee={assignee} setAssi={setAssi} />
-
+      { deadline && <DateTimeModal modal={modal1} setModal={setModal1} datetime={deadline} setdatetime={setDeadline} />}
+      <Text style={{color:'white',fontSize:18,alignSelf:'center',top:40}}> Edit Task</Text>
       <View style={styles.block}>
       
       <View style={styles.fblock}>
@@ -102,17 +106,20 @@ const EditTasks = ({ navigation }) => {
         </View>
 
         <View style={styles.sblock}>
+        <TouchableOpacity onPress={()=>setModal1(true)}>
           <View style={{ flexDirection: "row" }}>
             <Text style={styles.deadline}> Edit Deadline</Text>
             <Icon2
-              name="calendar-range"
+              name="calendar-clock"
               size={25}
               color="white"
               style={styles.icon}
             />
           </View>
-          <TextInput style={styles.input} defaultValue={Date(deadline).slice(0,Date(deadline).indexOf('GMT'))}
-          onChangeText={(text)=>setDeadline(text)} />
+          <TextInput style={styles.input} editable={false} 
+          value={new Date(deadline).toString().slice(0,new Date(deadline).toString().indexOf('GMT')-4)} />
+          </TouchableOpacity>
+
         </View>
         <View style={styles.tblock}>
           <Text style={styles.desc}> Edit Description</Text>

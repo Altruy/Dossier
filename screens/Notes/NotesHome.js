@@ -84,17 +84,7 @@ const Notes = ({ navigation }) => {
           onChangeText={onChangeSearch}
           value={searchQuery}
         />
-        <TouchableOpacity
-          onPress={() => {
-            setModal(true);
-          }}
-          style={styles.btn}
-        >
-          <Text style={styles.text}>
-            New
-            <Icon name="add" size={20} color="white" />
-          </Text>
-        </TouchableOpacity>
+        
       </View>
 
       <FlatList
@@ -110,6 +100,14 @@ const Notes = ({ navigation }) => {
         )}
         style={styles.fl}
       />
+      <TouchableOpacity
+          onPress={() => {
+            setModal(true);
+          }}
+          style={styles.btn}
+        >
+            <Icon name="add" size={30} color="white"  />
+        </TouchableOpacity>
     </ImageBackground>
   );
 };
@@ -134,35 +132,36 @@ const styles = StyleSheet.create({
     marginBottom: "10%",
     marginTop:'10%',
     flexDirection: "row",
-    paddingBottom: 10,
-    paddingTop:10,
-    alignItems:'center'
+    justifyContent:'center'
   },
   search: {
-    width: "50%",
-    height:50,
+    width: "55%",
+    height:45,
     borderRadius: 30,
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
-    marginLeft:'10%'
+    backgroundColor: "rgba(0,0,0,0.50)"
   },
   btn: {
-    fontSize: 18,
-    width: "23%",
-    height: 50,
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
-    borderWidth: 1,
-    borderRadius: 30,
-    paddingLeft: 20,
-    paddingTop: 12,
-    marginLeft:'6%'
+    position:'absolute',
+    fontSize: 15,
+    width: 60,
+    height: 60,
+    backgroundColor: '#B100FF',
+    borderRadius: 50,
+    bottom:'5%',
+    right:'10%',
+    justifyContent:'center',
+    alignItems:'center',
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOpacity: 0.8,
+    elevation: 10,
+    shadowRadius: 15 ,
+    shadowOffset : { width: 1, height: 13},
+    
   },
   text: {
     color: "white",
-    fontSize: 18,
+    fontSize: 15,
   },
-  modal:{
-
-  }
 });
 
 export default Notes

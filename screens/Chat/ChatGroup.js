@@ -93,8 +93,8 @@ const TestGroupChat = ({ navigation }) => {
               />
             </View>
             <TouchableOpacity style={styles.next} onPress={()=>handleSend()}> 
-              <FontAwesome5 name="arrow-right" size={30} color="blue" style={styles.next} />
-            </TouchableOpacity>
+        <MaterialIcons name="send" size={30} color="white" style={styles.nexts} />
+      </TouchableOpacity>
            
           </View>     
                     
@@ -127,20 +127,24 @@ textInput: {
   marginHorizontal: 10,
   backgroundColor:"#26272C",
   color:'white',
+  borderRadius: 25,
+  textAlignVertical:'center'
   //height:50
 },
-  next:{
-      height: 25,
-      width:25,
-      alignSelf:'center',
-      left:"15%",
-      borderRadius: 100/ 2,
-      height:28,
-      width:25,
-      borderColor:'#26272C',
-      backgroundColor:'#26272C',
-      marginRight:10
-    },
+nexts:{
+  left:2
+},
+next:{
+  height: 50,
+  width:50,
+  alignSelf:'center',
+  borderRadius: 100/ 2,
+  borderColor:'#26272C',
+  backgroundColor:'#26272C',
+  marginRight:10,
+  alignItems:'center',
+  justifyContent: 'center',
+},
     icon: {
       marginHorizontal: 15,
     },

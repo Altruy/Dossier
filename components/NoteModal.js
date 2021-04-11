@@ -26,7 +26,7 @@ const NoteModal = ({modal,setModal,text,setText,handleNew}) => {
         }}
       >
         <TouchableOpacity activeOpacity={1} 
-          style={{height:'100%',width:'100%'}}  
+          style={{height:'100%',width:'100%',backgroundColor:"rgba(52, 52, 52, 0.8)"}}  
           onPress={() => setModal(false)}>
       <View style={styles.modal}>
         <Icon style={styles.times} name="times" size={30} color="white" 
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   note: {
     position: "relative",
     top: -30,
-    fontSize: 22,
+    fontSize: 20,
     fontWeight:'bold',
     color: "white",
   },
@@ -105,8 +105,8 @@ const styles = StyleSheet.create({
     position: "relative",
     top: 0,
     left: "1%",
-    color: "white",
-    backgroundColor: "black",
+    color: "black",
+    backgroundColor: "white",
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 14,

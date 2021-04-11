@@ -23,8 +23,9 @@ const renderSeparator = () => {
         height: 1,
         width: "86%",
         backgroundColor: "#CED0CE",
-        marginLeft: "4.5%",
-        opacity: 0.2,
+        marginLeft: "7%",
+        opacity: 0.3,
+        marginVertical:10
       }}
     />
   );
@@ -56,7 +57,9 @@ const Tasks = ({ navigation }) => {
       source={require("../../assets/Notification-background.png")}
       style={styles.image}
     >
+      
       <View style={styles.container}>
+      
         <View style={styles.upperbar}>
           <Searchbar
             style={styles.search}
@@ -66,17 +69,7 @@ const Tasks = ({ navigation }) => {
             onChangeText={onChangeSearch}
             value={searchQuery}
           />
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("CreateTasks");
-            }}
-            style={styles.btn}
-          >
-            <Text style={styles.text}>
-              New
-              <Icon name="add" size={20} color="white" />
-            </Text>
-          </TouchableOpacity>
+          
         </View>
         <FlatList
           data={fildata}
@@ -89,6 +82,14 @@ const Tasks = ({ navigation }) => {
           style={styles.fl}
         />
       </View>
+      <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("CreateTasks");
+            }}
+            style={styles.btn}
+          >
+          <Icon name="add" size={30} color="white" />
+      </TouchableOpacity>
     </ImageBackground>
   );
 };
@@ -99,42 +100,49 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   container: {
-    paddingTop: 20,
+    paddingTop: 10,
     justifyContent: "center",
+    height:'100%',
+    
   },
   upperbar: {
-    paddingTop: 60,
-    alignItems: "center",
+    width:'100%',
+    marginBottom:'8%',
+    marginTop:'8%',
     flexDirection: "row",
-    paddingBottom: 10,
+    justifyContent:'center',
   },
   search: {
-    position: "absolute",
-    width: "50%",
+    width: "55%",
+    height:45,
     borderRadius: 30,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    left: "20%",
+    backgroundColor: "rgba(0,0,0,0.50)"
   },
   btn: {
-    position: "absolute",
-    fontSize: 18,
-    width: "21%",
-    height: 50,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    borderWidth: 1,
-    borderRadius: 30,
-    paddingLeft: 10,
-    paddingTop: 12,
-    left: "75%",
-    flexDirection:'row'
+    position:'absolute',
+    fontSize: 15,
+    width: 60,
+    height: 60,
+    backgroundColor: '#B100FF',
+    borderRadius: 50,
+    bottom:'5%',
+    right:'10%',
+    justifyContent:'center',
+    alignItems:'center',
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOpacity: 0.8,
+    elevation: 10,
+    shadowRadius: 15 ,
+    shadowOffset : { width: 1, height: 13},
+    
   },
   text: {
     color: "white",
     fontSize: 18,
   },
   fl: {
-    paddingTop: 30,
-    paddingBottom: 30,
+    paddingTop: 10,
+    paddingBottom: 50,
     marginBottom: 30,
   },
   image: {
