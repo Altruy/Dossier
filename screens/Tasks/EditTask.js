@@ -123,12 +123,12 @@ const EditTasks = ({ navigation }) => {
         </View>
         <View style={styles.tblock}>
           <Text style={styles.desc}> Edit Description</Text>
-          <TextInput multiline={true}
-          spellCheck={true}
-          style={styles.dinput}
-          inlineImagePadding={20}
-          onChangeText={(text) => setDesc(text)}
-          defaultValue={desc} />
+          <TextInput
+              style={styles.dinput}
+              textAlignVertical="top"
+              multiline={true}
+              onChangeText={(text) => setDesc(text)}
+          />
         </View>
       </View>
       <TouchableOpacity
@@ -167,7 +167,6 @@ const styles = StyleSheet.create({
     color:'white'
   },
   dinput: {
-    borderWidth: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     padding: 8,
     borderRadius: 8,
@@ -178,12 +177,15 @@ const styles = StyleSheet.create({
   },
   assignee: {
     color: "white",
+    left:10
   },
   deadline: {
     color: "white",
+    left:10
   },
   desc: {
     color: "white",
+    left:10
   },
   block: {
     top: "7%",
@@ -207,7 +209,7 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     borderWidth: 1,
     borderRadius: 40,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "#B100FF",
     width: "25%",
     height: "7%",
   },

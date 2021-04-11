@@ -19,16 +19,11 @@ import ChatBox from "../../components/ChatBox";
 //import { TextInput } from 'react-native-paper';
 import { Header } from 'react-navigation-stack'
 import {KeyboardAvoidingView, Platform,} from "react-native";
-import {
-  MaterialCommunityIcons,
-  MaterialIcons,
-  FontAwesome5,
-  Entypo,
-  Fontisto,
-} from '@expo/vector-icons';
 import {useAuth} from '../../auth_providers/Auth'
 import {getChat, addChat} from '../../API'
 import TopBar from "../../components/TopBar";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import Entypo from 'react-native-vector-icons/Entypo'
 
 
 const delay = (seconds) => 

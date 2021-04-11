@@ -21,13 +21,10 @@ import {useAuth} from '../../auth_providers/Auth'
 import {getGroup, addGroup} from '../../API'
 
 import {KeyboardAvoidingView, Platform,} from "react-native";
-import {
-  MaterialCommunityIcons,
-  MaterialIcons,
-  FontAwesome5,
-  Entypo,
-  Fontisto,
-} from '@expo/vector-icons';
+
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import Entypo from 'react-native-vector-icons/Entypo'
+
 import TopBar from "../../components/TopBar";
 
 const delay = (seconds) => 
