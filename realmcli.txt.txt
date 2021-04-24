@@ -1,0 +1,5 @@
+dossier-pqooi
+projjkey
+vghhseaq
+fc2dcc97-aa6e-441a-ae87-3b645e251e26
+realm-cli login --api-key=vghhseaq --private-api-key=fc2dcc97-aa6e-441a-ae87-3b645e251e26

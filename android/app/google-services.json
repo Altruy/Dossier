@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "565293546825",
+    "project_id": "dossierapp-c60e3",
+    "storage_bucket": "dossierapp-c60e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565293546825:android:84919ff35f5e8e805eae98",
+        "android_client_info": {
+          "package_name": "com.dossierapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565293546825-v0hudg1jjfbc21o6bntu61p77h8472o9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4z1tgLpITqMToW1Kpa8_49N5kXqNrSRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565293546825-v0hudg1jjfbc21o6bntu61p77h8472o9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
