@@ -50,6 +50,7 @@ const SignUp = ({navigation}) => {
                 }
                 else {
                     Alert.alert("Successfully Signed Up");
+                    navigation.navigate('SignIn')
 
                 }
             } catch (error) {
@@ -88,7 +89,7 @@ const SignUp = ({navigation}) => {
     }
     const usernameInputChange = (val) => {
         if (val.length != 0) {
-            if(val.includes(' ') || val.length<5){
+            if(val.includes(' ') || val.length<5 || val.length >10){
                 setData({
                     ...data, //destructrung data
                     username: val,

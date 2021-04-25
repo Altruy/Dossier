@@ -10,8 +10,7 @@ const resturi = "https://webhooks.mongodb-realm.com/api/client/v2.0/app/dossier-
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
 // });
-var API_KEY = '9510aee196dcf2cd09c584db2a2eabc7-71b35d7e-a9270dd2';
-var DOMAIN = 'sandbox2f92add2a1d142c4939eec1e21dad33a.mailgun.org';
+var API_KEY ;
 import {encode} from 'base-64'
 
 

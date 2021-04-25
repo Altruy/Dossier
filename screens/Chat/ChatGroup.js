@@ -86,7 +86,6 @@ const TestGroupChat = ({ navigation }) => {
             
              <View style={styles.container}>
             <View style={styles.mainContainer}>
-            <Entypo name="attachment" size={24} color="white" style={styles.icon} />
               <TextInput
                 placeholder={"Type a message"}
                 style={styles.textInput}

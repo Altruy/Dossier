@@ -127,6 +127,7 @@ const AssigneeModal = ({modal,setModal,datetime,setdatetime}) => {
           textColor="white"
           fadeToColor='black'
           onDateChange={setnow}
+          minimumDate={new Date()}
         />
         <TouchableOpacity
           onPress={() => setmodal2(false)}
@@ -158,6 +159,7 @@ const AssigneeModal = ({modal,setModal,datetime,setdatetime}) => {
           textColor="white"
           fadeToColor='black'
           onDateChange={setnow}
+          minimumDate={new Date()}
         />
         <TouchableOpacity
           onPress={() => setmodal1(false)}

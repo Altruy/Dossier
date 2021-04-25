@@ -16,6 +16,8 @@ import {
 import Colors from "../constants/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { ScrollView } from "react-native-gesture-handler";
+import { Dimensions } from 'react-native';
+const h = Dimensions.get('window').height;
 
 export default CollabText = ({ navigation , setCollabId, data ,setColname}) => {
 
@@ -58,6 +60,7 @@ export default CollabText = ({ navigation , setCollabId, data ,setColname}) => {
             )}
             ItemSeparatorComponent={RenderSeparator}
             keyExtractor={(item) => item.collab}
+            ListEmptyComponent={<Text style={{color:'grey',textAlign:'left',fontSize:16,marginTop:h*(20/100)}}>You currently have no Collaborations</Text>}
           />
         
         </View>

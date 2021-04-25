@@ -137,6 +137,7 @@ const Notes = ({ navigation }) => {
           <NoteTile all={fildata} setall={setFildata} data={item} navigation={navigation} />
         )}
         style={styles.fl}
+        ListFooterComponent={<View style={{height:60}}></View>}
       />
       <TouchableOpacity
           onPress={() => {
